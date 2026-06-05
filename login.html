@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Logg inn — M&O</title>
+<meta name="robots" content="noindex"/>
+<meta name="theme-color" content="#2d3a2a"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<div class="login-page">
+
+  <div>
+    <a href="index.html" class="login-brand">M&amp;O</a>
+    <p class="login-brand-sub">Mountain &amp; Outdoor</p>
+  </div>
+
+  <div class="login-card">
+    <div class="login-tabs">
+      <button class="login-tab active" id="tab-login" onclick="switchTab('login')">Logg inn</button>
+      <button class="login-tab" id="tab-register" onclick="switchTab('register')">Registrer deg</button>
+    </div>
+
+    <!-- Demo-hint -->
+    <div class="login-demo" id="demo-hint">
+      <strong>Demo-modus</strong> — Testbruker klar til bruk:<br/>
+      E-post: <code>test@test.no</code> &nbsp;·&nbsp; Passord: <code>test123</code>
+    </div>
+
+    <div class="login-alert login-alert--error" id="msg-error"></div>
+    <div class="login-alert login-alert--success" id="msg-success"></div>
+
+    <form id="auth-form" onsubmit="handleSubmit(event)" novalidate>
+
+      <div class="form-field" id="field-name" style="display:none">
+        <label class="form-label" for="inp-name">Fullt navn</label>
+        <input type="text" id="inp-name" class="form-input" placeholder="Ola Nordmann" autocomplete="name"/>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="inp-email">E-postadresse</label>
+        <input type="email" id="inp-email" class="form-input" placeholder="din@epost.no" autocomplete="email" required/>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" style="display:flex;justify-content:space-between;align-items:center">
+          <span>Passord</span>
+          <a href="#" id="forgot-link" onclick="handleForgot(event)" style="font-size:12px;color:var(--g5);font-weight:400;text-decoration:none">Glemt passord?</a>
+        </label>
+        <div class="pass-wrap">
+          <input type="password" id="inp-password" class="form-input" placeholder="••••••••" autocomplete="current-password" required/>
+          <button type="button" class="pass-toggle" onclick="togglePass()" aria-label="Vis passord">
+            <svg id="eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-field" id="field-confirm" style="display:none">
+        <label class="form-label" for="inp-confirm">Bekreft passord</label>
+        <input type="password" id="inp-confirm" class="form-input" placeholder="••••••••" autocomplete="new-password"/>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-full btn-lg" id="submit-btn" style="margin-top:4px">
+        Logg inn
+      </button>
+
+    </form>
+  </div>
+
+  <div class="login-footer-links">
+    <a href="index.html">← Tilbake til butikken</a>
+    &nbsp;·&nbsp;
+    <a href="faq.html">Hjelp</a>
+  </div>
+
+</div>
+
+<script src="js/app.js"></script>
+<script>
+/* Redirect om allerede innlogget */
+if (MO.auth.isLoggedIn()) window.location.replace('account.html');
+
+var currentTab = 'login';
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+  document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+  document.getElementById('field-name').style.display    = tab === 'register' ? '' : 'none';
+  document.getElementById('field-confirm').style.display = tab === 'register' ? '' : 'none';
+  document.getElementById('forgot-link').style.display   = tab === 'login' ? '' : 'none';
+  document.getElementById('submit-btn').textContent = tab === 'login' ? 'Logg inn' : 'Opprett konto';
+  document.getElementById('inp-password').autocomplete = tab === 'login' ? 'current-password' : 'new-password';
+  clearMsg();
+}
+
+function clearMsg() {
+  ['msg-error','msg-success'].forEach(function(id){
+    document.getElementById(id).style.display = 'none';
+  });
+}
+function showError(msg) {
+  var el = document.getElementById('msg-error');
+  el.textContent = msg; el.style.display = '';
+  document.getElementById('msg-success').style.display = 'none';
+}
+function showSuccess(msg) {
+  var el = document.getElementById('msg-success');
+  el.textContent = msg; el.style.display = '';
+  document.getElementById('msg-error').style.display = 'none';
+}
+function setLoading(on) {
+  var btn = document.getElementById('submit-btn');
+  btn.disabled = on;
+  btn.textContent = on ? 'Vennligst vent…' : (currentTab === 'login' ? 'Logg inn' : 'Opprett konto');
+}
+
+function togglePass() {
+  var inp = document.getElementById('inp-password');
+  var icon = document.getElementById('eye-icon');
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+  } else {
+    inp.type = 'password';
+    icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  }
+}
+
+function handleForgot(e) {
+  e.preventDefault();
+  var email = document.getElementById('inp-email').value.trim();
+  if (!email) { showError('Skriv inn e-postadressen din, så sender vi en tilbakestillingslenke.'); return; }
+  showSuccess('Tilbakestillingslenke sendt til ' + MO.sanitize(email) + '.');
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  clearMsg();
+
+  var email    = document.getElementById('inp-email').value.trim();
+  var password = document.getElementById('inp-password').value;
+  var emailRe  = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  if (!emailRe.test(email))  { showError('Ugyldig e-postadresse.'); return; }
+  if (password.length < 6)   { showError('Passordet må være minst 6 tegn.'); return; }
+
+  if (currentTab === 'register') {
+    var name    = document.getElementById('inp-name').value.trim();
+    var confirm = document.getElementById('inp-confirm').value;
+    if (!name)              { showError('Skriv inn fullt navn.'); return; }
+    if (password !== confirm){ showError('Passordene stemmer ikke overens.'); return; }
+    setLoading(true);
+    MO.auth.register(email, password, name).then(function() {
+      var redirect = sessionStorage.getItem('mo_redirect') || 'account.html';
+      sessionStorage.removeItem('mo_redirect');
+      window.location.href = redirect;
+    }).catch(function(err) { setLoading(false); showError(err.message); });
+    return;
+  }
+
+  setLoading(true);
+  MO.auth.login(email, password).then(function() {
+    var redirect = sessionStorage.getItem('mo_redirect') || 'account.html';
+    sessionStorage.removeItem('mo_redirect');
+    window.location.href = redirect;
+  }).catch(function(err) { setLoading(false); showError(err.message); });
+}
+</script>
+</body>
+</html>

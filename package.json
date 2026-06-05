@@ -1,0 +1,13 @@
+{
+  "name": "mo-mountain-outdoor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "M&O — Fjellklær uten kompromiss",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "stripe": "^17.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

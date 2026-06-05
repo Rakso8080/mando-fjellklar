@@ -1,0 +1,53 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/checkout-success"
+  to = "/checkout-success.html"
+  status = 200
+
+# ── SIKKERHEITSHEADERS ────────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Forhindrer innlasting i iframes (clickjacking)
+    X-Frame-Options = "DENY"
+
+    # Forhindrer MIME-type sniffing
+    X-Content-Type-Options = "nosniff"
+
+    # Tvinger HTTPS i 1 år (inkl. subdomener)
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+    # Begrenser referrer-informasjon som sendes videre
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Deaktiverer unødvendige nettleserfunksjoner
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), usb=(), payment=(self)"
+
+    # Content Security Policy — hviteliste for ressurser
+    # unsafe-inline nødvendig p.g.a. inline <script>-blokker i HTML-filene
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.stripe.com; frame-src https://js.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests;"
+
+# ── CACHING FOR STATISKE RESSURSER ───────────────────────
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML-filer skal aldri caches (alltid fersk versjon)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

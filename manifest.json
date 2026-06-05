@@ -1,0 +1,15 @@
+{
+  "name": "M&O — Mountain & Outdoor",
+  "short_name": "M&O",
+  "description": "Fjellklær uten kompromiss — nye og brukte klær fra de beste merkene",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#2d3a2a",
+  "background_color": "#fafaf8",
+  "lang": "nb",
+  "icons": [
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any maskable" }
+  ],
+  "categories": ["shopping", "sports"]
+}

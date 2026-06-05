@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Min konto — M&O</title>
+<meta name="robots" content="noindex"/>
+<meta name="theme-color" content="#2d3a2a"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="page-body">
+<section class="section">
+  <div class="container">
+
+    <div class="account-layout">
+
+      <!-- Sidebar -->
+      <aside class="account-sidebar">
+        <a href="account.html" class="account-nav__item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Min konto
+        </a>
+        <a href="account.html#ordrer" class="account-nav__item" onclick="showPanel('ordrer',this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Mine ordrer
+        </a>
+        <a href="account.html#favoritter" class="account-nav__item" onclick="showPanel('favoritter',this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Favoritter
+          <span id="wish-count" style="margin-left:auto;font-size:11px;background:var(--g9);color:var(--g4);padding:2px 7px;border-radius:99px;font-weight:600"></span>
+        </a>
+        <a href="account.html#innstillinger" class="account-nav__item" onclick="showPanel('innstillinger',this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Innstillinger
+        </a>
+        <button class="account-nav__item account-nav__item--danger" onclick="handleLogout()" style="width:100%;text-align:left;border:none;background:none;font-family:var(--sans);cursor:pointer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Logg ut
+        </button>
+      </aside>
+
+      <!-- Panels -->
+      <main>
+
+        <!-- Oversikt -->
+        <div class="account-panel" id="panel-oversikt">
+          <div class="account-avatar" id="user-avatar"></div>
+          <h1 class="account-panel__title" id="user-name">Min konto</h1>
+          <p class="account-panel__sub" id="user-email"></p>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px">
+            <div style="background:var(--gray-50);border-radius:12px;padding:20px;text-align:center">
+              <div style="font-family:var(--serif);font-size:28px;font-weight:600;color:var(--g3)" id="stat-orders">3</div>
+              <div style="font-size:12px;color:var(--text-4);margin-top:4px">Ordrer</div>
+            </div>
+            <div style="background:var(--gray-50);border-radius:12px;padding:20px;text-align:center">
+              <div style="font-family:var(--serif);font-size:28px;font-weight:600;color:var(--g3)" id="stat-wish">0</div>
+              <div style="font-size:12px;color:var(--text-4);margin-top:4px">Favoritter</div>
+            </div>
+            <div style="background:var(--gray-50);border-radius:12px;padding:20px;text-align:center">
+              <div style="font-family:var(--serif);font-size:28px;font-weight:600;color:var(--g3)">14d</div>
+              <div style="font-size:12px;color:var(--text-4);margin-top:4px">Returrett</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ordrer -->
+        <div class="account-panel" id="panel-ordrer" style="display:none">
+          <h2 class="account-panel__title">Mine ordrer</h2>
+          <p class="account-panel__sub">Oversikt over dine tidligere kjøp.</p>
+          <div id="orders-list"></div>
+        </div>
+
+        <!-- Favoritter -->
+        <div class="account-panel" id="panel-favoritter" style="display:none">
+          <h2 class="account-panel__title">Favoritter</h2>
+          <p class="account-panel__sub">Produkter du har lagret.</p>
+          <div class="product-grid" id="wish-grid"></div>
+          <div id="wish-empty" style="display:none;text-align:center;padding:40px 0;color:var(--text-4)">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="margin:0 auto 14px;display:block"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Ingen favoritter ennå — trykk hjertet på produktene du liker.
+          </div>
+        </div>
+
+        <!-- Innstillinger -->
+        <div class="account-panel" id="panel-innstillinger" style="display:none">
+          <h2 class="account-panel__title">Innstillinger</h2>
+          <p class="account-panel__sub">Administrer kontoen din.</p>
+          <div class="form-field">
+            <label class="form-label">Navn</label>
+            <input type="text" class="form-input" id="settings-name" placeholder="Fullt navn"/>
+          </div>
+          <div class="form-field">
+            <label class="form-label">E-post</label>
+            <input type="email" class="form-input" id="settings-email" placeholder="din@epost.no"/>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Nytt passord <span style="font-weight:400;color:var(--text-4)">(la stå tomt for å beholde)</span></label>
+            <input type="password" class="form-input" placeholder="••••••••"/>
+          </div>
+          <button class="btn btn-primary" onclick="saveSettings()">Lagre endringer</button>
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/layout.js"></script>
+<script>
+MO.injectLayout('');
+
+/* Krev innlogging */
+if (!MO.auth.requireAuth()) { /* redirect skjer i requireAuth */ }
+
+var user = MO.auth.user;
+
+/* Fyll inn brukerinfo */
+if (user) {
+  var initials = (user.name || user.email || '?').split(' ').map(function(w){ return w[0]; }).slice(0,2).join('').toUpperCase();
+  document.getElementById('user-avatar').textContent = initials;
+  document.getElementById('user-name').textContent = user.name || 'Min konto';
+  document.getElementById('user-email').textContent = user.email;
+  document.getElementById('settings-name').value  = user.name || '';
+  document.getElementById('settings-email').value = user.email || '';
+}
+
+/* Favoritter */
+var wishCount = MO.wishlist.length;
+document.getElementById('stat-wish').textContent = wishCount;
+if (wishCount > 0) document.getElementById('wish-count').textContent = wishCount;
+
+/* Demo-ordrer */
+var demoOrders = [
+  { num: 'MO-58291', date: '2. jun 2025', status: 'levert',    products: "Arc'teryx Beta AR · Salomon X Ultra", total: '2 950 kr' },
+  { num: 'MO-51847', date: '14. apr 2025', status: 'levert',   products: 'Norrøna Falketind · Kari Traa Base Layer', total: '2 889 kr' },
+  { num: 'MO-48302', date: '3. jan 2025',  status: 'levert',   products: 'Bergans Fløyen Pants', total: '890 kr' },
+];
+
+document.getElementById('orders-list').innerHTML = demoOrders.map(function(o) {
+  var statusMap = { levert: 'Levert', sendt: 'Sendt', behandles: 'Behandles' };
+  return '<div class="order-item">' +
+    '<div class="order-item__head">' +
+    '<span class="order-item__num">' + MO.sanitize(o.num) + '</span>' +
+    '<span class="order-item__date">' + MO.sanitize(o.date) + '</span>' +
+    '<span class="order-item__status status-' + MO.sanitize(o.status) + '">' + (statusMap[o.status] || o.status) + '</span>' +
+    '</div>' +
+    '<div class="order-item__products">' + MO.sanitize(o.products) + '</div>' +
+    '<div class="order-item__total">' + MO.sanitize(o.total) + '</div>' +
+    '</div>';
+}).join('');
+
+/* Favoritter */
+function renderWishlist() {
+  var grid = document.getElementById('wish-grid');
+  var empty = document.getElementById('wish-empty');
+  var items = MO.wishlist.map(MO.findProduct).filter(Boolean);
+  if (!items.length) { grid.style.display = 'none'; empty.style.display = ''; return; }
+  grid.style.display = ''; empty.style.display = 'none';
+  grid.innerHTML = items.map(MO.cardHTML).join('');
+}
+renderWishlist();
+
+/* Panel-navigasjon */
+function showPanel(name, btn) {
+  ['oversikt','ordrer','favoritter','innstillinger'].forEach(function(p) {
+    document.getElementById('panel-' + p).style.display = p === name ? '' : 'none';
+  });
+  document.querySelectorAll('.account-nav__item').forEach(function(el){ el.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  if (name === 'favoritter') renderWishlist();
+}
+
+function handleLogout() {
+  MO.auth.logout();
+  window.location.href = 'index.html';
+}
+
+function saveSettings() {
+  var name  = document.getElementById('settings-name').value.trim();
+  var email = document.getElementById('settings-email').value.trim();
+  if (name && MO.auth.user) {
+    MO.auth.user.name  = name;
+    MO.auth.user.email = email;
+    localStorage.setItem('mo_auth', JSON.stringify(MO.auth.user));
+    document.getElementById('user-name').textContent = name;
+    document.getElementById('user-email').textContent = email;
+    var initials = name.split(' ').map(function(w){ return w[0]; }).slice(0,2).join('').toUpperCase();
+    document.getElementById('user-avatar').textContent = initials;
+  }
+  MO.toast('Innstillinger lagret!');
+}
+</script>
+</body>
+</html>
