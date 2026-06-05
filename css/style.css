@@ -240,7 +240,7 @@ button, a, [role="button"], label, select { touch-action: manipulation; }
 
 /* ── SECTIONS ────────────────────────────────────────── */
 .section { padding: 96px 0; }
-.section--alt { background: var(--gray-50); }
+.section--alt { background: var(--gray-50); position: relative; }
 .section--sand { background: var(--s7); }
 .section--dark { background: var(--g1); }
 .section__eyebrow {
@@ -1295,6 +1295,45 @@ footer { background: var(--slate); padding: 60px 0 28px; }
 .newsletter::before { content: ''; position: absolute; top: -80px; right: -80px; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(212,168,75,.12); pointer-events: none; animation: drift-ring 30s linear infinite; }
 .newsletter::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 120px; height: 120px; border-radius: 50%; border: 1px solid rgba(212,168,75,.08); pointer-events: none; animation: drift-ring 25s linear infinite reverse; }
 .newsletter__form { position: relative; z-index: 1; }
+
+/* ── FALLING LEAVES ───────────────────────────────────── */
+.leaves { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.leaf { position: absolute; width: 24px; height: 32px; opacity: 0; animation: leaf-fall 10s ease-in-out infinite; }
+.leaf--1  { top: -5%; left: 8%;  animation-delay: 0s;   animation-duration: 11s; }
+.leaf--2  { top: -8%; left: 22%; animation-delay: 1.2s; animation-duration: 13s; width: 20px; height: 27px; }
+.leaf--3  { top: -3%; left: 38%; animation-delay: 2.8s; animation-duration: 9s;  width: 18px; height: 24px; }
+.leaf--4  { top: -10%;left: 55%; animation-delay: .5s;  animation-duration: 14s; width: 22px; height: 29px; }
+.leaf--5  { top: -6%; left: 70%; animation-delay: 3.5s; animation-duration: 10s; width: 16px; height: 24px; }
+.leaf--6  { top: -4%; left: 85%; animation-delay: 1.8s; animation-duration: 12s; width: 19px; height: 28px; }
+.leaf--7  { top: -12%;left: 15%; animation-delay: 4.2s; animation-duration: 15s; width: 17px; height: 24px; }
+.leaf--8  { top: -7%; left: 48%; animation-delay: 2.2s; animation-duration: 11s; width: 21px; height: 29px; }
+.leaf--9  { top: -5%; left: 12%; animation-delay: .8s;  animation-duration: 12s; width: 23px; height: 31px; }
+.leaf--10 { top: -9%; left: 32%; animation-delay: 3s;   animation-duration: 10s; width: 15px; height: 22px; }
+.leaf--11 { top: -3%; left: 62%; animation-delay: 1.5s; animation-duration: 13s; width: 18px; height: 25px; }
+.leaf--12 { top: -11%;left: 78%; animation-delay: 2.5s; animation-duration: 14s; width: 20px; height: 27px; }
+@keyframes leaf-fall {
+  0%   { opacity: 0; transform: translateY(0) rotate(0deg) scale(.8); }
+  8%   { opacity: .7; }
+  15%  { transform: translateY(8vh) rotate(40deg) scale(1); }
+  30%  { transform: translateY(20vh) rotate(80deg) scale(.95); }
+  45%  { transform: translateY(35vh) rotate(130deg) scale(1.05); }
+  60%  { transform: translateY(50vh) rotate(170deg) scale(.9); }
+  75%  { transform: translateY(65vh) rotate(210deg) scale(1); }
+  90%  { transform: translateY(80vh) rotate(250deg) scale(.95); }
+  100% { opacity: 0; transform: translateY(100vh) rotate(300deg) scale(.7); }
+}
+/* Drift variation */
+.leaf--2, .leaf--5, .leaf--10 { animation-name: leaf-fall-drift; }
+@keyframes leaf-fall-drift {
+  0%   { opacity: 0; transform: translateX(0) translateY(0) rotate(0deg) scale(.8); }
+  8%   { opacity: .6; }
+  20%  { transform: translateX(20px) translateY(12vh) rotate(50deg) scale(1); }
+  40%  { transform: translateX(-15px) translateY(28vh) rotate(100deg) scale(.95); }
+  55%  { transform: translateX(25px) translateY(45vh) rotate(150deg) scale(1.05); }
+  70%  { transform: translateX(-10px) translateY(62vh) rotate(200deg) scale(.9); }
+  85%  { transform: translateX(15px) translateY(80vh) rotate(250deg) scale(1); }
+  100% { opacity: 0; transform: translateX(0) translateY(100vh) rotate(310deg) scale(.7); }
+}
 
 /* ── TABLET (≤960px) ─────────────────────────────────── */
 @media (max-width: 960px) {
