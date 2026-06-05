@@ -1,0 +1,236 @@
+/* ══════════════════════════════════════════════════════
+   M&O — EFFEKTER (tåke, stjerner, regn, lyn, vind, osv.)
+   ══════════════════════════════════════════════════════ */
+
+/* ── 1. TÅKE/MIST ─────────────────────────────────── */
+.fog {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  overflow: hidden;
+}
+.fog__layer {
+  position: absolute; inset: -50px; opacity: .35;
+  background: linear-gradient(90deg,
+    transparent 0%, rgba(255,255,255,.04) 20%,
+    rgba(255,255,255,.08) 40%, transparent 50%,
+    rgba(255,255,255,.05) 70%, transparent 100%);
+  animation: fog-drift 18s ease-in-out infinite alternate;
+}
+.fog__layer--2 {
+  opacity: .2; animation-duration: 26s; animation-delay: -9s;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,.02) 0%, transparent 30%,
+    rgba(255,255,255,.1) 50%, transparent 70%,
+    rgba(255,255,255,.03) 100%);
+}
+.fog__layer--3 {
+  opacity: .15; animation-duration: 34s; animation-delay: -4s;
+  background: linear-gradient(135deg,
+    transparent 0%, rgba(255,255,255,.06) 30%,
+    transparent 60%, rgba(255,255,255,.04) 100%);
+}
+@keyframes fog-drift {
+  0%   { transform: translateX(-12%) scaleX(1); }
+  50%  { transform: translateX(6%) scaleX(1.05); }
+  100% { transform: translateX(-8%) scaleX(.95); }
+}
+
+.fog--section {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+  pointer-events: none; z-index: 1;
+  background: linear-gradient(0deg, rgba(255,255,255,.12) 0%, transparent 100%);
+  animation: fog-drift 20s ease-in-out infinite alternate;
+}
+
+/* ── 2. STJERNEHIMMEL ─────────────────────────────── */
+.starry-sky {
+  position: absolute; inset: 0; pointer-events: none;
+  z-index: 0; overflow: hidden;
+}
+.starry-sky canvas {
+  width: 100%; height: 100%;
+}
+
+/* ── 3. REGN ───────────────────────────────────────── */
+.rain {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  overflow: hidden;
+}
+.rain__drop {
+  position: absolute; top: -20px; width: 1.5px; height: 18px;
+  background: linear-gradient(180deg, transparent, rgba(180,210,240,.35));
+  animation: rain-fall linear infinite;
+}
+@keyframes rain-fall {
+  0%   { opacity: 0; transform: translateX(0) translateY(0); }
+  10%  { opacity: .6; }
+  90%  { opacity: .2; }
+  100% { opacity: 0; transform: translateX(-60px) translateY(105vh); }
+}
+.rain__splash {
+  position: absolute; width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(180,210,240,.15); opacity: 0;
+  animation: rain-splash .5s ease-out forwards;
+}
+@keyframes rain-splash {
+  0%   { opacity: .5; transform: scale(0) translateY(0); }
+  100% { opacity: 0; transform: scale(2) translateY(-8px); }
+}
+
+/* ── 4. TORDENSKYER MED LYN ─────────────────────────── */
+.thunder {
+  position: absolute; inset: 0; pointer-events: none; z-index: 3;
+  overflow: hidden;
+}
+.thunder__cloud {
+  position: absolute;
+  background: radial-gradient(ellipse at center,
+    rgba(30,35,40,.6) 0%, rgba(30,35,40,.3) 50%, transparent 70%);
+  border-radius: 50%;
+}
+.thunder__cloud--1 { width: 300px; height: 120px; top: -40px; left: 5%; }
+.thunder__cloud--2 { width: 250px; height: 100px; top: -30px; right: 10%; }
+.thunder__cloud--3 { width: 200px; height: 80px; top: -20px; left: 40%; }
+
+.thunder__flash {
+  position: absolute;
+  pointer-events: none;
+}
+@keyframes lightning-flash {
+  0%, 100% { opacity: 0; }
+  2%  { opacity: .8; }
+  4%  { opacity: 0; }
+  6%  { opacity: .6; }
+  8%  { opacity: 0; }
+}
+.thunder__bolt {
+  position: absolute; opacity: 0; pointer-events: none;
+  animation: lightning-flash 4s ease-in-out infinite;
+}
+.thunder__bolt--1 {
+  top: 30%; left: 12%;
+  animation-delay: 0s; animation-duration: 7s;
+}
+.thunder__bolt--2 {
+  top: 25%; right: 18%;
+  animation-delay: 3.5s; animation-duration: 9s;
+}
+.thunder__bolt--3 {
+  top: 35%; left: 50%;
+  animation-delay: 5.2s; animation-duration: 6s;
+}
+
+/* ── 5. SNØSPOR (MUSE) ──────────────────────────── */
+.footprint {
+  position: fixed; pointer-events: none;
+  width: 12px; height: 16px; z-index: 9999;
+  opacity: 0;
+  animation: footprint-fade 4s ease-out forwards;
+}
+.footprint__inner {
+  width: 100%; height: 100%;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  border: 1.5px solid rgba(255,255,255,.5);
+  background: rgba(255,255,255,.08);
+  transform: rotate(-8deg);
+}
+.footprint:nth-child(odd) .footprint__inner { transform: rotate(8deg); }
+@keyframes footprint-fade {
+  0%   { opacity: .5; transform: scale(.6) translateY(0); }
+  30%  { opacity: .35; }
+  70%  { opacity: .2; }
+  100% { opacity: 0; transform: scale(.8) translateY(-10px); }
+}
+
+/* ── 6. VIND-EFFEKT ───────────────────────────────── */
+.wind-indicator {
+  position: fixed; top: 16px; right: 16px;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: rgba(255,255,255,.25);
+  letter-spacing: .06em; z-index: 999; opacity: 0;
+  transition: opacity .6s ease;
+  pointer-events: none;
+}
+.wind-indicator.visible { opacity: 1; }
+.wind-indicator__arrow {
+  display: inline-block; font-size: 16px;
+  transition: transform .8s ease;
+}
+
+/* Tree sway enhanced by wind */
+.forest-bg.windy svg { animation-duration: 3s; }
+.forest-bg.strong-wind svg { animation-duration: 1.8s; }
+
+/* ── 7. INTERAKTIVT KOMPASS ────────────────────────── */
+.compass-interactive {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px; z-index: 998;
+  opacity: 0; transition: opacity .6s ease; cursor: pointer;
+  pointer-events: none;
+}
+.compass-interactive.visible { opacity: .5; pointer-events: auto; }
+.compass-interactive:hover { opacity: .8; }
+.compass-interactive svg { width: 100%; height: 100%; display: block; }
+.compass-interactive__needle {
+  transform-origin: 50% 50%;
+  transition: transform .6s cubic-bezier(.16,1,.3,1);
+}
+.compass-interactive__ring {
+  animation: compass-spin 30s linear infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes compass-spin { to { transform: rotate(360deg); } }
+
+/* ── 8. PARTIKKEL-TEKST ─────────────────────────────── */
+.particle-text {
+  position: relative; display: inline-block;
+}
+.particle-text canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+/* ── 9. AKVARELL-OVERFANG ───────────────────────────── */
+.watercolor-section {
+  position: relative;
+}
+.watercolor-section::before {
+  content: ''; position: absolute; inset: 0;
+  pointer-events: none; z-index: 1;
+  background: linear-gradient(135deg,
+    transparent 40%, rgba(200,169,106,.04) 50%,
+    rgba(155,195,140,.04) 60%, transparent 70%);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.watercolor-section.revealed::before {
+  opacity: 1;
+}
+
+/* ── 10. 3D DYBDEPARALLAKSE ────────────────────────── */
+.parallax-3d {
+  perspective: 800px;
+}
+.parallax-3d .mountains__layer,
+.parallax-3d .cloud,
+.parallax-3d .aurora__b {
+  transition: translate .12s ease-out;
+  will-change: translate;
+}
+
+/* ── REDUCED MOTION ────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .fog, .rain, .thunder, .starry-sky,
+  .footprint, .wind-indicator,
+  .compass-interactive, .watercolor-section::before { display: none; }
+  .forest-bg.windy svg,
+  .forest-bg.strong-wind svg { animation-duration: 7s; }
+}
+
+/* ── MOBIL: SKJUL TUNGE EFFEKTER ──────────────────── */
+@media (max-width: 768px) {
+  .rain { display: none; }
+  .thunder { display: none; }
+  .thunder__bolt { display: none; }
+  .compass-interactive { width: 36px; height: 36px; bottom: 16px; right: 16px; }
+  .wind-indicator { display: none; }
+}

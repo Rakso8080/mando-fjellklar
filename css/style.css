@@ -1633,8 +1633,14 @@ footer { background: var(--slate); padding: 60px 0 28px; }
 
 /* ── REDUCED MOTION ────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .aurora, .snow, .forest-bg svg { display: none; }
+  .aurora, .snow, .forest-bg svg,
+  .fog, .rain, .thunder, .starry-sky,
+  .footprint, .wind-indicator,
+  .compass-interactive { display: none; }
   .snow__f { animation: none; }
+  .trail-sparkle { display: none; }
+  .forest-bg.windy svg,
+  .forest-bg.strong-wind svg { animation-duration: 7s; }
 }
 
 /* ── MOBILE SNOW ───────────────────────────────────── */

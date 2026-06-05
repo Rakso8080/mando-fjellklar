@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link rel="stylesheet" href="css/style.css?v=2"/>
+<link rel="stylesheet" href="css/effects.css?v=1"/>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -699,6 +700,7 @@
 
 <script src="js/app.js?v=2"></script>
 <script src="js/layout.js?v=2"></script>
+<script src="js/effects.js?v=1"></script>
 <script>
 MO.injectLayout('home');
 
@@ -715,6 +717,17 @@ MO.initMountainParallax();
 MO.initCountUp();
 MO.initCardTilt();
 MO.initMouseTrail();
+
+MO.initFog();
+MO.initStars();
+MO.initRain();
+MO.initThunder();
+MO.initFootprints();
+MO.initWind();
+MO.initCompass();
+MO.initParticleText();
+MO.initWatercolor();
+MO.init3DParallax();
 
 document.addEventListener('click', function (e) {
   var t = e.target.closest('[data-scroll]');
