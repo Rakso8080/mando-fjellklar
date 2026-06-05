@@ -76,49 +76,6 @@
   100% { opacity: 0; transform: scale(2) translateY(-8px); }
 }
 
-/* ── 4. TORDENSKYER MED LYN ─────────────────────────── */
-.thunder {
-  position: absolute; inset: 0; pointer-events: none; z-index: 3;
-  overflow: hidden;
-}
-.thunder__cloud {
-  position: absolute;
-  background: radial-gradient(ellipse at center,
-    rgba(30,35,40,.6) 0%, rgba(30,35,40,.3) 50%, transparent 70%);
-  border-radius: 50%;
-}
-.thunder__cloud--1 { width: 300px; height: 120px; top: -40px; left: 5%; }
-.thunder__cloud--2 { width: 250px; height: 100px; top: -30px; right: 10%; }
-.thunder__cloud--3 { width: 200px; height: 80px; top: -20px; left: 40%; }
-
-.thunder__flash {
-  position: absolute;
-  pointer-events: none;
-}
-@keyframes lightning-flash {
-  0%, 100% { opacity: 0; }
-  2%  { opacity: .8; }
-  4%  { opacity: 0; }
-  6%  { opacity: .6; }
-  8%  { opacity: 0; }
-}
-.thunder__bolt {
-  position: absolute; opacity: 0; pointer-events: none;
-  animation: lightning-flash 4s ease-in-out infinite;
-}
-.thunder__bolt--1 {
-  top: 30%; left: 12%;
-  animation-delay: 0s; animation-duration: 7s;
-}
-.thunder__bolt--2 {
-  top: 25%; right: 18%;
-  animation-delay: 3.5s; animation-duration: 9s;
-}
-.thunder__bolt--3 {
-  top: 35%; left: 50%;
-  animation-delay: 5.2s; animation-duration: 6s;
-}
-
 /* ── 5. SNØSPOR (MUSE) ──────────────────────────── */
 .footprint {
   position: fixed; pointer-events: none;
@@ -206,20 +163,23 @@
   opacity: 1;
 }
 
-/* ── 10. 3D DYBDEPARALLAKSE ────────────────────────── */
-.parallax-3d {
-  perspective: 800px;
+/* ── 10. 3D DYBDEPARALLAKSE PÅ PRODUKTKORT ────────── */
+.pcard {
+  transition: transform .15s ease-out, box-shadow .15s ease-out;
+  will-change: transform;
+  cursor: pointer;
 }
-.parallax-3d .mountains__layer,
-.parallax-3d .cloud,
-.parallax-3d .aurora__b {
-  transition: translate .12s ease-out;
+.pcard:hover {
+  z-index: 10;
+}
+.pcard__img, .pcard__body, .pcard__badges, .pcard__wish {
+  transition: translate .15s ease-out;
   will-change: translate;
 }
 
 /* ── REDUCED MOTION ────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .fog, .rain, .thunder, .starry-sky,
+  .fog, .rain, .starry-sky,
   .footprint, .wind-indicator,
   .compass-interactive, .watercolor-section::before { display: none; }
   .forest-bg.windy svg,
@@ -229,8 +189,6 @@
 /* ── MOBIL: SKJUL TUNGE EFFEKTER ──────────────────── */
 @media (max-width: 768px) {
   .rain { display: none; }
-  .thunder { display: none; }
-  .thunder__bolt { display: none; }
   .compass-interactive { width: 36px; height: 36px; bottom: 16px; right: 16px; }
   .wind-indicator { display: none; }
 }

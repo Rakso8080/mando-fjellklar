@@ -129,59 +129,6 @@
     }
   };
 
-  /* ── 4. TORDENSKYER MED LYN ────────────────────── */
-  MO.initThunder = function () {
-    var hero = document.getElementById('hero');
-    if (!hero || hero.querySelector('.thunder')) return;
-    var container = document.createElement('div');
-    container.className = 'thunder';
-    container.innerHTML =
-      '<div class="thunder__cloud thunder__cloud--1"></div>' +
-      '<div class="thunder__cloud thunder__cloud--2"></div>' +
-      '<div class="thunder__cloud thunder__cloud--3"></div>' +
-      '<svg class="thunder__bolt thunder__bolt--1" viewBox="0 0 20 60">' +
-        '<polyline points="12,0 8,25 14,28 6,60" ' +
-          'fill="none" stroke="rgba(255,240,200,.7)" stroke-width="2" stroke-linejoin="round"/>' +
-        '<polyline points="12,0 8,25 14,28 6,60" ' +
-          'fill="none" stroke="#fff" stroke-width="0.8" stroke-linejoin="round"/>' +
-      '</svg>' +
-      '<svg class="thunder__bolt thunder__bolt--2" viewBox="0 0 20 60">' +
-        '<polyline points="14,0 6,22 16,26 4,58" ' +
-          'fill="none" stroke="rgba(255,240,200,.6)" stroke-width="2" stroke-linejoin="round"/>' +
-        '<polyline points="14,0 6,22 16,26 4,58" ' +
-          'fill="none" stroke="#fff" stroke-width="0.8" stroke-linejoin="round"/>' +
-      '</svg>' +
-      '<svg class="thunder__bolt thunder__bolt--3" viewBox="0 0 20 60">' +
-        '<polyline points="10,0 12,28 6,30 14,60" ' +
-          'fill="none" stroke="rgba(255,240,200,.5)" stroke-width="1.5" stroke-linejoin="round"/>' +
-        '<polyline points="10,0 12,28 6,30 14,60" ' +
-          'fill="none" stroke="#fff" stroke-width="0.6" stroke-linejoin="round"/>' +
-      '</svg>';
-    hero.appendChild(container);
-
-    /* Scroll-triggered flash */
-    var flash = document.createElement('div');
-    flash.className = 'thunder__flash';
-    flash.style.cssText =
-      'position:fixed;inset:0;background:rgba(255,255,255,.08);' +
-      'pointer-events:none;z-index:9998;opacity:0;' +
-      'transition:opacity .1s ease;';
-    document.body.appendChild(flash);
-
-    var canFlash = true;
-    function randomFlash() {
-      if (!canFlash) return;
-      canFlash = false;
-      flash.style.opacity = '0.6';
-      setTimeout(function () { flash.style.opacity = '0.1'; }, 80);
-      setTimeout(function () { flash.style.opacity = '0.3'; }, 130);
-      setTimeout(function () { flash.style.opacity = '0'; }, 200);
-      var next = 8000 + Math.random() * 20000;
-      setTimeout(function () { canFlash = true; randomFlash(); }, next);
-    }
-    setTimeout(randomFlash, 3000 + Math.random() * 5000);
-  };
-
   /* ── 5. SNØSPOR (MUSE) ──────────────────────────── */
   MO.initFootprints = function () {
     if ('ontouchstart' in window) return;
@@ -441,45 +388,46 @@
     });
   };
 
-  /* ── 10. 3D DYBDEPARALLAKSE ───────────────────────── */
+  /* ── 10. 3D DYBDEPARALLAKSE PÅ PRODUKTKORT ──────── */
   MO.init3DParallax = function () {
     if ('ontouchstart' in window) return;
-    var hero = document.getElementById('hero');
-    if (!hero) return;
+    var grids = document.querySelectorAll('.product-grid');
+    if (!grids.length) return;
 
-    /* Use CSS translate property (separate from transform) to avoid
-       overriding existing CSS transform animations on mountains/clouds */
-    hero.classList.add('parallax-3d');
+    grids.forEach(function (grid) {
+      grid.addEventListener('mousemove', function (e) {
+        var cards = grid.querySelectorAll('.pcard');
+        cards.forEach(function (c) {
+          var r = c.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width - 0.5;
+          var y = (e.clientY - r.top) / r.height - 0.5;
 
-    /* Target specific depth layers */
-    var fgTargets = [
-      hero.querySelector('.mountains__layer--fg'),
-      hero.querySelector('.cloud--3')
-    ];
-    var midTargets = [
-      hero.querySelector('.mountains__layer--mid'),
-      hero.querySelector('.cloud--2'),
-      hero.querySelector('.aurora__b.a2')
-    ];
-    var bgTargets = [
-      hero.querySelector('.mountains__layer--bg'),
-      hero.querySelector('.cloud--1')
-    ];
+          /* Base 3D tilt */
+          var tiltX = -y * 6;
+          var tiltY = x * 6;
 
-    hero.addEventListener('mousemove', function (e) {
-      var r = hero.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width - 0.5;
-      var y = (e.clientY - r.top) / r.height - 0.5;
+          /* Inner elements move at different depths */
+          var img = c.querySelector('.pcard__img');
+          var body = c.querySelector('.pcard__body');
+          var badges = c.querySelector('.pcard__badges');
+          var wish = c.querySelector('.pcard__wish');
 
-      fgTargets.forEach(function (t) { if (t) t.style.translate = (-x * 12) + 'px ' + (-y * 8) + 'px'; });
-      midTargets.forEach(function (t) { if (t) t.style.translate = (-x * 8) + 'px ' + (-y * 5) + 'px'; });
-      bgTargets.forEach(function (t) { if (t) t.style.translate = (-x * 4) + 'px ' + (-y * 3) + 'px'; });
-    });
+          if (img) img.style.translate = (x * 4) + 'px ' + (y * 3) + 'px';
+          if (badges) badges.style.translate = (x * 6) + 'px ' + (y * 4) + 'px';
+          if (wish) wish.style.translate = (-x * 5) + 'px ' + (-y * 3) + 'px';
+          if (body) body.style.translate = (x * 3) + 'px ' + (y * 2) + 'px';
 
-    hero.addEventListener('mouseleave', function () {
-      fgTargets.forEach(function (t) { if (t) t.style.translate = ''; });
-      midTargets.forEach(function (t) { if (t) t.style.translate = ''; });
-      bgTargets.forEach(function (t) { if (t) t.style.translate = ''; });
+          c.style.transform = 'perspective(600px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg) scale(1.03)';
+        });
+      });
+
+      grid.addEventListener('mouseleave', function () {
+        grid.querySelectorAll('.pcard').forEach(function (c) {
+          c.style.transform = '';
+          var inner = c.querySelectorAll('.pcard__img, .pcard__body, .pcard__badges, .pcard__wish');
+          inner.forEach(function (el) { el.style.translate = ''; });
+        });
+      });
     });
   };
 
