@@ -713,6 +713,65 @@
     });
   };
 
+  /* ── COLOR THEME TOGGLE ───────────────────────────── */
+  MO.themes = ['default', 'warm', 'cool', 'earth', 'sunset'];
+  MO.themeIcons = ['🎨', '🔥', '❄️', '🌿', '🌅'];
+  MO.currentTheme = localStorage.getItem('mo_theme') || 'default';
+
+  MO.initTheme = function () {
+    MO.applyTheme(MO.currentTheme);
+    var btn = document.getElementById('theme-btn');
+    if (btn) {
+      var idx = MO.themes.indexOf(MO.currentTheme);
+      if (idx === -1) idx = 0;
+      btn.textContent = MO.themeIcons[idx];
+    }
+  };
+
+  MO.toggleTheme = function () {
+    var idx = MO.themes.indexOf(MO.currentTheme);
+    if (idx === -1) idx = 0;
+    idx = (idx + 1) % MO.themes.length;
+    MO.currentTheme = MO.themes[idx];
+    MO.applyTheme(MO.currentTheme);
+    localStorage.setItem('mo_theme', MO.currentTheme);
+    var btn = document.getElementById('theme-btn');
+    if (btn) btn.textContent = MO.themeIcons[idx];
+    MO.toast('Farge tema: ' + MO.currentTheme.charAt(0).toUpperCase() + MO.currentTheme.slice(1));
+  };
+
+  MO.applyTheme = function (theme) {
+    document.documentElement.setAttribute('data-theme', theme === 'default' ? '' : theme);
+  };
+
+  /* ── FLOATING PARTICLES ──────────────────────────── */
+  MO.initParticles = function () {
+    var hero = document.getElementById('hero');
+    if (!hero || hero.querySelector('.particles-container')) return;
+    var container = document.createElement('div');
+    container.className = 'particles-container';
+    container.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;';
+    hero.insertBefore(container, hero.firstChild);
+    var colors = ['rgba(200,169,106,.3)', 'rgba(255,255,255,.1)', 'rgba(107,143,98,.2)', 'rgba(200,169,106,.2)'];
+    for (var i = 0; i < 15; i++) {
+      var p = document.createElement('div');
+      var size = 4 + Math.random() * 12;
+      var x = Math.random() * 100;
+      var y = Math.random() * 100;
+      var dur = 8 + Math.random() * 12;
+      var col = colors[Math.floor(Math.random() * colors.length)];
+      p.style.cssText = 'position:absolute;left:' + x + '%;top:' + y + '%;width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:' + col + ';animation:particleFloat ' + dur + 's ease-in-out infinite;animation-delay:' + (Math.random() * 5) + 's;';
+      container.appendChild(p);
+    }
+    /* inject keyframes if not present */
+    if (!document.getElementById('particle-style')) {
+      var style = document.createElement('style');
+      style.id = 'particle-style';
+      style.textContent = '@keyframes particleFloat{0%,100%{transform:translateY(0) translateX(0) scale(1);opacity:0}20%{opacity:1}50%{transform:translateY(-60px) translateX(20px) scale(1.2);opacity:.8}80%{opacity:.4}100%{transform:translateY(-100px) translateX(-10px) scale(0.5);opacity:0}}';
+      document.head.appendChild(style);
+    }
+  };
+
   window.MO = MO;
 
 })();

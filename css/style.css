@@ -731,6 +731,160 @@ footer { background: var(--slate); padding: 60px 0 28px; }
 .cookie-bar__text a { color: rgba(255,255,255,.85); text-decoration: underline; text-underline-offset: 2px; }
 .cookie-bar__actions { display: flex; gap: 8px; flex-shrink: 0; }
 
+/* ── THEME TOGGLE ────────────────────────────────────── */
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--gray-100); border: 1.5px solid var(--gray-200);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-3); cursor: pointer;
+  transition: all .25s var(--ease); position: relative;
+  font-size: 18px;
+}
+.theme-toggle:hover {
+  background: var(--g9); color: var(--g3); border-color: var(--g7);
+  transform: rotate(30deg);
+}
+.theme-toggle:active { transform: scale(.9); }
+.theme-tip {
+  position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
+  font-size: 9px; color: var(--text-4); white-space: nowrap;
+  opacity: 0; transition: opacity .2s; pointer-events: none;
+}
+.theme-toggle:hover .theme-tip { opacity: 1; }
+
+/* ── THEME COLOR OVERRIDES ───────────────────────────── */
+[data-theme="warm"] {
+  --g3: #8b4513; --g4: #a0522d; --g5: #cd853f;
+  --g6: #deb887; --g7: #f0d5b0; --g8: #f5e6cc;
+  --g9: #faf0e6; --g10: #fdf6ee;
+  --off-white: #faf5f0;
+}
+[data-theme="cool"] {
+  --g3: #1a3a5c; --g4: #2a5080; --g5: #3a7abd;
+  --g6: #6aa0d0; --g7: #a0c8e8; --g8: #c8dff0;
+  --g9: #e6f0f8; --g10: #f0f6fc;
+  --off-white: #f0f5fa;
+}
+[data-theme="earth"] {
+  --g3: #4a6741; --g4: #5c7d52; --g5: #6b8f62;
+  --g6: #9ab896; --g7: #c8dbc4; --g8: #dce8d8;
+  --g9: #e8f0e6; --g10: #f4f8f3;
+  --s1: #8b5e3c; --s2: #a07840; --s3: #c8a96a;
+  --s4: #d4b87a; --s5: #e0c8a0; --s6: #f0e8d4;
+}
+[data-theme="sunset"] {
+  --g3: #8b2252; --g4: #a03060; --g5: #c04070;
+  --g6: #d07090; --g7: #e0a0b8; --g8: #ecc0d0;
+  --g9: #f8e6ec; --g10: #fcf0f4;
+  --s1: #d4753a; --s2: #e09050; --s3: #f0b070;
+  --s4: #f5c890; --s5: #fae0b8; --s6: #fcf0e0;
+  --off-white: #fdf5f7;
+}
+
+/* ── ANIMATED GRADIENT SECTIONS ──────────────────────── */
+.section--gradient {
+  background: linear-gradient(135deg, var(--g9), var(--g10), var(--g8));
+  background-size: 300% 300%;
+  animation: gradientShift 8s ease infinite;
+}
+.section--gradient-warm {
+  background: linear-gradient(135deg, var(--s6), var(--s7), #fdf6ee);
+  background-size: 300% 300%;
+  animation: gradientShift 10s ease infinite;
+}
+.hero--animated {
+  animation: heroGlow 12s ease infinite;
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes heroGlow {
+  0% { filter: brightness(1) saturate(1); }
+  50% { filter: brightness(1.08) saturate(1.2); }
+  100% { filter: brightness(1) saturate(1); }
+}
+
+/* ── FLOATING ANIMATIONS ─────────────────────────────── */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+.float-delay-1 { animation-delay: .5s; }
+.float-delay-2 { animation-delay: 1s; }
+.float-delay-3 { animation-delay: 1.5s; }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ── PULSE ANIMATIONS ────────────────────────────────── */
+.pulse-slow {
+  animation: pulseSlow 3s ease-in-out infinite;
+}
+.pulse-fast {
+  animation: pulseFast 1.5s ease-in-out infinite;
+}
+@keyframes pulseSlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .8; transform: scale(1.02); }
+}
+@keyframes pulseFast {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .7; }
+}
+
+/* ── SHIMMER EFFECT ──────────────────────────────────── */
+.shimmer {
+  position: relative; overflow: hidden;
+}
+.shimmer::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,.08) 50%,
+    transparent 100%);
+  animation: shimmer 3s infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ── GRADIENT TEXT ───────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--g3), var(--g5), var(--s3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-warm {
+  background: linear-gradient(135deg, var(--s2), var(--g5), var(--s4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── GLOW ON HOVER ───────────────────────────────────── */
+.glow-hover {
+  transition: all .3s var(--ease);
+}
+.glow-hover:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 0 20px rgba(200,169,106,.3),
+              0 0 40px rgba(200,169,106,.1);
+}
+
+/* ── WOBBLE ──────────────────────────────────────────── */
+@keyframes wobble {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+.wobble:hover {
+  animation: wobble .4s ease;
+}
+
 /* ── SOCIAL LINKS ────────────────────────────────────── */
 .footer__social { display: flex; gap: 8px; margin-top: 18px; }
 .footer__social-link { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.55); transition: background .15s, color .15s; flex-shrink: 0; }
