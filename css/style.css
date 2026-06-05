@@ -172,6 +172,69 @@ button, a, [role="button"], label, select { touch-action: manipulation; }
 /* ── PAGE OFFSET ─────────────────────────────────────── */
 .page-body { padding-top: calc(var(--nav-h) + 42px); animation: pageIn .45s var(--ease) both; }
 
+/* ── TOPOGRAPHIC MAP PATTERN ──────────────────────────── */
+.section--topo {
+  position: relative;
+}
+.section--topo::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 200 Q125 100 200 200 T350 200' fill='none' stroke='currentColor' stroke-width='1'/%3E%3Cpath d='M50 220 Q125 120 200 220 T350 220' fill='none' stroke='currentColor' stroke-width='.8'/%3E%3Cpath d='M50 240 Q125 140 200 240 T350 240' fill='none' stroke='currentColor' stroke-width='.6'/%3E%3Cpath d='M50 260 Q125 160 200 260 T350 260' fill='none' stroke='currentColor' stroke-width='.5'/%3E%3Cpath d='M50 180 Q125 80 200 180 T350 180' fill='none' stroke='currentColor' stroke-width='.8'/%3E%3Cpath d='M50 160 Q125 60 200 160 T350 160' fill='none' stroke='currentColor' stroke-width='.6'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+}
+
+/* ── DOT GRID PATTERN ─────────────────────────────────── */
+.section--dots {
+  position: relative;
+}
+.section--dots::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  opacity: .025;
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── SUBTLE WAVES PATTERN ─────────────────────────────── */
+.section--waves {
+  position: relative;
+}
+.section--waves::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 60 Q180 0 360 60 T720 60 T1080 60 T1440 60' fill='none' stroke='currentColor' stroke-width='1'/%3E%3Cpath d='M0 70 Q180 10 360 70 T720 70 T1080 70 T1440 70' fill='none' stroke='currentColor' stroke-width='.7'/%3E%3C/svg%3E");
+  background-size: 400px 40px;
+  background-repeat: repeat;
+}
+
+/* ── MOUNTAIN PEAK DECORATION ─────────────────────────── */
+.section--peak {
+  position: relative;
+}
+.section--peak::before {
+  content: ''; position: absolute;
+  top: 40px; right: 40px; width: 80px; height: 60px;
+  pointer-events: none; opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 80 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='0,60 20,20 35,35 50,10 65,30 80,20 80,60' fill='none' stroke='currentColor' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: contain; background-repeat: no-repeat;
+}
+.section--peak::after {
+  content: ''; position: absolute;
+  bottom: 40px; left: 40px; width: 60px; height: 45px;
+  pointer-events: none; opacity: .03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 60 45' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='0,45 15,15 25,25 40,8 50,22 60,15 60,45' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: contain; background-repeat: no-repeat;
+}
+
+/* ── DEPTH SHADOW TO SECTIONS ─────────────────────────── */
+.section--depth {
+  position: relative;
+}
+.section--depth::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 120px; pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,.03) 0%, transparent 100%);
+}
+
 /* ── SECTIONS ────────────────────────────────────────── */
 .section { padding: 96px 0; }
 .section--alt { background: var(--gray-50); }
@@ -221,13 +284,27 @@ button, a, [role="button"], label, select { touch-action: manipulation; }
 .pcard {
   background: #fff; border: 1px solid var(--gray-200);
   border-radius: 16px; overflow: hidden; cursor: pointer;
-  transition: transform .24s var(--ease), box-shadow .24s var(--ease), border-color .24s;
+  transition: transform .28s var(--ease), box-shadow .28s var(--ease), border-color .28s;
+  box-shadow:
+    0 1px 3px rgba(0,0,0,.03),
+    0 1px 2px rgba(0,0,0,.05);
+  position: relative;
+}
+.pcard::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 60%; pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,.015) 0%, transparent 100%);
+  opacity: 0; transition: opacity .28s;
 }
 .pcard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(20,31,18,.07);
+  transform: translateY(-4px);
+  box-shadow:
+    0 4px 12px rgba(20,31,18,.05),
+    0 12px 32px rgba(20,31,18,.08),
+    0 24px 48px rgba(20,31,18,.04);
   border-color: var(--gray-300);
 }
+.pcard:hover::after { opacity: 1; }
 .pcard__img {
   aspect-ratio: 4/5; background: var(--gray-100);
   position: relative; overflow: hidden;
@@ -305,7 +382,10 @@ button, a, [role="button"], label, select { touch-action: manipulation; }
   background: linear-gradient(transparent, rgba(0,0,0,.12));
 }
 .pcard:hover .pcard__quick { opacity: 1; transform: translateY(0); }
-.pcard__body { padding: 14px 16px 16px; }
+.pcard__body {
+  padding: 14px 16px 16px;
+  background: linear-gradient(180deg, #fff 0%, var(--gray-50) 100%);
+}
 .pcard__brand { font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-4); margin-bottom: 3px; }
 .pcard__name  { font-size: 14px; font-weight: 500; line-height: 1.38; margin-bottom: 6px; color: var(--text); }
 .pcard__cond  { font-size: 11.5px; color: var(--text-4); margin-bottom: 8px; }
@@ -340,9 +420,17 @@ button, a, [role="button"], label, select { touch-action: manipulation; }
 .cond-card {
   background: #fff; border: 1px solid var(--gray-200);
   border-radius: 16px; padding: 28px 26px;
-  transition: transform .2s var(--ease), box-shadow .2s;
+  transition: transform .25s var(--ease), box-shadow .25s;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.03),
+    0 2px 8px rgba(0,0,0,.04);
 }
-.cond-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.07); }
+.cond-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.08), 0 16px 40px rgba(0,0,0,.04); }
+.cond-card__title { font-size: 15px; font-weight: 500; margin-bottom: 6px; position: relative; }
+.cond-card__title::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 28px; height: 2px; background: var(--g6); border-radius: 1px;
+}
 .cond-card__icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
 .cond-card__icon svg { width: 20px; height: 20px; }
 .cond-card--a .cond-card__icon { background: var(--g9); color: var(--g3); }
@@ -635,9 +723,11 @@ footer { background: var(--slate); padding: 60px 0 28px; }
 .hero__card {
   background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
   border-radius: 16px; padding: 18px 20px; display: flex; align-items: center; gap: 16px;
-  cursor: pointer; transition: background .2s, transform .2s;
+  cursor: pointer; transition: background .25s var(--ease), transform .25s var(--ease);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
 }
-.hero__card:hover { background: rgba(255,255,255,.12); transform: translateX(4px); }
+.hero__card:hover { background: rgba(255,255,255,.14); transform: translateX(6px) scale(1.02); box-shadow: 0 4px 16px rgba(0,0,0,.12); }
 .hero__card-img { width: 64px; height: 72px; background: rgba(255,255,255,.07); border-radius: 9px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.25); }
 .hero__card-img svg { width: 26px; height: 26px; }
 .hero__card-brand { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.38); margin-bottom: 3px; }
