@@ -654,11 +654,15 @@ footer { background: var(--slate); padding: 60px 0 28px; }
 .sr { opacity: 0; transform: translateY(16px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
 .sr.in { opacity: 1; transform: none; }
 
-/* ── LANGUAGE TOGGLE ─────────────────────────────────── */
-.lang-toggle { display: flex; align-items: center; gap: 1px; padding: 4px 5px; border-radius: 7px; background: var(--gray-100); margin-left: 4px; }
-.lang-btn { font-size: 11px; font-weight: 600; letter-spacing: .04em; padding: 4px 8px; border-radius: 5px; color: var(--text-4); cursor: pointer; transition: all .15s; background: none; border: none; font-family: var(--sans); }
-.lang-btn:hover { color: var(--text-2); }
-.lang-btn.active { background: #fff; color: var(--g3); box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+/* ── LANGUAGE SELECT ─────────────────────────────────── */
+.lang-select {
+  font-size: 12px; font-family: var(--sans); font-weight: 500;
+  padding: 5px 8px; border-radius: 7px; border: 1.5px solid var(--gray-200);
+  background: #fff; color: var(--text-2); cursor: pointer; outline: none;
+  margin-left: 4px; transition: border-color .15s; touch-action: manipulation;
+  max-width: 80px;
+}
+.lang-select:hover, .lang-select:focus { border-color: var(--g5); }
 
 /* ── INDEX: HIKER ANIMATION ──────────────────────────── */
 .hiker-scene { position: absolute; bottom: 0; left: 0; right: 0; height: 120px; overflow: hidden; pointer-events: none; z-index: 0; }

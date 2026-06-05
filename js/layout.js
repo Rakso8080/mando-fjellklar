@@ -51,10 +51,13 @@ MO.injectLayout = function(activePage) {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         <span class="cart-badge" id="cart-badge-nav"></span>
       </button>
-      <div class="lang-toggle">
-        <button class="lang-btn${MO.lang==='no'?' active':''}" data-lang="no" onclick="MO.setLang('no')">NO</button>
-        <button class="lang-btn${MO.lang==='en'?' active':''}" data-lang="en" onclick="MO.setLang('en')">EN</button>
-      </div>
+      <select id="lang-select" class="lang-select" onchange="MO.setLang(this.value)" aria-label="Velg språk">
+        <option value="no" ${MO.lang==='no'?'selected':''}>🇳🇴 NO</option>
+        <option value="en" ${MO.lang==='en'?'selected':''}>🇬🇧 EN</option>
+        <option value="de" ${MO.lang==='de'?'selected':''}>🇩🇪 DE</option>
+        <option value="es" ${MO.lang==='es'?'selected':''}>🇪🇸 ES</option>
+        <option value="zh" ${MO.lang==='zh'?'selected':''}>🇨🇳 中文</option>
+      </select>
       <button class="nav__icon nav__mobile-btn" onclick="MO.openMobileMenu()" aria-label="Meny">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>

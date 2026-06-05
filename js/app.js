@@ -975,7 +975,8 @@ MO.subscribe = function() {
 /* ── LANGUAGE / i18n ─────────────────────────────────── */
 MO.lang = localStorage.getItem('mo_lang') || (function(){
   var bl = (navigator.language || 'no').slice(0,2).toLowerCase();
-  return (bl === 'no' || bl === 'nb' || bl === 'nn') ? 'no' : bl === 'en' ? 'en' : 'no';
+  var map = { no:'no', nb:'no', nn:'no', en:'en', de:'de', es:'es', zh:'zh' };
+  return map[bl] || 'no';
 })();
 
 MO.translations = {
@@ -1036,6 +1037,93 @@ MO.translations = {
     'mobile.new': 'New gear', 'mobile.used': 'Used gear',
     'mobile.about': 'About us', 'mobile.cart': 'Shopping cart',
     'mobile.contact': 'Contact us', 'mobile.sell': 'Sell gear to us',
+  },
+  de: {
+    'nav.new': 'Neu', 'nav.used': 'Gebraucht', 'nav.about': 'Über uns',
+    'cat.all': 'Alle', 'cat.jackets': 'Jacken & Oberbekleidung', 'cat.midlayer': 'Zwischenschicht',
+    'cat.pants': 'Hosen', 'cat.shoes': 'Schuhe & Stiefel', 'cat.accessories': 'Zubehör', 'cat.sale': '🔥 Angebote',
+    'search.placeholder': 'Marke, Typ oder Größe suchen…', 'search.cancel': 'Abbrechen',
+    'cart.title': 'Warenkorb', 'cart.total': 'Gesamt',
+    'cart.checkout': 'Zur Kasse', 'cart.continue': 'Weiter einkaufen',
+    'cart.empty.title': 'Ihr Warenkorb ist leer', 'cart.empty.sub': 'Finden Sie etwas, das Ihnen gefällt!',
+    'product.size': 'Größe', 'product.add': 'In den Warenkorb',
+    'product.wish': '♡ Auf die Wunschliste', 'product.quick': '+ In den Warenkorb',
+    'product.select-size': 'Bitte zuerst eine Größe wählen',
+    'wishlist.title': 'Favoriten', 'wishlist.empty.title': 'Noch keine Favoriten',
+    'wishlist.empty.sub': 'Klicken Sie auf das Herz bei Produkten', 'wishlist.view': 'Produkt ansehen',
+    'footer.tagline': 'Bergausrüstung ohne Kompromisse. Neu und gebraucht von den besten Marken.',
+    'footer.shop': 'Shop', 'footer.new': 'Neuware', 'footer.used': 'Gebraucht',
+    'footer.campaigns': 'Aktionen', 'footer.service': 'Kundendienst',
+    'footer.contact': 'Kontakt', 'footer.shipping': 'Versand & Lieferung',
+    'footer.return': 'Rückgabe & Umtausch', 'footer.sell': 'An uns verkaufen',
+    'footer.about-col': 'Über M&O', 'footer.about-link': 'Über uns',
+    'footer.sustainability': 'Nachhaltigkeit', 'footer.privacy': 'Datenschutz', 'footer.terms': 'AGB',
+    'footer.faq': 'FAQ',
+    'footer.copy': '© 2025 M&O — Mountain &amp; Outdoor. Alle Rechte vorbehalten.',
+    'nl.error': 'Bitte eine gültige E-Mail-Adresse eingeben',
+    'nl.success': 'Angemeldet! Bis bald auf dem Berg ⛰',
+    'nl.toast': 'Angemeldet! Willkommen in der M&O-Familie',
+    'mobile.new': 'Neuware', 'mobile.used': 'Gebraucht',
+    'mobile.about': 'Über uns', 'mobile.cart': 'Warenkorb',
+    'mobile.contact': 'Kontakt', 'mobile.sell': 'Ausrüstung verkaufen',
+  },
+  es: {
+    'nav.new': 'Nuevo', 'nav.used': 'Usado', 'nav.about': 'Nosotros',
+    'cat.all': 'Todo', 'cat.jackets': 'Chaquetas y ropa exterior', 'cat.midlayer': 'Capa intermedia',
+    'cat.pants': 'Pantalones', 'cat.shoes': 'Calzado', 'cat.accessories': 'Accesorios', 'cat.sale': '🔥 Ofertas',
+    'search.placeholder': 'Buscar por marca, tipo o talla…', 'search.cancel': 'Cancelar',
+    'cart.title': 'Carrito', 'cart.total': 'Total',
+    'cart.checkout': 'Ir a pagar', 'cart.continue': 'Seguir comprando',
+    'cart.empty.title': 'Tu carrito está vacío', 'cart.empty.sub': '¡Encuentra algo que te guste!',
+    'product.size': 'Talla', 'product.add': 'Añadir al carrito',
+    'product.wish': '♡ Añadir a favoritos', 'product.quick': '+ Añadir al carrito',
+    'product.select-size': 'Por favor, selecciona una talla primero',
+    'wishlist.title': 'Favoritos', 'wishlist.empty.title': 'Sin favoritos aún',
+    'wishlist.empty.sub': 'Pulsa el corazón en los productos que te gusten', 'wishlist.view': 'Ver producto',
+    'footer.tagline': 'Equipamiento de montaña sin compromisos. Nuevo y de segunda mano.',
+    'footer.shop': 'Tienda', 'footer.new': 'Nuevo', 'footer.used': 'Segunda mano',
+    'footer.campaigns': 'Ofertas', 'footer.service': 'Atención al cliente',
+    'footer.contact': 'Contacto', 'footer.shipping': 'Envío y entrega',
+    'footer.return': 'Devoluciones', 'footer.sell': 'Vender a M&O',
+    'footer.about-col': 'Sobre M&O', 'footer.about-link': 'Sobre nosotros',
+    'footer.sustainability': 'Sostenibilidad', 'footer.privacy': 'Privacidad', 'footer.terms': 'Términos',
+    'footer.faq': 'FAQ',
+    'footer.copy': '© 2025 M&O — Mountain &amp; Outdoor. Todos los derechos reservados.',
+    'nl.error': 'Por favor, introduce un correo electrónico válido',
+    'nl.success': '¡Suscrito! Hasta pronto en la montaña ⛰',
+    'nl.toast': '¡Suscrito! Bienvenido a la familia M&O',
+    'mobile.new': 'Nuevo', 'mobile.used': 'Usado',
+    'mobile.about': 'Nosotros', 'mobile.cart': 'Carrito',
+    'mobile.contact': 'Contacto', 'mobile.sell': 'Vender equipo',
+  },
+  zh: {
+    'nav.new': '新品', 'nav.used': '二手', 'nav.about': '关于我们',
+    'cat.all': '全部', 'cat.jackets': '夹克与外套', 'cat.midlayer': '中间层',
+    'cat.pants': '裤子', 'cat.shoes': '鞋靴', 'cat.accessories': '配件', 'cat.sale': '🔥 特卖',
+    'search.placeholder': '搜索品牌、类型或尺码…', 'search.cancel': '取消',
+    'cart.title': '购物车', 'cart.total': '总计',
+    'cart.checkout': '前往结账', 'cart.continue': '继续购物',
+    'cart.empty.title': '购物车是空的', 'cart.empty.sub': '去找找你喜欢的商品！',
+    'product.size': '尺码', 'product.add': '加入购物车',
+    'product.wish': '♡ 收藏', 'product.quick': '+ 加入购物车',
+    'product.select-size': '请先选择尺码',
+    'wishlist.title': '收藏夹', 'wishlist.empty.title': '暂无收藏',
+    'wishlist.empty.sub': '点击商品上的爱心进行收藏', 'wishlist.view': '查看商品',
+    'footer.tagline': '优质山地装备，新品与二手，无妥协。',
+    'footer.shop': '商店', 'footer.new': '新品', 'footer.used': '二手精品',
+    'footer.campaigns': '促销活动', 'footer.service': '客户服务',
+    'footer.contact': '联系我们', 'footer.shipping': '配送与物流',
+    'footer.return': '退换货', 'footer.sell': '向我们出售',
+    'footer.about-col': '关于M&O', 'footer.about-link': '关于我们',
+    'footer.sustainability': '可持续发展', 'footer.privacy': '隐私政策', 'footer.terms': '服务条款',
+    'footer.faq': '常见问题',
+    'footer.copy': '© 2025 M&amp;O — Mountain &amp; Outdoor. 保留所有权利。',
+    'nl.error': '请输入有效的电子邮件地址',
+    'nl.success': '订阅成功！⛰',
+    'nl.toast': '订阅成功！欢迎加入M&O大家庭',
+    'mobile.new': '新品', 'mobile.used': '二手',
+    'mobile.about': '关于我们', 'mobile.cart': '购物车',
+    'mobile.contact': '联系我们', 'mobile.sell': '出售装备',
   }
 };
 
@@ -1044,9 +1132,10 @@ MO.t = function(key) {
 };
 
 MO.setLang = function(lang) {
-  if (MO.lang === lang) return;
+  if (!MO.translations[lang]) return;
   MO.lang = lang;
   localStorage.setItem('mo_lang', lang);
+  document.documentElement.lang = {zh:'zh-Hans',de:'de',es:'es',en:'en',no:'no'}[lang] || lang;
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     el.innerHTML = MO.t(el.getAttribute('data-i18n'));
   });
@@ -1054,7 +1143,6 @@ MO.setLang = function(lang) {
   if (catbar) catbar.innerHTML = MO.catbarHTML();
   var si = document.getElementById('search-input');
   if (si) si.placeholder = MO.t('search.placeholder');
-  document.querySelectorAll('.lang-btn').forEach(function(btn) {
-    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-  });
+  var sel = document.getElementById('lang-select');
+  if (sel) sel.value = lang;
 };
