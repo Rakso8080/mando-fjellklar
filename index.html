@@ -55,33 +55,22 @@
 
 <div class="page-body">
 
-<!-- ─ HERO ──────────────────────────────────────────────── -->
+<!-- HERO -->
 <section class="hero" id="hero">
 
-  <!-- animated hiker -->
   <div class="hiker-scene" aria-hidden="true">
     <div class="terrain-line"></div>
     <div class="hiker-track" id="hiker-track">
       <svg class="hiker" viewBox="0 0 36 64" xmlns="http://www.w3.org/2000/svg" id="hiker-svg">
-        <!-- Head -->
         <circle cx="18" cy="7" r="5" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"/>
-        <!-- Backpack -->
         <rect x="20" y="13" width="7" height="10" rx="2" fill="rgba(200,169,106,0.5)" stroke="rgba(200,169,106,0.7)" stroke-width="1"/>
-        <!-- Body -->
         <line x1="18" y1="12" x2="18" y2="32" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" stroke-linecap="round"/>
-        <!-- Left arm -->
         <line x1="18" y1="16" x2="10" y2="26" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" stroke-linecap="round" id="arm-l"/>
-        <!-- Right arm (holding pole) -->
         <line x1="18" y1="16" x2="26" y2="22" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" stroke-linecap="round" id="arm-r"/>
-        <!-- Trekking pole -->
         <line x1="26" y1="22" x2="30" y2="44" stroke="rgba(200,169,106,0.65)" stroke-width="1.2" stroke-linecap="round" id="pole"/>
-        <!-- Left leg -->
         <line x1="18" y1="32" x2="12" y2="50" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" stroke-linecap="round" id="leg-l"/>
-        <!-- Right leg -->
         <line x1="18" y1="32" x2="22" y2="50" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" stroke-linecap="round" id="leg-r"/>
-        <!-- Left foot -->
         <line x1="12" y1="50" x2="7" y2="54" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-linecap="round" id="foot-l"/>
-        <!-- Right foot -->
         <line x1="22" y1="50" x2="27" y2="54" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-linecap="round" id="foot-r"/>
       </svg>
     </div>
@@ -97,8 +86,8 @@
         Kvalitetsfjellklær — nye og pent brukte — til priser som faktisk gir mening. Ingen unødvendige mellomlegg.
       </p>
       <div class="hero__ctas anim-fade-up anim-delay-3">
-        <button class="btn btn-white btn-lg" onclick="document.getElementById('nytt').scrollIntoView({behavior:'smooth',block:'start'})">Se nytt sortiment</button>
-        <button class="btn btn-outline-w btn-lg" onclick="document.getElementById('brukt').scrollIntoView({behavior:'smooth',block:'start'})">Utforsk brukt</button>
+        <button class="btn btn-white btn-lg" data-scroll="nytt">Se nytt sortiment</button>
+        <button class="btn btn-outline-w btn-lg" data-scroll="brukt">Utforsk brukt</button>
       </div>
       <div class="hero__stats anim-fade-up anim-delay-4">
         <div><div class="hero__stat-num">400+</div><div class="hero__stat-lbl">Produkter</div></div>
@@ -108,7 +97,7 @@
     </div>
 
     <div class="hero__cards" aria-label="Utvalgte produkter">
-      <div class="hero__card" onclick="MO.openProduct('b1')">
+      <div class="hero__card" data-pid="b1">
         <div class="hero__card-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg></div>
         <div style="flex:1">
           <div class="hero__card-brand">Arc'teryx</div>
@@ -117,7 +106,7 @@
         </div>
         <span class="badge badge-used">Brukt</span>
       </div>
-      <div class="hero__card" onclick="MO.openProduct('n1')">
+      <div class="hero__card" data-pid="n1">
         <div class="hero__card-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg></div>
         <div style="flex:1">
           <div class="hero__card-brand">Norrøna</div>
@@ -126,7 +115,7 @@
         </div>
         <span class="badge badge-new">Nytt</span>
       </div>
-      <div class="hero__card" onclick="MO.openProduct('b3')">
+      <div class="hero__card" data-pid="b3">
         <div class="hero__card-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
         <div style="flex:1">
           <div class="hero__card-brand">Salomon</div>
@@ -139,7 +128,7 @@
   </div>
 </section>
 
-<!-- ─ TRUST BAR ──────────────────────────────────────────── -->
+<!-- TRUST BAR -->
 <div class="trustbar">
   <div class="trustbar__inner">
     <div class="trust-item">
@@ -161,7 +150,7 @@
   </div>
 </div>
 
-<!-- ─ NYTT ───────────────────────────────────────────────── -->
+<!-- NYTT -->
 <section class="section" id="nytt">
   <div class="container">
     <div class="section__header">
@@ -170,7 +159,7 @@
         <h2 class="section__title">Nytt sortiment</h2>
       </div>
       <div style="display:flex;align-items:center;gap:12px">
-        <select class="sort-select" id="sort-nytt" onchange="MO.applySortNytt(this.value)">
+        <select class="sort-select" id="sort-nytt">
           <option value="default">Sorter etter</option>
           <option value="price-asc">Pris: lav–høy</option>
           <option value="price-desc">Pris: høy–lav</option>
@@ -179,18 +168,18 @@
       </div>
     </div>
     <div class="filters" id="filters-nytt">
-      <button class="filter-btn active-new" onclick="MO.filterNytt(this,'alle')">Alle</button>
-      <button class="filter-btn" onclick="MO.filterNytt(this,'jakker')">Jakker</button>
-      <button class="filter-btn" onclick="MO.filterNytt(this,'mellomlag')">Mellomlag</button>
-      <button class="filter-btn" onclick="MO.filterNytt(this,'bukser')">Bukser</button>
-      <button class="filter-btn" onclick="MO.filterNytt(this,'sko')">Sko</button>
+      <button class="filter-btn active-new" data-cat="alle">Alle</button>
+      <button class="filter-btn" data-cat="jakker">Jakker</button>
+      <button class="filter-btn" data-cat="mellomlag">Mellomlag</button>
+      <button class="filter-btn" data-cat="bukser">Bukser</button>
+      <button class="filter-btn" data-cat="sko">Sko</button>
     </div>
     <p class="result-count" id="count-nytt"></p>
     <div class="product-grid" id="grid-nytt"></div>
   </div>
 </section>
 
-<!-- ─ BRUKT ──────────────────────────────────────────────── -->
+<!-- BRUKT -->
 <section class="section section--alt" id="brukt">
   <div class="container">
     <div class="section__header">
@@ -199,7 +188,7 @@
         <h2 class="section__title">Brukt sortiment</h2>
       </div>
       <div style="display:flex;align-items:center;gap:12px">
-        <select class="sort-select" id="sort-brukt" onchange="MO.applySortBrukt(this.value)">
+        <select class="sort-select" id="sort-brukt">
           <option value="default">Sorter etter</option>
           <option value="price-asc">Pris: lav–høy</option>
           <option value="price-desc">Pris: høy–lav</option>
@@ -209,17 +198,17 @@
       </div>
     </div>
     <div class="filters" id="filters-brukt">
-      <button class="filter-btn active-used" onclick="MO.filterBrukt(this,'alle')">Alle stander</button>
-      <button class="filter-btn" onclick="MO.filterBrukt(this,'Topptrim')">Topptrim</button>
-      <button class="filter-btn" onclick="MO.filterBrukt(this,'Turerfaren')">Turerfaren</button>
-      <button class="filter-btn" onclick="MO.filterBrukt(this,'Arbeidshest')">Arbeidshest</button>
+      <button class="filter-btn active-used" data-stand="alle">Alle stander</button>
+      <button class="filter-btn" data-stand="Topptrim">Topptrim</button>
+      <button class="filter-btn" data-stand="Turerfaren">Turerfaren</button>
+      <button class="filter-btn" data-stand="Arbeidshest">Arbeidshest</button>
     </div>
     <p class="result-count" id="count-brukt"></p>
     <div class="product-grid" id="grid-brukt"></div>
   </div>
 </section>
 
-<!-- ─ SLIK FUNGERER DET ──────────────────────────────────── -->
+<!-- SLIK FUNGERER DET -->
 <section class="section section--alt">
   <div class="container">
     <div class="section__header" style="margin-bottom:48px">
@@ -253,7 +242,7 @@
   </div>
 </section>
 
-<!-- ─ STANDBESKRIVELSE ───────────────────────────────────── -->
+<!-- STANDBESKRIVELSE -->
 <section class="section section--sand">
   <div class="container">
     <div class="section__header">
@@ -282,14 +271,13 @@
   </div>
 </section>
 
-<!-- ─ OM OSS ──────────────────────────────────────────────── -->
+<!-- OM OSS -->
 <section class="section" id="om-oss">
   <div class="container">
     <div class="about-grid">
       <div class="about-visual">
         <div class="about-visual__bg" aria-hidden="true">
           <svg viewBox="0 0 340 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%">
-            <!-- Fjellrygg — stroke-basert, ingen fylte trekanter -->
             <polyline points="0,290 55,175 105,225 170,95 235,195 290,125 340,155 340,400 0,400"
               fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.1)" stroke-width="1.5" stroke-linejoin="round"/>
             <polyline points="0,320 65,215 115,258 178,135 242,230 298,162 340,188 340,400 0,400"
@@ -298,7 +286,6 @@
               fill="none" stroke="rgba(255,255,255,.035)" stroke-width="1" stroke-linejoin="round"/>
             <polyline points="0,370 90,292 142,322 205,218 264,302 318,242 340,260 340,400 0,400"
               fill="none" stroke="rgba(255,255,255,.02)" stroke-width="1" stroke-linejoin="round"/>
-            <!-- Toppunkt-markering -->
             <circle cx="170" cy="95" r="3" fill="rgba(200,169,106,.5)"/>
             <line x1="170" y1="68" x2="170" y2="88" stroke="rgba(200,169,106,.35)" stroke-width="1" stroke-dasharray="2 2"/>
           </svg>
@@ -318,7 +305,7 @@
         </div>
         <div class="about__btns">
           <a href="om-oss.html" class="btn btn-primary">Les mer om oss</a>
-          <button class="btn btn-outline" onclick="MO.showModal('selg')">Selg klær til oss</button>
+          <button class="btn btn-outline" data-modal="selg">Selg klær til oss</button>
         </div>
         <p class="about__sig">— Fra fjellelskere, til fjellelskere.</p>
       </div>
@@ -326,7 +313,7 @@
   </div>
 </section>
 
-<!-- ─ REVIEWS ────────────────────────────────────────────── -->
+<!-- REVIEWS -->
 <section class="section section--sand" id="anmeldelser">
   <div class="container">
     <div class="section__header">
@@ -334,7 +321,7 @@
         <p class="section__eyebrow">Kundene sier</p>
         <h2 class="section__title">Anmeldelser</h2>
       </div>
-      <button class="btn btn-outline" onclick="MO.reviews.openForm()">Skriv en anmeldelse</button>
+      <button class="btn btn-outline" data-action="review-form">Skriv en anmeldelse</button>
     </div>
     <div class="reviews-summary">
       <div class="reviews-avg">
@@ -348,7 +335,7 @@
   </div>
 </section>
 
-<!-- ─ NEWSLETTER ──────────────────────────────────────────── -->
+<!-- NEWSLETTER -->
 <section class="section--sand newsletter">
   <div class="container">
     <p class="section__eyebrow" style="text-align:center;margin-bottom:8px">Nyhetsbrev</p>
@@ -357,179 +344,41 @@
     <div class="newsletter__form">
       <label for="nl-email" class="sr-only">E-postadresse</label>
       <input type="email" id="nl-email" class="newsletter__input" placeholder="din@epost.no" autocomplete="email"/>
-      <button class="btn btn-primary" onclick="MO.subscribe()">Meld meg på</button>
+      <button class="btn btn-primary" data-action="subscribe">Meld meg på</button>
     </div>
   </div>
 </section>
 
-</div><!-- end .page-body -->
+</div>
 
 <script src="js/app.js"></script>
 <script src="js/layout.js"></script>
 <script>
 MO.injectLayout('home');
 
-/* ── RENDER GRIDS ── */
-var nytt  = MO.products.filter(function(p){ return p.type === 'nytt'; });
-var brukt = MO.products.filter(function(p){ return p.type === 'brukt'; });
-/* Vis skjelettlasting kort */
-document.getElementById('grid-nytt').innerHTML  = MO.skeletonHTML(4);
-document.getElementById('grid-brukt').innerHTML = MO.skeletonHTML(4);
-setTimeout(function() {
-  document.getElementById('grid-nytt').innerHTML  = nytt.map(MO.cardHTML).join('');
-  document.getElementById('grid-brukt').innerHTML = brukt.map(MO.cardHTML).join('');
-  MO.initReveal();
-  MO.initProductHash();
-}, 300);
+MO.initIndexFilters();
+MO.initHikerAnimation();
+MO.initSearch();
+MO.initEventDelegation();
+MO.renderReviews();
+MO.initReveal();
 
-/* ── SECTION FILTERS ── */
-var nyttSort = 'default', bruktSort = 'default';
-function setCount(gridId, countId, arr) {
-  var el = document.getElementById(countId);
-  if (el) el.innerHTML = 'Viser <strong>' + arr.length + '</strong> produkter';
-}
-MO.filterNytt = function(btn, cat) {
-  document.querySelectorAll('#filters-nytt .filter-btn').forEach(function(b){ b.classList.remove('active-new'); });
-  btn.classList.add('active-new'); btn.setAttribute('data-cat', cat);
-  var arr = cat === 'alle' ? nytt : nytt.filter(function(p){ return p.cat === cat; });
-  arr = MO.sortProducts(arr, nyttSort);
-  document.getElementById('grid-nytt').innerHTML = arr.map(MO.cardHTML).join('');
-  setCount('grid-nytt','count-nytt',arr); MO.initReveal();
-};
-MO.filterBrukt = function(btn, stand) {
-  document.querySelectorAll('#filters-brukt .filter-btn').forEach(function(b){ b.classList.remove('active-used'); });
-  btn.classList.add('active-used'); btn.setAttribute('data-stand', stand);
-  var arr = stand === 'alle' ? brukt : brukt.filter(function(p){ return p.cond === stand; });
-  arr = MO.sortProducts(arr, bruktSort);
-  document.getElementById('grid-brukt').innerHTML = arr.map(MO.cardHTML).join('');
-  setCount('grid-brukt','count-brukt',arr); MO.initReveal();
-};
-MO.applySortNytt = function(method) {
-  nyttSort = method;
-  var activeBtn = document.querySelector('#filters-nytt .active-new');
-  var cat = activeBtn ? (activeBtn.getAttribute('data-cat') || 'alle') : 'alle';
-  var arr = MO.sortProducts(cat === 'alle' ? nytt : nytt.filter(function(p){ return p.cat === cat; }), method);
-  document.getElementById('grid-nytt').innerHTML = arr.map(MO.cardHTML).join('');
-  setCount('grid-nytt','count-nytt',arr); MO.initReveal();
-};
-MO.applySortBrukt = function(method) {
-  bruktSort = method;
-  var activeBtn = document.querySelector('#filters-brukt .active-used');
-  var stand = activeBtn ? (activeBtn.getAttribute('data-stand') || 'alle') : 'alle';
-  var arr = MO.sortProducts(stand === 'alle' ? brukt : brukt.filter(function(p){ return p.cond === stand; }), method);
-  document.getElementById('grid-brukt').innerHTML = arr.map(MO.cardHTML).join('');
-  setCount('grid-brukt','count-brukt',arr); MO.initReveal();
-};
-
-/* ── SEARCH ── */
-document.getElementById('search-input').addEventListener('input', function(){
-  var q = this.value.toLowerCase().trim();
-  if (!q) {
-    document.getElementById('grid-nytt').innerHTML  = nytt.map(MO.cardHTML).join('');
-    document.getElementById('grid-brukt').innerHTML = brukt.map(MO.cardHTML).join('');
+document.addEventListener('click', function (e) {
+  var t = e.target.closest('[data-scroll]');
+  if (t) {
+    var target = t.getAttribute('data-scroll');
+    document.getElementById(target).scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
-  var fn = function(arr){ return arr.filter(function(p){ return (p.name+p.brand+(p.cond||'')+p.cat).toLowerCase().includes(q); }); };
-  document.getElementById('grid-nytt').innerHTML  = fn(nytt).map(MO.cardHTML).join('');
-  document.getElementById('grid-brukt').innerHTML = fn(brukt).map(MO.cardHTML).join('');
+  t = e.target.closest('[data-modal]');
+  if (t) { MO.showModal(t.getAttribute('data-modal')); return; }
+  t = e.target.closest('[data-action="review-form"]');
+  if (t) { MO.reviews.openForm(); return; }
+  t = e.target.closest('[data-action="subscribe"]');
+  if (t) { MO.subscribe(); return; }
+  t = e.target.closest('.hero__card');
+  if (t) { var pid = t.getAttribute('data-pid'); if (pid) MO.openProduct(pid); return; }
 });
-
-/* ── HIKER LIMB ANIMATION ── */
-(function() {
-  var t = 0;
-  var armL  = document.getElementById('arm-l');
-  var armR  = document.getElementById('arm-r');
-  var legL  = document.getElementById('leg-l');
-  var legR  = document.getElementById('leg-r');
-  var footL = document.getElementById('foot-l');
-  var footR = document.getElementById('foot-r');
-  var pole  = document.getElementById('pole');
-  if (!armL) return;
-
-  function animateHiker() {
-    t += 0.08;
-    var sw = Math.sin(t) * 6; // swing amount
-
-    // Arms swing opposite to legs
-    armL.setAttribute('x2', 10 + sw);
-    armL.setAttribute('y2', 26 - Math.abs(sw)*0.3);
-    armR.setAttribute('x2', 26 - sw * 0.5);
-
-    // Legs stride
-    legL.setAttribute('x2', 12 + sw);
-    legL.setAttribute('y2', 48 + (sw > 0 ? 3 : 0));
-    legR.setAttribute('x2', 22 - sw);
-    legR.setAttribute('y2', 48 + (sw < 0 ? 3 : 0));
-
-    // Feet follow legs
-    footL.setAttribute('x1', 12 + sw);
-    footL.setAttribute('y1', 48 + (sw > 0 ? 3 : 0));
-    footL.setAttribute('x2', 7  + sw);
-    footL.setAttribute('y2', 54 + (sw > 0 ? 2 : 0));
-    footR.setAttribute('x1', 22 - sw);
-    footR.setAttribute('y1', 48 + (sw < 0 ? 3 : 0));
-    footR.setAttribute('x2', 27 - sw);
-    footR.setAttribute('y2', 54 + (sw < 0 ? 2 : 0));
-
-    // Pole bob slightly
-    pole.setAttribute('y1', 22 - Math.abs(sw)*0.2);
-
-    requestAnimationFrame(animateHiker);
-  }
-  requestAnimationFrame(animateHiker);
-})();
-
-/* ── REVIEWS ── */
-function renderReviews() {
-  var all  = MO.reviews.all();
-  var avg  = MO.reviews.avg();
-  var dist = MO.reviews.dist(); /* [1★, 2★, 3★, 4★, 5★] */
-
-  document.getElementById('rv-avg').textContent   = avg.toFixed(1);
-  document.getElementById('rv-stars').innerHTML   = MO.reviews.starsHTML(Math.round(avg), 16);
-  document.getElementById('rv-count').textContent = 'Basert på ' + all.length + ' anmeldelser';
-
-  /* Fordeling */
-  var bars = '';
-  for (var s = 5; s >= 1; s--) {
-    var pct = all.length ? Math.round(dist[s-1] / all.length * 100) : 0;
-    bars += '<div class="reviews-bar"><span class="reviews-bar__label">' + s + '</span>' +
-      '<div class="reviews-bar__track"><div class="reviews-bar__fill" style="width:' + pct + '%"></div></div>' +
-      '<span class="reviews-bar__count">' + dist[s-1] + '</span></div>';
-  }
-  document.getElementById('rv-bars').innerHTML = bars;
-
-  /* Kort */
-  document.getElementById('rv-grid').innerHTML = all.slice(0,9).map(function(r) {
-    var badge = r.verified ? '' : '<span style="font-size:10px;color:var(--g5);margin-left:6px">ny</span>';
-    return '<div class="review-card' + (r.verified ? '' : ' review-card--user') + '">' +
-      '<div class="review-card__stars">' + MO.reviews.starsHTML(r.rating) + '</div>' +
-      '<p class="review-card__text">' + MO.sanitize(r.text) + '</p>' +
-      '<div class="review-card__foot">' +
-        '<div><span class="review-card__name">' + MO.sanitize(r.name) + '</span>' + badge + '</div>' +
-        '<div style="display:flex;align-items:center;gap:6px">' +
-          '<span class="review-card__tag">' + MO.sanitize(r.tag) + '</span>' +
-          '<span class="review-card__date">' + MO.sanitize(r.date) + '</span>' +
-        '</div>' +
-      '</div></div>';
-  }).join('');
-}
-renderReviews();
-
-/* ── CATBAR OVERRIDE FOR INDEX ── */
-MO.catFilter = function(btn, cat) {
-  document.querySelectorAll('.catbar__btn').forEach(function(b){ b.classList.remove('active'); });
-  if (btn) btn.classList.add('active');
-  var fn = function(arr){
-    if (cat === 'alle') return arr;
-    if (cat === 'salg') return arr.filter(function(p){ return Math.round((1-p.price/p.oldPrice)*100) >= 50; });
-    return arr.filter(function(p){ return p.cat === cat; });
-  };
-  document.getElementById('grid-nytt').innerHTML  = fn(nytt).map(MO.cardHTML).join('');
-  document.getElementById('grid-brukt').innerHTML = fn(brukt).map(MO.cardHTML).join('');
-  // scroll to nytt section
-  if (cat !== 'alle') document.getElementById('nytt').scrollIntoView({behavior:'smooth', block:'start'});
-};
 </script>
 </body>
 </html>
