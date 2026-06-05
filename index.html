@@ -217,135 +217,116 @@
   <!-- MOUNTAIN BACKGROUND -->
   <div class="mountain-bg" aria-hidden="true">
     <svg viewBox="0 0 1440 200" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <polyline points="0,200 100,120 200,160 320,80 440,140 560,60 680,130 780,90 900,40 1020,110 1140,70 1260,130 1360,80 1440,100 1440,200" fill="var(--g8)" opacity=".06" stroke="var(--g7)" stroke-width=".5"/>
-      <polyline points="0,200 80,140 180,170 280,100 400,150 520,80 640,140 740,110 840,60 960,120 1080,90 1200,140 1320,100 1440,120 1440,200" fill="var(--g7)" opacity=".04" stroke="var(--g6)" stroke-width=".3"/>
+      <!-- Layer 1 - farthest -->
+      <path d="M0 200 L100 130 L200 160 L350 80 L500 140 L650 60 L800 130 L950 90 L1100 40 L1250 110 L1400 70 L1440 80 L1440 200 Z" fill="var(--g8)" opacity=".04"/>
+      <path d="M1100 40 L1080 58 L1090 68 L1100 62 L1110 68 L1120 58 L1100 40 Z" fill="var(--g8)" opacity=".15"/>
+      <path d="M650 60 L635 78 L645 88 L650 82 L655 88 L665 78 L650 60 Z" fill="var(--g8)" opacity=".15"/>
+      <path d="M350 80 L335 95 L343 103 L350 98 L357 103 L365 95 L350 80 Z" fill="var(--g8)" opacity=".12"/>
+      <!-- Layer 2 - mid -->
+      <path d="M0 200 L80 140 L180 170 L300 100 L420 150 L550 80 L680 140 L800 110 L920 60 L1050 120 L1200 90 L1350 140 L1440 120 L1440 200 Z" fill="var(--g7)" opacity=".06" stroke="var(--g6)" stroke-width=".3"/>
+      <path d="M920 60 L902 78 L910 88 L920 82 L930 88 L938 78 L920 60 Z" fill="var(--g7)" opacity=".2"/>
+      <path d="M550 80 L535 98 L543 108 L550 102 L557 108 L565 98 L550 80 Z" fill="var(--g7)" opacity=".18"/>
+      <path d="M300 100 L285 115 L293 123 L300 118 L307 123 L315 115 L300 100 Z" fill="var(--g7)" opacity=".15"/>
+      <!-- Layer 3 - front foreground -->
+      <path d="M0 200 L60 155 L140 175 L260 115 L360 160 L480 95 L600 145 L720 120 L840 75 L960 130 L1080 100 L1220 145 L1320 110 L1440 135 L1440 200 Z" fill="var(--g6)" opacity=".08" stroke="var(--g5)" stroke-width=".4"/>
+      <path d="M840 75 L825 93 L832 103 L840 97 L848 103 L855 93 L840 75 Z" fill="var(--g6)" opacity=".25"/>
+      <path d="M480 95 L467 112 L474 120 L480 115 L486 120 L493 112 L480 95 Z" fill="var(--g6)" opacity=".22"/>
+      <path d="M260 115 L247 130 L254 138 L260 133 L266 138 L273 130 L260 115 Z" fill="var(--g6)" opacity=".18"/>
+      <!-- Ridge detail lines -->
+      <path d="M100 130 L150 148 L200 160 L250 140 L320 80 L380 110 L440 140" fill="none" stroke="var(--g7)" stroke-width=".3" opacity=".06"/>
+      <path d="M80 140 L140 155 L180 170 L240 135 L300 100 L360 130 L420 150" fill="none" stroke="var(--g6)" stroke-width=".3" opacity=".08"/>
+      <path d="M60 155 L120 165 L180 175 L230 145 L290 125 L350 160" fill="none" stroke="var(--g5)" stroke-width=".25" opacity=".07"/>
+      <defs>
+        <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="65%" stop-color="var(--g8)" stop-opacity="0"/>
+          <stop offset="100%" stop-color="var(--g8)" stop-opacity=".12"/>
+        </linearGradient>
+      </defs>
+      <rect width="1440" height="200" fill="url(#mist)" pointer-events="none"/>
     </svg>
   </div>
   <!-- FOREST BACKGROUND -->
   <div class="forest-bg" aria-hidden="true">
-    <svg class="forest" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <!-- DEEP BACKGROUND - distant trees, very faint -->
-      <g fill="var(--g7)" opacity=".06">
-        <polygon points="0,500 25,140 50,500" />
-        <polygon points="40,500 65,100 90,500" />
-        <polygon points="80,500 100,160 120,500" />
-        <polygon points="120,500 145,80 170,500" />
-        <polygon points="160,500 180,180 200,500" />
-        <polygon points="200,500 225,120 250,500" />
-        <polygon points="250,500 270,70 290,500" />
-        <polygon points="290,500 310,150 330,500" />
-        <polygon points="330,500 355,90 380,500" />
-        <polygon points="380,500 400,170 420,500" />
-        <polygon points="420,500 445,60 470,500" />
-        <polygon points="470,500 490,140 510,500" />
-        <polygon points="510,500 530,200 550,500" />
-        <polygon points="550,500 575,110 600,500" />
-        <polygon points="600,500 620,80 640,500" />
-        <polygon points="640,500 660,160 680,500" />
-        <polygon points="680,500 705,130 730,500" />
-        <polygon points="730,500 750,70 770,500" />
-        <polygon points="770,500 790,180 810,500" />
-        <polygon points="810,500 835,100 860,500" />
-        <polygon points="860,500 880,50 900,500" />
-        <polygon points="900,500 920,190 940,500" />
-        <polygon points="940,500 965,120 990,500" />
-        <polygon points="990,500 1010,90 1030,500" />
-        <polygon points="1030,500 1050,160 1070,500" />
-        <polygon points="1070,500 1095,70 1120,500" />
-        <polygon points="1120,500 1140,140 1160,500" />
-        <polygon points="1160,500 1180,200 1200,500" />
-        <polygon points="1200,500 1225,80 1250,500" />
-        <polygon points="1250,500 1270,150 1290,500" />
-        <polygon points="1290,500 1310,60 1330,500" />
-        <polygon points="1330,500 1355,130 1380,500" />
-        <polygon points="1380,500 1400,100 1420,500" />
-        <polygon points="1420,500 1440,170 1460,500" />
+    <svg class="forest" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="p" d="M0 0 L-5 18 L0 18 L-9 35 L0 35 L-13 52 L0 52 L-16 68 L0 68 L-18 84 L0 84 L-20 100 L0 100 L-22 120 L22 120 L0 100 L20 100 L0 84 L18 84 L0 68 L16 68 L0 52 L13 52 L0 35 L9 35 L0 18 L5 18 Z"/>
+        <path id="s" d="M0 0 L-4 22 L0 22 L-7 44 L0 44 L-10 65 L0 65 L-12 85 L0 85 L-14 105 L0 105 L-16 120 L16 120 L0 105 L14 105 L0 85 L12 85 L0 65 L10 65 L0 44 L7 44 L0 22 L4 22 Z"/>
+        <path id="r" d="M0 120 L-4 120 L-4 100 Q-22 78 -22 48 Q-22 15 0 6 Q22 15 22 48 Q22 78 4 100 L4 120 Z"/>
+      </defs>
+      <!-- BACKGROUND -->
+      <g fill="var(--g7)" opacity=".04">
+        <use href="#s" transform="translate(40, 0) scale(.4)"/>
+        <use href="#r" transform="translate(100, 0) scale(.35)"/>
+        <use href="#p" transform="translate(160, 0) scale(.45)"/>
+        <use href="#s" transform="translate(220, 0) scale(.4)"/>
+        <use href="#r" transform="translate(280, 0) scale(.38)"/>
+        <use href="#p" transform="translate(340, 0) scale(.42)"/>
+        <use href="#s" transform="translate(400, 0) scale(.4)"/>
+        <use href="#r" transform="translate(460, 0) scale(.35)"/>
+        <use href="#p" transform="translate(520, 0) scale(.45)"/>
+        <use href="#s" transform="translate(580, 0) scale(.4)"/>
+        <use href="#r" transform="translate(640, 0) scale(.38)"/>
+        <use href="#p" transform="translate(700, 0) scale(.42)"/>
+        <use href="#s" transform="translate(760, 0) scale(.4)"/>
+        <use href="#r" transform="translate(820, 0) scale(.35)"/>
+        <use href="#p" transform="translate(880, 0) scale(.45)"/>
+        <use href="#s" transform="translate(940, 0) scale(.4)"/>
+        <use href="#r" transform="translate(1000, 0) scale(.38)"/>
+        <use href="#p" transform="translate(1060, 0) scale(.42)"/>
+        <use href="#s" transform="translate(1120, 0) scale(.4)"/>
+        <use href="#r" transform="translate(1180, 0) scale(.35)"/>
+        <use href="#p" transform="translate(1240, 0) scale(.45)"/>
+        <use href="#s" transform="translate(1300, 0) scale(.4)"/>
+        <use href="#r" transform="translate(1360, 0) scale(.38)"/>
+        <use href="#p" transform="translate(1420, 0) scale(.42)"/>
       </g>
-      <!-- MIDGROUND - layered tree silhouettes -->
-      <g fill="var(--g8)" opacity=".1">
-        <polygon points="10,500 30,180 50,500" />
-        <polygon points="55,500 75,110 95,500" />
-        <polygon points="100,500 120,200 140,500" />
-        <polygon points="150,500 175,90 200,500" />
-        <polygon points="210,500 230,170 250,500" />
-        <polygon points="260,500 280,130 300,500" />
-        <polygon points="310,500 330,60 350,500" />
-        <polygon points="360,500 380,190 400,500" />
-        <polygon points="410,500 435,100 460,500" />
-        <polygon points="465,500 485,160 505,500" />
-        <polygon points="515,500 535,80 555,500" />
-        <polygon points="565,500 585,210 605,500" />
-        <polygon points="615,500 635,120 655,500" />
-        <polygon points="665,500 685,70 705,500" />
-        <polygon points="715,500 735,180 755,500" />
-        <polygon points="765,500 785,140 805,500" />
-        <polygon points="815,500 835,90 855,500" />
-        <polygon points="865,500 885,50 905,500" />
-        <polygon points="915,500 935,200 955,500" />
-        <polygon points="965,500 985,110 1005,500" />
-        <polygon points="1015,500 1035,170 1055,500" />
-        <polygon points="1065,500 1085,80 1105,500" />
-        <polygon points="1115,500 1135,150 1155,500" />
-        <polygon points="1165,500 1185,60 1205,500" />
-        <polygon points="1215,500 1235,190 1255,500" />
-        <polygon points="1265,500 1285,130 1305,500" />
-        <polygon points="1315,500 1335,70 1355,500" />
-        <polygon points="1365,500 1385,160 1405,500" />
-        <polygon points="1415,500 1435,100 1455,500" />
+      <!-- MIDGROUND -->
+      <g fill="var(--g8)" opacity=".08">
+        <use href="#p" transform="translate(60, 0) scale(.65)"/>
+        <use href="#s" transform="translate(140, 0) scale(.6)"/>
+        <use href="#r" transform="translate(220, 0) scale(.55)"/>
+        <use href="#p" transform="translate(300, 0) scale(.7)"/>
+        <use href="#s" transform="translate(380, 0) scale(.6)"/>
+        <use href="#r" transform="translate(460, 0) scale(.55)"/>
+        <use href="#p" transform="translate(540, 0) scale(.65)"/>
+        <use href="#s" transform="translate(620, 0) scale(.6)"/>
+        <use href="#p" transform="translate(700, 0) scale(.7)"/>
+        <use href="#r" transform="translate(780, 0) scale(.55)"/>
+        <use href="#s" transform="translate(860, 0) scale(.6)"/>
+        <use href="#p" transform="translate(940, 0) scale(.65)"/>
+        <use href="#s" transform="translate(1020, 0) scale(.6)"/>
+        <use href="#r" transform="translate(1100, 0) scale(.55)"/>
+        <use href="#p" transform="translate(1180, 0) scale(.7)"/>
+        <use href="#s" transform="translate(1260, 0) scale(.6)"/>
+        <use href="#r" transform="translate(1340, 0) scale(.55)"/>
+        <use href="#p" transform="translate(1420, 0) scale(.65)"/>
       </g>
-      <!-- FOREGROUND - wider trees, more visible -->
+      <!-- FOREGROUND -->
       <g fill="var(--g8)" opacity=".14">
-        <polygon points="25,500 45,230 65,500" />
-        <polygon points="85,500 110,150 135,500" />
-        <polygon points="160,500 185,120 210,500" />
-        <polygon points="230,500 255,210 280,500" />
-        <polygon points="305,500 325,170 345,500" />
-        <polygon points="370,500 395,90 420,500" />
-        <polygon points="445,500 465,200 485,500" />
-        <polygon points="510,500 535,140 560,500" />
-        <polygon points="580,500 605,110 630,500" />
-        <polygon points="650,500 670,230 690,500" />
-        <polygon points="715,500 740,160 765,500" />
-        <polygon points="790,500 810,80 830,500" />
-        <polygon points="855,500 875,190 895,500" />
-        <polygon points="920,500 945,130 970,500" />
-        <polygon points="995,500 1015,100 1035,500" />
-        <polygon points="1055,500 1075,220 1095,500" />
-        <polygon points="1115,500 1140,150 1165,500" />
-        <polygon points="1190,500 1210,90 1230,500" />
-        <polygon points="1255,500 1275,180 1295,500" />
-        <polygon points="1315,500 1340,120 1365,500" />
-        <polygon points="1385,500 1405,200 1425,500" />
-      </g>
-      <!-- EXTRA DETAIL - tiny trees between gaps -->
-      <g fill="var(--g7)" opacity=".08">
-        <polygon points="35,500 45,250 55,500" />
-        <polygon points="140,500 150,220 160,500" />
-        <polygon points="245,500 255,280 265,500" />
-        <polygon points="350,500 360,240 370,500" />
-        <polygon points="455,500 465,270 475,500" />
-        <polygon points="560,500 570,230 580,500" />
-        <polygon points="670,500 680,260 690,500" />
-        <polygon points="780,500 790,210 800,500" />
-        <polygon points="890,500 900,250 910,500" />
-        <polygon points="1000,500 1010,280 1020,500" />
-        <polygon points="1110,500 1120,240 1130,500" />
-        <polygon points="1220,500 1230,270 1240,500" />
-        <polygon points="1330,500 1340,230 1350,500" />
-        <polygon points="1435,500 1445,260 1455,500" />
+        <use href="#p" transform="translate(80, 0) scale(.95)"/>
+        <use href="#s" transform="translate(190, 0) scale(.85)"/>
+        <use href="#r" transform="translate(310, 0) scale(.8)"/>
+        <use href="#p" transform="translate(440, 0) scale(.9)"/>
+        <use href="#s" transform="translate(570, 0) scale(.88)"/>
+        <use href="#r" transform="translate(700, 0) scale(.82)"/>
+        <use href="#p" transform="translate(830, 0) scale(.95)"/>
+        <use href="#s" transform="translate(960, 0) scale(.85)"/>
+        <use href="#r" transform="translate(1090, 0) scale(.8)"/>
+        <use href="#p" transform="translate(1220, 0) scale(.9)"/>
+        <use href="#s" transform="translate(1350, 0) scale(.88)"/>
       </g>
     </svg>
   </div>
   <!-- FALLING LEAVES -->
   <div class="leaves" aria-hidden="true">
-    <svg class="leaf leaf--1" viewBox="0 0 30 40" xmlns="http://www.w3.org/2000/svg"><path d="M15 0 Q25 10 20 25 Q15 38 15 40 Q10 32 5 20 Q2 12 15 0Z" fill="#6b8f62" opacity=".45"/><path d="M15 0 Q20 15 15 40" stroke="#4a6b42" stroke-width="1" fill="none" opacity=".5"/></svg>
-    <svg class="leaf leaf--2" viewBox="0 0 30 40" xmlns="http://www.w3.org/2000/svg"><path d="M15 0 Q25 10 20 25 Q15 38 15 40 Q10 32 5 20 Q2 12 15 0Z" fill="#b8860b" opacity=".4"/><path d="M15 0 Q20 15 15 40" stroke="#8b6508" stroke-width="1" fill="none" opacity=".5"/></svg>
-    <svg class="leaf leaf--3" viewBox="0 0 30 40" xmlns="http://www.w3.org/2000/svg"><path d="M15 0 Q25 10 20 25 Q15 38 15 40 Q10 32 5 20 Q2 12 15 0Z" fill="#8fbc8f" opacity=".4"/><path d="M15 0 Q20 15 15 40" stroke="#6b9b6b" stroke-width="1" fill="none" opacity=".5"/></svg>
-    <svg class="leaf leaf--4" viewBox="0 0 30 40" xmlns="http://www.w3.org/2000/svg"><path d="M15 0 Q25 10 20 25 Q15 38 15 40 Q10 32 5 20 Q2 12 15 0Z" fill="#c8a94a" opacity=".45"/><path d="M15 0 Q20 15 15 40" stroke="#a88a2a" stroke-width="1" fill="none" opacity=".5"/></svg>
-    <svg class="leaf leaf--5" viewBox="0 0 20 30" xmlns="http://www.w3.org/2000/svg"><path d="M10 0 Q18 8 14 20 Q10 28 10 30 Q6 24 3 15 Q1 9 10 0Z" fill="#5a7a52" opacity=".35"/><path d="M10 0 Q13 12 10 30" stroke="#3a5a32" stroke-width="1" fill="none" opacity=".45"/></svg>
-    <svg class="leaf leaf--6" viewBox="0 0 20 30" xmlns="http://www.w3.org/2000/svg"><path d="M10 0 Q18 8 14 20 Q10 28 10 30 Q6 24 3 15 Q1 9 10 0Z" fill="#d4a017" opacity=".4"/><path d="M10 0 Q13 12 10 30" stroke="#b4800a" stroke-width="1" fill="none" opacity=".5"/></svg>
-    <svg class="leaf leaf--7" viewBox="0 0 25 35" xmlns="http://www.w3.org/2000/svg"><path d="M12 0 Q22 12 17 26 Q12 33 12 35 Q7 28 4 18 Q1 10 12 0Z" fill="#7daa7d" opacity=".35"/><path d="M12 0 Q16 14 12 35" stroke="#5d8a5d" stroke-width="1" fill="none" opacity=".45"/></svg>
-    <svg class="leaf leaf--8" viewBox="0 0 25 35" xmlns="http://www.w3.org/2000/svg"><path d="M12 0 Q22 12 17 26 Q12 33 12 35 Q7 28 4 18 Q1 10 12 0Z" fill="#c8a94a" opacity=".35"/><path d="M12 0 Q16 14 12 35" stroke="#a88a2a" stroke-width="1" fill="none" opacity=".45"/></svg>
+    <svg class="leaf leaf--1" viewBox="0 0 30 34" xmlns="http://www.w3.org/2000/svg"><path d="M15 34 L12 26 L4 28 L8 20 L0 16 L8 12 L4 4 L12 8 L15 0 L18 8 L26 4 L22 12 L30 16 L22 20 L26 28 L18 26 Z" fill="#6b8f62" opacity=".45"/><path d="M15 0 L15 34" stroke="#4a6b42" stroke-width=".8" fill="none" opacity=".6"/><path d="M15 8 L10 11 M15 8 L20 11 M15 16 L9 18 M15 16 L21 18 M15 24 L11 26 M15 24 L19 26" stroke="#4a6b42" stroke-width=".4" fill="none" opacity=".4"/></svg>
+    <svg class="leaf leaf--2" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg"><path d="M14 32 Q6 28 4 22 Q0 18 3 14 Q0 10 5 7 Q2 4 8 2 Q6 0 14 0 Q22 0 20 2 Q26 4 23 7 Q28 10 25 14 Q28 18 24 22 Q22 28 14 32Z" fill="#b8860b" opacity=".4"/><path d="M14 0 L14 32" stroke="#8b6508" stroke-width=".8" fill="none" opacity=".6"/><path d="M14 8 L7 11 M14 8 L21 11 M14 16 L8 19 M14 16 L20 19 M14 24 L9 26 M14 24 L19 26" stroke="#8b6508" stroke-width=".4" fill="none" opacity=".4"/></svg>
+    <svg class="leaf leaf--3" viewBox="0 0 24 30" xmlns="http://www.w3.org/2000/svg"><path d="M12 30 Q4 24 2 16 Q0 8 12 0 Q24 8 22 16 Q20 24 12 30Z" fill="#8fbc8f" opacity=".4"/><path d="M12 0 L12 30" stroke="#6b9b6b" stroke-width=".8" fill="none" opacity=".6"/><path d="M12 8 L6 11 M12 8 L18 11 M12 16 L7 19 M12 16 L17 19" stroke="#6b9b6b" stroke-width=".4" fill="none" opacity=".4"/></svg>
+    <svg class="leaf leaf--4" viewBox="0 0 30 34" xmlns="http://www.w3.org/2000/svg"><path d="M15 34 L12 26 L4 28 L8 20 L0 16 L8 12 L4 4 L12 8 L15 0 L18 8 L26 4 L22 12 L30 16 L22 20 L26 28 L18 26 Z" fill="#c8a94a" opacity=".45"/><path d="M15 0 L15 34" stroke="#a88a2a" stroke-width=".8" fill="none" opacity=".6"/><path d="M15 8 L10 11 M15 8 L20 11 M15 16 L9 18 M15 16 L21 18" stroke="#a88a2a" stroke-width=".4" fill="none" opacity=".4"/></svg>
+    <svg class="leaf leaf--5" viewBox="0 0 22 26" xmlns="http://www.w3.org/2000/svg"><path d="M11 26 Q5 22 3 15 Q1 8 11 0 Q21 8 19 15 Q17 22 11 26Z" fill="#5a7a52" opacity=".35"/><path d="M11 0 L11 26" stroke="#3a5a32" stroke-width=".7" fill="none" opacity=".5"/><path d="M11 7 L6 10 M11 7 L16 10 M11 14 L7 16 M11 14 L15 16" stroke="#3a5a32" stroke-width=".3" fill="none" opacity=".35"/></svg>
+    <svg class="leaf leaf--6" viewBox="0 0 26 28" xmlns="http://www.w3.org/2000/svg"><path d="M13 28 Q7 24 4 18 Q1 12 4 7 Q1 3 13 0 Q25 3 22 7 Q25 12 22 18 Q19 24 13 28Z" fill="#d4a017" opacity=".4"/><path d="M13 0 L13 28" stroke="#b4800a" stroke-width=".7" fill="none" opacity=".5"/><path d="M13 7 L7 10 M13 7 L19 10 M13 16 L8 18 M13 16 L18 18" stroke="#b4800a" stroke-width=".3" fill="none" opacity=".35"/></svg>
+    <svg class="leaf leaf--7" viewBox="0 0 30 34" xmlns="http://www.w3.org/2000/svg"><path d="M15 34 L12 26 L4 28 L8 20 L0 16 L8 12 L4 4 L12 8 L15 0 L18 8 L26 4 L22 12 L30 16 L22 20 L26 28 L18 26 Z" fill="#7daa7d" opacity=".35"/><path d="M15 0 L15 34" stroke="#5d8a5d" stroke-width=".8" fill="none" opacity=".5"/><path d="M15 8 L10 11 M15 8 L20 11 M15 16 L9 18 M15 16 L21 18" stroke="#5d8a5d" stroke-width=".4" fill="none" opacity=".35"/></svg>
+    <svg class="leaf leaf--8" viewBox="0 0 24 30" xmlns="http://www.w3.org/2000/svg"><path d="M12 30 Q4 24 2 16 Q0 8 12 0 Q24 8 22 16 Q20 24 12 30Z" fill="#c8a94a" opacity=".35"/><path d="M12 0 L12 30" stroke="#a88a2a" stroke-width=".8" fill="none" opacity=".5"/><path d="M12 8 L6 11 M12 8 L18 11 M12 16 L7 19 M12 16 L17 19" stroke="#a88a2a" stroke-width=".4" fill="none" opacity=".35"/></svg>
   </div>
   <div class="container">
     <div class="section__header">
@@ -379,118 +360,96 @@
   <!-- MOUNTAIN BACKGROUND -->
   <div class="mountain-bg" aria-hidden="true">
     <svg viewBox="0 0 1440 200" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <polyline points="0,200 100,120 200,160 320,80 440,140 560,60 680,130 780,90 900,40 1020,110 1140,70 1260,130 1360,80 1440,100 1440,200" fill="var(--g8)" opacity=".08" stroke="var(--g7)" stroke-width=".5"/>
-      <polyline points="0,200 80,140 180,170 280,100 400,150 520,80 640,140 740,110 840,60 960,120 1080,90 1200,140 1320,100 1440,120 1440,200" fill="var(--g7)" opacity=".05" stroke="var(--g6)" stroke-width=".3"/>
+      <path d="M0 200 L100 130 L200 160 L350 80 L500 140 L650 60 L800 130 L950 90 L1100 40 L1250 110 L1400 70 L1440 80 L1440 200 Z" fill="var(--g8)" opacity=".05"/>
+      <path d="M1100 40 L1080 58 L1090 68 L1100 62 L1110 68 L1120 58 L1100 40 Z" fill="var(--g8)" opacity=".18"/>
+      <path d="M650 60 L635 78 L645 88 L650 82 L655 88 L665 78 L650 60 Z" fill="var(--g8)" opacity=".18"/>
+      <path d="M350 80 L335 95 L343 103 L350 98 L357 103 L365 95 L350 80 Z" fill="var(--g8)" opacity=".14"/>
+      <path d="M0 200 L80 140 L180 170 L300 100 L420 150 L550 80 L680 140 L800 110 L920 60 L1050 120 L1200 90 L1350 140 L1440 120 L1440 200 Z" fill="var(--g7)" opacity=".08" stroke="var(--g6)" stroke-width=".3"/>
+      <path d="M920 60 L902 78 L910 88 L920 82 L930 88 L938 78 L920 60 Z" fill="var(--g7)" opacity=".25"/>
+      <path d="M550 80 L535 98 L543 108 L550 102 L557 108 L565 98 L550 80 Z" fill="var(--g7)" opacity=".22"/>
+      <path d="M300 100 L285 115 L293 123 L300 118 L307 123 L315 115 L300 100 Z" fill="var(--g7)" opacity=".18"/>
+      <path d="M0 200 L60 155 L140 175 L260 115 L360 160 L480 95 L600 145 L720 120 L840 75 L960 130 L1080 100 L1220 145 L1320 110 L1440 135 L1440 200 Z" fill="var(--g6)" opacity=".1" stroke="var(--g5)" stroke-width=".4"/>
+      <path d="M840 75 L825 93 L832 103 L840 97 L848 103 L855 93 L840 75 Z" fill="var(--g6)" opacity=".3"/>
+      <path d="M480 95 L467 112 L474 120 L480 115 L486 120 L493 112 L480 95 Z" fill="var(--g6)" opacity=".26"/>
+      <path d="M260 115 L247 130 L254 138 L260 133 L266 138 L273 130 L260 115 Z" fill="var(--g6)" opacity=".22"/>
+      <path d="M100 130 L150 148 L200 160 L250 140 L320 80 L380 110 L440 140" fill="none" stroke="var(--g7)" stroke-width=".3" opacity=".08"/>
+      <path d="M80 140 L140 155 L180 170 L240 135 L300 100 L360 130 L420 150" fill="none" stroke="var(--g6)" stroke-width=".3" opacity=".1"/>
+      <path d="M60 155 L120 165 L180 175 L230 145 L290 125 L350 160" fill="none" stroke="var(--g5)" stroke-width=".25" opacity=".08"/>
+      <defs>
+        <linearGradient id="mist2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="65%" stop-color="var(--g8)" stop-opacity="0"/>
+          <stop offset="100%" stop-color="var(--g8)" stop-opacity=".15"/>
+        </linearGradient>
+      </defs>
+      <rect width="1440" height="200" fill="url(#mist2)" pointer-events="none"/>
     </svg>
   </div>
   <!-- FOREST BACKGROUND -->
   <div class="forest-bg" aria-hidden="true">
-    <svg class="forest" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <g fill="var(--g7)" opacity=".08">
-        <polygon points="0,500 25,140 50,500" />
-        <polygon points="40,500 65,100 90,500" />
-        <polygon points="80,500 100,160 120,500" />
-        <polygon points="120,500 145,80 170,500" />
-        <polygon points="160,500 180,180 200,500" />
-        <polygon points="200,500 225,120 250,500" />
-        <polygon points="250,500 270,70 290,500" />
-        <polygon points="290,500 310,150 330,500" />
-        <polygon points="330,500 355,90 380,500" />
-        <polygon points="380,500 400,170 420,500" />
-        <polygon points="420,500 445,60 470,500" />
-        <polygon points="470,500 490,140 510,500" />
-        <polygon points="510,500 530,200 550,500" />
-        <polygon points="550,500 575,110 600,500" />
-        <polygon points="600,500 620,80 640,500" />
-        <polygon points="640,500 660,160 680,500" />
-        <polygon points="680,500 705,130 730,500" />
-        <polygon points="730,500 750,70 770,500" />
-        <polygon points="770,500 790,180 810,500" />
-        <polygon points="810,500 835,100 860,500" />
-        <polygon points="860,500 880,50 900,500" />
-        <polygon points="900,500 920,190 940,500" />
-        <polygon points="940,500 965,120 990,500" />
-        <polygon points="990,500 1010,90 1030,500" />
-        <polygon points="1030,500 1050,160 1070,500" />
-        <polygon points="1070,500 1095,70 1120,500" />
-        <polygon points="1120,500 1140,140 1160,500" />
-        <polygon points="1160,500 1180,200 1200,500" />
-        <polygon points="1200,500 1225,80 1250,500" />
-        <polygon points="1250,500 1270,150 1290,500" />
-        <polygon points="1290,500 1310,60 1330,500" />
-        <polygon points="1330,500 1355,130 1380,500" />
-        <polygon points="1380,500 1400,100 1420,500" />
-        <polygon points="1420,500 1440,170 1460,500" />
+    <svg class="forest" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="p" d="M0 0 L-5 18 L0 18 L-9 35 L0 35 L-13 52 L0 52 L-16 68 L0 68 L-18 84 L0 84 L-20 100 L0 100 L-22 120 L22 120 L0 100 L20 100 L0 84 L18 84 L0 68 L16 68 L0 52 L13 52 L0 35 L9 35 L0 18 L5 18 Z"/>
+        <path id="s" d="M0 0 L-4 22 L0 22 L-7 44 L0 44 L-10 65 L0 65 L-12 85 L0 85 L-14 105 L0 105 L-16 120 L16 120 L0 105 L14 105 L0 85 L12 85 L0 65 L10 65 L0 44 L7 44 L0 22 L4 22 Z"/>
+        <path id="r" d="M0 120 L-4 120 L-4 100 Q-22 78 -22 48 Q-22 15 0 6 Q22 15 22 48 Q22 78 4 100 L4 120 Z"/>
+      </defs>
+      <g fill="var(--g7)" opacity=".06">
+        <use href="#s" transform="translate(40, 0) scale(.4)"/>
+        <use href="#r" transform="translate(100, 0) scale(.35)"/>
+        <use href="#p" transform="translate(160, 0) scale(.45)"/>
+        <use href="#s" transform="translate(220, 0) scale(.4)"/>
+        <use href="#r" transform="translate(280, 0) scale(.38)"/>
+        <use href="#p" transform="translate(340, 0) scale(.42)"/>
+        <use href="#s" transform="translate(400, 0) scale(.4)"/>
+        <use href="#r" transform="translate(460, 0) scale(.35)"/>
+        <use href="#p" transform="translate(520, 0) scale(.45)"/>
+        <use href="#s" transform="translate(580, 0) scale(.4)"/>
+        <use href="#r" transform="translate(640, 0) scale(.38)"/>
+        <use href="#p" transform="translate(700, 0) scale(.42)"/>
+        <use href="#s" transform="translate(760, 0) scale(.4)"/>
+        <use href="#r" transform="translate(820, 0) scale(.35)"/>
+        <use href="#p" transform="translate(880, 0) scale(.45)"/>
+        <use href="#s" transform="translate(940, 0) scale(.4)"/>
+        <use href="#r" transform="translate(1000, 0) scale(.38)"/>
+        <use href="#p" transform="translate(1060, 0) scale(.42)"/>
+        <use href="#s" transform="translate(1120, 0) scale(.4)"/>
+        <use href="#r" transform="translate(1180, 0) scale(.35)"/>
+        <use href="#p" transform="translate(1240, 0) scale(.45)"/>
+        <use href="#s" transform="translate(1300, 0) scale(.4)"/>
+        <use href="#r" transform="translate(1360, 0) scale(.38)"/>
+        <use href="#p" transform="translate(1420, 0) scale(.42)"/>
       </g>
-      <g fill="var(--g8)" opacity=".14">
-        <polygon points="10,500 30,180 50,500" />
-        <polygon points="55,500 75,110 95,500" />
-        <polygon points="100,500 120,200 140,500" />
-        <polygon points="150,500 175,90 200,500" />
-        <polygon points="210,500 230,170 250,500" />
-        <polygon points="260,500 280,130 300,500" />
-        <polygon points="310,500 330,60 350,500" />
-        <polygon points="360,500 380,190 400,500" />
-        <polygon points="410,500 435,100 460,500" />
-        <polygon points="465,500 485,160 505,500" />
-        <polygon points="515,500 535,80 555,500" />
-        <polygon points="565,500 585,210 605,500" />
-        <polygon points="615,500 635,120 655,500" />
-        <polygon points="665,500 685,70 705,500" />
-        <polygon points="715,500 735,180 755,500" />
-        <polygon points="765,500 785,140 805,500" />
-        <polygon points="815,500 835,90 855,500" />
-        <polygon points="865,500 885,50 905,500" />
-        <polygon points="915,500 935,200 955,500" />
-        <polygon points="965,500 985,110 1005,500" />
-        <polygon points="1015,500 1035,170 1055,500" />
-        <polygon points="1065,500 1085,80 1105,500" />
-        <polygon points="1115,500 1135,150 1155,500" />
-        <polygon points="1165,500 1185,60 1205,500" />
-        <polygon points="1215,500 1235,190 1255,500" />
-        <polygon points="1265,500 1285,130 1305,500" />
-        <polygon points="1315,500 1335,70 1355,500" />
-        <polygon points="1365,500 1385,160 1405,500" />
-        <polygon points="1415,500 1435,100 1455,500" />
+      <g fill="var(--g8)" opacity=".12">
+        <use href="#p" transform="translate(60, 0) scale(.65)"/>
+        <use href="#s" transform="translate(140, 0) scale(.6)"/>
+        <use href="#r" transform="translate(220, 0) scale(.55)"/>
+        <use href="#p" transform="translate(300, 0) scale(.7)"/>
+        <use href="#s" transform="translate(380, 0) scale(.6)"/>
+        <use href="#r" transform="translate(460, 0) scale(.55)"/>
+        <use href="#p" transform="translate(540, 0) scale(.65)"/>
+        <use href="#s" transform="translate(620, 0) scale(.6)"/>
+        <use href="#p" transform="translate(700, 0) scale(.7)"/>
+        <use href="#r" transform="translate(780, 0) scale(.55)"/>
+        <use href="#s" transform="translate(860, 0) scale(.6)"/>
+        <use href="#p" transform="translate(940, 0) scale(.65)"/>
+        <use href="#s" transform="translate(1020, 0) scale(.6)"/>
+        <use href="#r" transform="translate(1100, 0) scale(.55)"/>
+        <use href="#p" transform="translate(1180, 0) scale(.7)"/>
+        <use href="#s" transform="translate(1260, 0) scale(.6)"/>
+        <use href="#r" transform="translate(1340, 0) scale(.55)"/>
+        <use href="#p" transform="translate(1420, 0) scale(.65)"/>
       </g>
-      <g fill="var(--g8)" opacity=".18">
-        <polygon points="25,500 45,230 65,500" />
-        <polygon points="85,500 110,150 135,500" />
-        <polygon points="160,500 185,120 210,500" />
-        <polygon points="230,500 255,210 280,500" />
-        <polygon points="305,500 325,170 345,500" />
-        <polygon points="370,500 395,90 420,500" />
-        <polygon points="445,500 465,200 485,500" />
-        <polygon points="510,500 535,140 560,500" />
-        <polygon points="580,500 605,110 630,500" />
-        <polygon points="650,500 670,230 690,500" />
-        <polygon points="715,500 740,160 765,500" />
-        <polygon points="790,500 810,80 830,500" />
-        <polygon points="855,500 875,190 895,500" />
-        <polygon points="920,500 945,130 970,500" />
-        <polygon points="995,500 1015,100 1035,500" />
-        <polygon points="1055,500 1075,220 1095,500" />
-        <polygon points="1115,500 1140,150 1165,500" />
-        <polygon points="1190,500 1210,90 1230,500" />
-        <polygon points="1255,500 1275,180 1295,500" />
-        <polygon points="1315,500 1340,120 1365,500" />
-        <polygon points="1385,500 1405,200 1425,500" />
-      </g>
-      <g fill="var(--g7)" opacity=".1">
-        <polygon points="35,500 45,250 55,500" />
-        <polygon points="140,500 150,220 160,500" />
-        <polygon points="245,500 255,280 265,500" />
-        <polygon points="350,500 360,240 370,500" />
-        <polygon points="455,500 465,270 475,500" />
-        <polygon points="560,500 570,230 580,500" />
-        <polygon points="670,500 680,260 690,500" />
-        <polygon points="780,500 790,210 800,500" />
-        <polygon points="890,500 900,250 910,500" />
-        <polygon points="1000,500 1010,280 1020,500" />
-        <polygon points="1110,500 1120,240 1130,500" />
-        <polygon points="1220,500 1230,270 1240,500" />
-        <polygon points="1330,500 1340,230 1350,500" />
-        <polygon points="1435,500 1445,260 1455,500" />
+      <g fill="var(--g8)" opacity=".2">
+        <use href="#p" transform="translate(80, 0) scale(.95)"/>
+        <use href="#s" transform="translate(190, 0) scale(.85)"/>
+        <use href="#r" transform="translate(310, 0) scale(.8)"/>
+        <use href="#p" transform="translate(440, 0) scale(.9)"/>
+        <use href="#s" transform="translate(570, 0) scale(.88)"/>
+        <use href="#r" transform="translate(700, 0) scale(.82)"/>
+        <use href="#p" transform="translate(830, 0) scale(.95)"/>
+        <use href="#s" transform="translate(960, 0) scale(.85)"/>
+        <use href="#r" transform="translate(1090, 0) scale(.8)"/>
+        <use href="#p" transform="translate(1220, 0) scale(.9)"/>
+        <use href="#s" transform="translate(1350, 0) scale(.88)"/>
       </g>
     </svg>
   </div>
@@ -555,10 +514,10 @@
     <div class="product-grid" id="grid-brukt"></div>
   </div>
   <div class="leaves" aria-hidden="true">
-    <svg class="leaf leaf--9" viewBox="0 0 30 40" xmlns="http://www.w3.org/2000/svg"><path d="M15 0 Q25 10 20 25 Q15 38 15 40 Q10 32 5 20 Q2 12 15 0Z" fill="#6b8f62" opacity=".45"/><path d="M15 0 Q20 15 15 40" stroke="#4a6b42" stroke-width="1" fill="none" opacity=".5"/></svg>
-    <svg class="leaf leaf--10" viewBox="0 0 20 30" xmlns="http://www.w3.org/2000/svg"><path d="M10 0 Q18 8 14 20 Q10 28 10 30 Q6 24 3 15 Q1 9 10 0Z" fill="#c8a94a" opacity=".4"/><path d="M10 0 Q13 12 10 30" stroke="#a88a2a" stroke-width="1" fill="none" opacity=".5"/></svg>
-    <svg class="leaf leaf--11" viewBox="0 0 25 35" xmlns="http://www.w3.org/2000/svg"><path d="M12 0 Q22 12 17 26 Q12 33 12 35 Q7 28 4 18 Q1 10 12 0Z" fill="#8fbc8f" opacity=".35"/><path d="M12 0 Q16 14 12 35" stroke="#6b9b6b" stroke-width="1" fill="none" opacity=".45"/></svg>
-    <svg class="leaf leaf--12" viewBox="0 0 30 40" xmlns="http://www.w3.org/2000/svg"><path d="M15 0 Q25 10 20 25 Q15 38 15 40 Q10 32 5 20 Q2 12 15 0Z" fill="#b8860b" opacity=".4"/><path d="M15 0 Q20 15 15 40" stroke="#8b6508" stroke-width="1" fill="none" opacity=".5"/></svg>
+    <svg class="leaf leaf--9" viewBox="0 0 24 30" xmlns="http://www.w3.org/2000/svg"><path d="M12 30 Q4 24 2 16 Q0 8 12 0 Q24 8 22 16 Q20 24 12 30Z" fill="#6b8f62" opacity=".45"/><path d="M12 0 L12 30" stroke="#4a6b42" stroke-width=".8" fill="none" opacity=".6"/><path d="M12 8 L6 11 M12 8 L18 11 M12 16 L7 19 M12 16 L17 19" stroke="#4a6b42" stroke-width=".4" fill="none" opacity=".4"/></svg>
+    <svg class="leaf leaf--10" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg"><path d="M14 32 Q6 28 4 22 Q0 18 3 14 Q0 10 5 7 Q2 4 8 2 Q6 0 14 0 Q22 0 20 2 Q26 4 23 7 Q28 10 25 14 Q28 18 24 22 Q22 28 14 32Z" fill="#c8a94a" opacity=".4"/><path d="M14 0 L14 32" stroke="#a88a2a" stroke-width=".8" fill="none" opacity=".6"/><path d="M14 8 L7 11 M14 8 L21 11 M14 16 L8 19 M14 16 L20 19 M14 24 L9 26 M14 24 L19 26" stroke="#a88a2a" stroke-width=".4" fill="none" opacity=".4"/></svg>
+    <svg class="leaf leaf--11" viewBox="0 0 30 34" xmlns="http://www.w3.org/2000/svg"><path d="M15 34 L12 26 L4 28 L8 20 L0 16 L8 12 L4 4 L12 8 L15 0 L18 8 L26 4 L22 12 L30 16 L22 20 L26 28 L18 26 Z" fill="#8fbc8f" opacity=".35"/><path d="M15 0 L15 34" stroke="#6b9b6b" stroke-width=".8" fill="none" opacity=".5"/><path d="M15 8 L10 11 M15 8 L20 11 M15 16 L9 18 M15 16 L21 18" stroke="#6b9b6b" stroke-width=".4" fill="none" opacity=".35"/></svg>
+    <svg class="leaf leaf--12" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg"><path d="M14 32 Q6 28 4 22 Q0 18 3 14 Q0 10 5 7 Q2 4 8 2 Q6 0 14 0 Q22 0 20 2 Q26 4 23 7 Q28 10 25 14 Q28 18 24 22 Q22 28 14 32Z" fill="#b8860b" opacity=".4"/><path d="M14 0 L14 32" stroke="#8b6508" stroke-width=".8" fill="none" opacity=".6"/><path d="M14 8 L7 11 M14 8 L21 11 M14 16 L8 19 M14 16 L20 19 M14 24 L9 26 M14 24 L19 26" stroke="#8b6508" stroke-width=".4" fill="none" opacity=".4"/></svg>
   </div>
 </section>
 
