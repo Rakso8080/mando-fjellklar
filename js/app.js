@@ -716,6 +716,280 @@
     });
   };
 
+  /* ── LANGUAGE SYSTEM ──────────────────────────────── */
+  MO.lang = localStorage.getItem('mo_lang') || 'no';
+  MO.translations = {
+    /* Nav */
+    'nav.nytt': { no: 'Nytt', en: 'New' },
+    'nav.brukt': { no: 'Brukt', en: 'Used' },
+    'nav.om': { no: 'Om oss', en: 'About' },
+    'nav.search': { no: 'Søk', en: 'Search' },
+    'nav.favorites': { no: 'Favoritter', en: 'Favorites' },
+    'nav.cart': { no: 'Handlekurv', en: 'Cart' },
+    'nav.menu': { no: 'Meny', en: 'Menu' },
+    'nav.lang': { no: 'NO', en: 'EN' },
+    'nav.langtip': { no: 'Språk', en: 'Language' },
+    'nav.theme': { no: 'Tema', en: 'Theme' },
+    /* Search */
+    'search.placeholder': { no: 'Søk etter merke, type eller størrelse…', en: 'Search brand, type or size…' },
+    'search.cancel': { no: 'Avbryt', en: 'Cancel' },
+    /* Hero */
+    'hero.eyebrow': { no: 'Mountain & Outdoor', en: 'Mountain & Outdoor' },
+    'hero.title1': { no: 'Kle deg for fjellet.', en: 'Dress for the mountain.' },
+    'hero.title2': { no: 'Ikke for merkelappen.', en: 'Not for the label.' },
+    'hero.sub': { no: 'Kvalitetsfjellklær — nye og pent brukte — til priser som faktisk gir mening. Ingen unødvendige mellomlegg.', en: 'Quality mountain gear — new and gently used — at prices that make sense. No unnecessary markups.' },
+    'hero.btn1': { no: 'Se nytt sortiment', en: 'Shop new arrivals' },
+    'hero.btn2': { no: 'Utforsk brukt', en: 'Explore used' },
+    'hero.stat1': { no: 'Produkter', en: 'Products' },
+    'hero.stat2': { no: 'Vs. butikkpris', en: 'vs. retail price' },
+    'hero.stat3': { no: 'Fri retur', en: 'Free returns' },
+    /* Trust */
+    'trust.retur': { no: '14 dagers retur', en: '14 days return' },
+    'trust.retursub': { no: 'Også på brukte varer', en: 'Also on used items' },
+    'trust.betaling': { no: 'Trygg betaling', en: 'Secure payment' },
+    'trust.betalingsub': { no: 'Vipps, kort & Klarna', en: 'Vipps, card & Klarna' },
+    'trust.levering': { no: 'Rask levering', en: 'Fast delivery' },
+    'trust.leveringsub': { no: '1–3 virkedager', en: '1–3 business days' },
+    'trust.kvalitet': { no: 'Kvalitetssikret brukt', en: 'Quality checked used' },
+    'trust.kvalitetsub': { no: 'Sjekket og vasket', en: 'Inspected & washed' },
+    /* Sections */
+    'section.nytt.eyebrow': { no: 'Splitter nytt', en: 'Brand new' },
+    'section.nytt.title': { no: 'Nytt sortiment', en: 'New arrivals' },
+    'section.brukt.eyebrow': { no: 'Pent brukt', en: 'Gently used' },
+    'section.brukt.title': { no: 'Brukt sortiment', en: 'Used selection' },
+    'section.sort': { no: 'Sorter etter', en: 'Sort by' },
+    'section.sort.asc': { no: 'Pris: lav–høy', en: 'Price: low–high' },
+    'section.sort.desc': { no: 'Pris: høy–lav', en: 'Price: high–low' },
+    'section.sort.discount': { no: 'Størst rabatt', en: 'Biggest discount' },
+    'section.sort.last': { no: 'Siste eksemplar først', en: 'Last pieces first' },
+    'section.showing': { no: 'Viser', en: 'Showing' },
+    'section.products': { no: 'produkter', en: 'products' },
+    'section.alle': { no: 'Alle', en: 'All' },
+    'section.alle.stander': { no: 'Alle stander', en: 'All conditions' },
+    /* Steps */
+    'steps.eyebrow': { no: 'Enkelt og trygt', en: 'Simple and secure' },
+    'steps.title': { no: 'Slik fungerer det', en: 'How it works' },
+    'steps.1.title': { no: 'Finn plagget', en: 'Find the item' },
+    'steps.1.desc': { no: 'Bla gjennom nytt og brukt sortiment. Filtrer på kategori, stand og pris.', en: 'Browse new and used selection. Filter by category, condition and price.' },
+    'steps.2.title': { no: 'Sjekk størrelse', en: 'Check size' },
+    'steps.2.desc': { no: 'Bruk størrelsesguiden i produktvisningen. Usikker? Send oss en melding.', en: 'Use the size guide in product view. Unsure? Send us a message.' },
+    'steps.3.title': { no: 'Betal trygt', en: 'Pay securely' },
+    'steps.3.desc': { no: 'Vipps, Klarna eller kort. Pengene holdes tilbake til du har mottatt varen.', en: 'Vipps, Klarna or card. Payment held until you receive the item.' },
+    'steps.4.title': { no: 'Levert på døra', en: 'Delivered to your door' },
+    'steps.4.desc': { no: '1–3 virkedager. Gratis frakt over 999 kr. 14 dagers returrett.', en: '1–3 business days. Free shipping over 999 NOK. 14 days return.' },
+    /* Conditions */
+    'cond.eyebrow': { no: 'Åpenhet', en: 'Transparency' },
+    'cond.title': { no: 'Hva betyr standbeskrivelsen?', en: 'What does the condition mean?' },
+    'cond.top.title': { no: 'Topptrim', en: 'Mint condition' },
+    'cond.top.desc': { no: 'Brukt 1–3 ganger eller aldri. Ingen synlige bruksmerker. Ser ut og føles som ny.', en: 'Used 1–3 times or never. No visible wear. Looks and feels like new.' },
+    'cond.turer.title': { no: 'Turerfaren', en: 'Trail tested' },
+    'cond.turer.desc': { no: 'Noen bruksmerker som pilling eller lett misfarging. Full teknisk funksjon.', en: 'Some wear like pilling or slight discoloration. Full technical function.' },
+    'cond.arbeid.title': { no: 'Arbeidshest', en: 'Workhorse' },
+    'cond.arbeid.desc': { no: 'Tydelig slitasje, men tett og varm. Alle glidelåser og membraner fungerer.', en: 'Clear wear, but still tight and warm. All zippers and membranes work.' },
+    /* About */
+    'about.eyebrow': { no: 'Om M&O', en: 'About M&O' },
+    'about.title1': { no: 'Vi elsker fjellet.', en: 'We love the mountains.' },
+    'about.title2': { no: 'Vi hater unødvendige mellomlegg.', en: 'We hate unnecessary markups.' },
+    'about.p1': { no: 'M&O er nettbutikken for deg som vil ha ordentlig fjellklær — uten å betale for fancy butikklokaler, kjendisreklame og tre ledd med grossister.', en: 'M&O is the online store for those who want real mountain gear — without paying for fancy storefronts, celebrity ads and layers of middlemen.' },
+    'about.p2': { no: 'Vi selger både splitter nytt og pent brukt. Ikke fordi vi må, men fordi det er fornuftig. Godt brukte klær har gjerne mange turer igjen i seg — og de koster en brøkdel.', en: 'We sell both brand new and gently used. Not because we have to, but because it makes sense. Well-used gear still has many trips left — at a fraction of the cost.' },
+    'about.p3': { no: 'Vi sjekker, vasker og beskriver alt nøye, så du alltid vet nøyaktig hva du får.', en: 'We inspect, wash and describe everything carefully, so you always know exactly what you get.' },
+    'about.btn1': { no: 'Les mer om oss', en: 'Read more about us' },
+    'about.btn2': { no: 'Selg klær til oss', en: 'Sell clothes to us' },
+    'about.sig': { no: '— Fra fjellelskere, til fjellelskere.', en: '— From mountain lovers, to mountain lovers.' },
+    'about.customers': { no: 'Fornøyde kunder i år', en: 'Happy customers this year' },
+    /* Reviews */
+    'review.eyebrow': { no: 'Kundene sier', en: 'Customers say' },
+    'review.title': { no: 'Anmeldelser', en: 'Reviews' },
+    'review.write': { no: 'Skriv en anmeldelse', en: 'Write a review' },
+    'review.based': { no: 'Basert på', en: 'Based on' },
+    'review.reviews': { no: 'anmeldelser', en: 'reviews' },
+    'review.new': { no: 'ny', en: 'new' },
+    /* Newsletter */
+    'newsletter.eyebrow': { no: 'Nyhetsbrev', en: 'Newsletter' },
+    'newsletter.title': { no: 'Få varsel om nye varer', en: 'Get notified about new items' },
+    'newsletter.sub': { no: 'Populære brukte varer forsvinner fort. Vær alltid først ute.', en: 'Popular used items sell fast. Always be first.' },
+    'newsletter.placeholder': { no: 'din@epost.no', en: 'your@email.com' },
+    'newsletter.btn': { no: 'Meld meg på', en: 'Subscribe' },
+    /* Footer */
+    'footer.tagline': { no: 'Fjellklær uten kompromiss. Nye og brukte klær fra de beste merkene — til priser som gir mening.', en: 'Mountain gear without compromise. New and used from the best brands — at prices that make sense.' },
+    'footer.shop': { no: 'Butikk', en: 'Shop' },
+    'footer.new': { no: 'Nytt sortiment', en: 'New arrivals' },
+    'footer.used': { no: 'Pent brukt', en: 'Gently used' },
+    'footer.sale': { no: 'Kampanjer', en: 'Sales' },
+    'footer.service': { no: 'Kundeservice', en: 'Customer service' },
+    'footer.contact': { no: 'Kontakt oss', en: 'Contact us' },
+    'footer.shipping': { no: 'Frakt & levering', en: 'Shipping & delivery' },
+    'footer.returns': { no: 'Retur & bytte', en: 'Returns & exchanges' },
+    'footer.sell': { no: 'Selg til oss', en: 'Sell to us' },
+    'footer.about': { no: 'Om M&O', en: 'About M&O' },
+    'footer.sustainability': { no: 'Bærekraft', en: 'Sustainability' },
+    'footer.privacy': { no: 'Personvern', en: 'Privacy' },
+    'footer.terms': { no: 'Vilkår', en: 'Terms' },
+    'footer.copyright': { no: '© 2025 M&O — Mountain & Outdoor. Alle rettigheter forbeholdt.', en: '© 2025 M&O — Mountain & Outdoor. All rights reserved.' },
+    'footer.org': { no: 'Org.nr: 123 456 789 MVA', en: 'Org.no: 123 456 789 VAT' },
+    /* Cart */
+    'cart.title': { no: 'Handlekurv', en: 'Shopping cart' },
+    'cart.empty': { no: 'Handlekurven er tom', en: 'Your cart is empty' },
+    'cart.empty2': { no: 'Finn noe du vil ha!', en: 'Find something you like!' },
+    'cart.products': { no: 'Se produkter', en: 'View products' },
+    'cart.total': { no: 'Total', en: 'Total' },
+    'cart.checkout': { no: 'Gå til kasse', en: 'Go to checkout' },
+    'cart.continue': { no: 'Fortsett å handle', en: 'Continue shopping' },
+    'cart.remove': { no: 'Fjern', en: 'Remove' },
+    /* Product */
+    'product.new': { no: 'Nytt', en: 'New' },
+    'product.used': { no: 'Brukt', en: 'Used' },
+    'product.add': { no: 'Legg i handlekurv', en: 'Add to cart' },
+    'product.quickadd': { no: '+ Legg i kurv', en: '+ Add to cart' },
+    'product.fav': { no: 'Legg til favoritter', en: 'Add to favorites' },
+    'product.size': { no: 'Størrelse', en: 'Size' },
+    /* Cookie */
+    'cookie.text': { no: 'Vi bruker cookies for å gi deg best mulig opplevelse.', en: 'We use cookies to give you the best experience.' },
+    'cookie.read': { no: 'Les mer', en: 'Read more' },
+    'cookie.accept': { no: 'Godta alle', en: 'Accept all' },
+    'cookie.essential': { no: 'Kun nødvendige', en: 'Only essential' },
+    /* Modal titles */
+    'modal.selg': { no: 'Selg klær til oss', en: 'Sell clothes to us' },
+    'modal.kontakt': { no: 'Kontakt oss', en: 'Contact us' },
+    'modal.frakt': { no: 'Frakt & levering', en: 'Shipping & delivery' },
+    'modal.retur': { no: 'Retur & bytte', en: 'Returns & exchanges' },
+    'modal.baerekraft': { no: 'Bærekraft', en: 'Sustainability' },
+    'modal.personvern': { no: 'Personvern', en: 'Privacy' },
+    'modal.vilkar': { no: 'Vilkår', en: 'Terms & conditions' },
+    'modal.menu': { no: 'Meny', en: 'Menu' },
+    'modal.om': { no: 'Om M&O', en: 'About M&O' },
+    'modal.close': { no: 'Lukk', en: 'Close' },
+    'modal.submit': { no: 'Send inn', en: 'Submit' },
+    'modal.send': { no: 'Send melding', en: 'Send message' },
+    /* Toast messages */
+    'toast.added': { no: 'lagt i kurven', en: 'added to cart' },
+    'toast.removed': { no: 'Fjernet fra favoritter', en: 'Removed from favorites' },
+    'toast.addedfav': { no: 'lagt til favoritter', en: 'added to favorites' },
+    'toast.subscribed': { no: 'Påmeldt! Velkommen til M&O-familien', en: 'Subscribed! Welcome to the M&O family' },
+    'toast.invalidemail': { no: 'Skriv inn en gyldig e-postadresse', en: 'Please enter a valid email address' },
+    'toast.reviewthanks': { no: 'Takk for din anmeldelse!', en: 'Thanks for your review!' },
+    'toast.reviewname': { no: 'Skriv inn navnet ditt', en: 'Please enter your name' },
+    'toast.reviewrating': { no: 'Velg en vurdering', en: 'Please select a rating' },
+    'toast.reviewtext': { no: 'Skriv en anmeldelse', en: 'Please write a review' },
+    'toast.sizefirst': { no: 'Velg størrelse først', en: 'Select size first' },
+    'toast.sent': { no: 'Melding sendt! Takk for at du tok kontakt', en: 'Message sent! Thanks for reaching out' },
+    'toast.selg': { no: 'Forespørsel sendt! Vi svarer innen 24 timer', en: 'Request sent! We respond within 24 hours' },
+    'toast.theme': { no: 'Farge tema:', en: 'Color theme:' },
+    /* Back to top */
+    'backtop': { no: 'Til toppen', en: 'Back to top' },
+    /* Search */
+    'search.noresults': { no: 'Ingen produkter funnet', en: 'No products found' },
+    /* Categories */
+    'cat.alle': { no: 'Alle', en: 'All' },
+    'cat.jakker': { no: 'Jakker & Yttertøy', en: 'Jackets & Outerwear' },
+    'cat.mellomlag': { no: 'Mellomlag', en: 'Mid Layers' },
+    'cat.bukser': { no: 'Bukser', en: 'Pants' },
+    'cat.sko': { no: 'Sko & Støvler', en: 'Shoes & Boots' },
+    'cat.tilbehor': { no: 'Tilbehør', en: 'Accessories' },
+    'cat.tilbud': { no: '🔥 Tilbud', en: '🔥 Sale' },
+    /* Wishlist */
+    'wish.title': { no: 'Favoritter', en: 'Favorites' },
+    'wish.empty': { no: 'Ingen favoritter ennå', en: 'No favorites yet' },
+    'wish.emptysub': { no: 'Trykk hjertet på produktene du liker', en: 'Tap the heart on products you like' },
+    /* Filters */
+    'filter.jakker': { no: 'Jakker', en: 'Jackets' },
+    'filter.mellomlag': { no: 'Mellomlag', en: 'Mid Layers' },
+    'filter.bukser': { no: 'Bukser', en: 'Pants' },
+    'filter.sko': { no: 'Sko', en: 'Shoes' },
+    'filter.topptrim': { no: 'Topptrim', en: 'Mint' },
+    'filter.turerfaren': { no: 'Turerfaren', en: 'Trail tested' },
+    'filter.arbeidshest': { no: 'Arbeidshest', en: 'Workhorse' },
+  };
+
+  MO.t = function (key) {
+    var lang = MO.lang;
+    var entry = MO.translations[key];
+    if (!entry) return key;
+    return entry[lang] || entry['no'] || key;
+  };
+
+  MO.toggleLang = function () {
+    MO.lang = MO.lang === 'no' ? 'en' : 'no';
+    localStorage.setItem('mo_lang', MO.lang);
+    document.documentElement.lang = MO.lang === 'no' ? 'nb' : 'en';
+    var btn = document.getElementById('lang-btn');
+    if (btn) btn.textContent = MO.lang === 'no' ? 'NO' : 'EN';
+    MO.applyLang();
+    MO.toast(MO.lang === 'no' ? 'Språk: Norsk' : 'Language: English');
+  };
+
+  MO.applyLang = function () {
+    /* Update data-i18n elements */
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      var translated = MO.t(key);
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.setAttribute('placeholder', translated);
+      } else {
+        el.textContent = translated;
+      }
+    });
+    /* Update nav and footer links if already injected */
+    var linkMap = {
+      'nav.nytt': 'nav-nytt', 'nav.brukt': 'nav-brukt', 'nav.om': 'nav-om'
+    };
+    /* Re-render dynamic content */
+    if (typeof MO.renderReviews === 'function') MO.renderReviews();
+    if (typeof MO.renderCartDrawer === 'function') MO.renderCartDrawer();
+    /* Update product counts if visible */
+    var countEls = document.querySelectorAll('.result-count');
+    if (countEls.length) {
+      countEls.forEach(function (el) {
+        var num = el.textContent.match(/\d+/);
+        if (num) {
+          var prefix = MO.t('section.showing');
+          var suffix = MO.t('section.products');
+          el.innerHTML = prefix + ' <strong>' + num[0] + '</strong> ' + suffix;
+        }
+      });
+    }
+    /* Update search placeholder */
+    var searchInput = document.getElementById('search-input');
+    if (searchInput) searchInput.placeholder = MO.t('search.placeholder');
+    /* Update cookie bar */
+    var cookieText = document.querySelector('.cookie-bar__text');
+    if (cookieText) {
+      var parts = cookieText.innerHTML.split('<a');
+      if (parts.length > 1) {
+        cookieText.innerHTML = MO.t('cookie.text') + ' <a' + parts[1];
+      }
+    }
+    /* Update mobile menu */
+    var mobileBtns = document.querySelectorAll('.mobile-nav__btn');
+    if (mobileBtns.length) {
+      var mobileLabels = { search: 'nav.search', wish: 'nav.favorites', cart: 'nav.cart', menu: 'nav.menu' };
+      mobileBtns.forEach(function (btn) {
+        var mnav = btn.getAttribute('data-mnav');
+        var lbl = btn.querySelector('.mobile-nav__lbl');
+        if (lbl && mobileLabels[mnav]) {
+          lbl.textContent = MO.t(mobileLabels[mnav]);
+        }
+      });
+    }
+    /* Update toast messages to be dynamic */
+    /* Re-render product grids if shown */
+    if (typeof MO.filterNytt === 'function') {
+      var activeNew = document.querySelector('#filters-nytt .active-new');
+      if (activeNew) MO.filterNytt(activeNew, activeNew.getAttribute('data-cat') || 'alle');
+    }
+    if (typeof MO.filterBrukt === 'function') {
+      var activeUsed = document.querySelector('#filters-brukt .active-used');
+      if (activeUsed) MO.filterBrukt(activeUsed, activeUsed.getAttribute('data-stand') || 'alle');
+    }
+  };
+
+  MO.initLang = function () {
+    document.documentElement.lang = MO.lang === 'no' ? 'nb' : 'en';
+    MO.applyLang();
+    var btn = document.getElementById('lang-btn');
+    if (btn) btn.textContent = MO.lang === 'no' ? 'NO' : 'EN';
+  };
+
   MO.initCookieConsent = function () {
     if (localStorage.getItem('mo_cookie_consent')) return;
     var bar = document.getElementById('cookie-bar');
