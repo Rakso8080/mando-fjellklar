@@ -21,8 +21,8 @@ exports.handler = async function(event) {
   const secret  = process.env.STRIPE_WEBHOOK_SECRET;
 
   if (!secret) {
-    console.warn('STRIPE_WEBHOOK_SECRET mangler — webhook ikke verifisert');
-    return { statusCode: 200, body: JSON.stringify({ received: true }) };
+    console.error('STRIPE_WEBHOOK_SECRET mangler — webhook avvist');
+    return { statusCode: 500, body: JSON.stringify({ error: 'Server misconfigured' }) };
   }
 
   let stripeEvent;
@@ -30,7 +30,7 @@ exports.handler = async function(event) {
     stripeEvent = stripe.webhooks.constructEvent(event.body, sig, secret);
   } catch(err) {
     console.error('Webhook signatur-feil:', err.message);
-    return { statusCode: 400, body: 'Webhook Error: ' + err.message };
+    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid signature' }) };
   }
 
   switch (stripeEvent.type) {
