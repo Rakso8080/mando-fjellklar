@@ -358,6 +358,9 @@ button, a, [role="button"], label, select { touch-action: manipulation; }
   background: var(--g2); position: relative;
   display: flex; align-items: flex-end;
 }
+.about-visual:hover .compass-needle {
+  animation-duration: 2s;
+}
 .about-visual__bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.04); }
 .about-visual__card {
   margin: 28px; position: relative; z-index: 1;
@@ -663,6 +666,79 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   max-width: 80px;
 }
 .lang-select:hover, .lang-select:focus { border-color: var(--g5); }
+
+/* ── MOUNTAIN RANGE ──────────────────────────────────── */
+.mountains {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 280px;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+.mountains__layer {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+  will-change: transform;
+}
+.mountains__layer--bg { animation: mountainParallax 40s linear infinite; opacity: .6; }
+.mountains__layer--mid { animation: mountainParallax 25s linear infinite; opacity: .8; }
+.mountains__layer--fg { animation: mountainParallax 15s linear infinite; }
+@keyframes mountainParallax {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-30px); }
+  100% { transform: translateX(0); }
+}
+
+/* ── CLOUDS ──────────────────────────────────────────── */
+.clouds {
+  position: absolute; top: 0; left: 0; right: 0; height: 100%;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+.cloud {
+  position: absolute; width: 200px; height: auto;
+}
+.cloud--1 {
+  top: 12%; left: 10%;
+  animation: cloudDrift 35s linear infinite;
+}
+.cloud--2 {
+  top: 25%; left: 40%;
+  animation: cloudDrift 45s linear infinite;
+  animation-delay: 10s;
+}
+.cloud--3 {
+  top: 8%; left: 70%;
+  animation: cloudDrift 30s linear infinite;
+  animation-delay: 5s;
+}
+@keyframes cloudDrift {
+  0% { transform: translateX(-220px); }
+  100% { transform: translateX(calc(100vw + 220px)); }
+}
+
+/* ── COMPASS DECORATION ──────────────────────────────── */
+.compass-deco {
+  position: absolute; top: 20px; right: 20px;
+  width: 80px; height: 80px; z-index: 1;
+  opacity: .7; pointer-events: none;
+}
+.compass-svg { width: 100%; height: 100%; }
+.compass-needle {
+  transform-origin: 50px 50px;
+  animation: compassSpin 6s ease-in-out infinite;
+}
+@keyframes compassSpin {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(-10deg); }
+  75% { transform: rotate(8deg); }
+}
+
+/* ── MOUNTAIN DIVIDER ────────────────────────────────── */
+.mountain-divider {
+  width: 100%; height: 80px; display: block; line-height: 0;
+  overflow: hidden; pointer-events: none;
+}
+.mountain-divider svg {
+  width: 100%; height: 100%;
+  display: block;
+}
 
 /* ── INDEX: HIKER ANIMATION ──────────────────────────── */
 .hiker-scene { position: absolute; bottom: 0; left: 0; right: 0; height: 120px; overflow: hidden; pointer-events: none; z-index: 0; }

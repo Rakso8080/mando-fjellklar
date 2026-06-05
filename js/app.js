@@ -744,6 +744,29 @@
     document.documentElement.setAttribute('data-theme', theme === 'default' ? '' : theme);
   };
 
+  /* ── MOUNTAIN PARALLAX ON SCROLL ────────────────── */
+  MO.initMountainParallax = function () {
+    var layers = document.querySelectorAll('.mountains__layer');
+    if (!layers.length) return;
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          var scrolled = window.scrollY;
+          var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          var progress = Math.min(scrolled / maxScroll, 1);
+          layers.forEach(function (layer, i) {
+            var speed = [0.3, 0.5, 0.7][i] || 0.3;
+            var y = progress * 40 * speed;
+            layer.style.transform = 'translateY(' + y + 'px)';
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  };
+
   /* ── FLOATING PARTICLES ──────────────────────────── */
   MO.initParticles = function () {
     var hero = document.getElementById('hero');

@@ -58,6 +58,38 @@
 <!-- HERO -->
 <section class="hero" id="hero">
 
+  <!-- MOUNTAIN RANGE -->
+  <div class="mountains" aria-hidden="true">
+    <svg class="mountains__layer mountains__layer--bg" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="0,400 80,280 160,320 260,200 340,280 440,160 540,250 640,180 740,260 840,140 940,230 1040,170 1140,250 1240,190 1340,280 1440,220 1440,400" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+    </svg>
+    <svg class="mountains__layer mountains__layer--mid" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="0,400 60,320 130,350 220,250 310,310 400,210 480,290 560,220 640,300 720,190 810,270 890,210 970,290 1060,230 1150,260 1250,210 1340,270 1440,240 1440,400" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+    </svg>
+    <svg class="mountains__layer mountains__layer--fg" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="0,400 40,350 100,370 180,290 250,340 340,250 420,310 500,240 580,300 660,220 750,280 830,230 920,290 1000,260 1080,300 1180,240 1280,280 1380,250 1440,260 1440,400" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+      <polyline points="0,400 30,370 80,390 150,320 220,360 310,280 390,330 470,270 550,320 630,260 710,300 800,260 870,300 960,270 1030,290 1120,260 1210,290 1300,270 1380,280 1440,270 1440,400" fill="rgba(20,31,18,.3)" stroke="rgba(255,255,255,.04)" stroke-width=".5"/>
+    </svg>
+  </div>
+
+  <!-- CLOUDS -->
+  <div class="clouds" aria-hidden="true">
+    <svg class="cloud cloud--1" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="60" cy="50" rx="60" ry="25" fill="rgba(255,255,255,.06)"/>
+      <ellipse cx="100" cy="40" rx="50" ry="20" fill="rgba(255,255,255,.08)"/>
+      <ellipse cx="140" cy="50" rx="40" ry="18" fill="rgba(255,255,255,.05)"/>
+    </svg>
+    <svg class="cloud cloud--2" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="50" cy="50" rx="55" ry="22" fill="rgba(255,255,255,.04)"/>
+      <ellipse cx="100" cy="38" rx="45" ry="18" fill="rgba(255,255,255,.06)"/>
+      <ellipse cx="130" cy="50" rx="35" ry="15" fill="rgba(255,255,255,.03)"/>
+    </svg>
+    <svg class="cloud cloud--3" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="70" cy="50" rx="50" ry="20" fill="rgba(255,255,255,.05)"/>
+      <ellipse cx="110" cy="42" rx="40" ry="16" fill="rgba(255,255,255,.07)"/>
+    </svg>
+  </div>
+
   <div class="hiker-scene" aria-hidden="true">
     <div class="terrain-line"></div>
     <div class="hiker-track" id="hiker-track">
@@ -271,6 +303,14 @@
   </div>
 </section>
 
+<!-- MOUNTAIN DIVIDER -->
+<div class="mountain-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <polyline points="0,80 120,50 240,65 360,30 480,55 600,20 720,45 840,25 960,50 1080,35 1200,55 1320,30 1440,40 1440,0 0,0" fill="var(--g9, #e8f0e6)" stroke="none"/>
+    <polyline points="0,80 140,58 260,70 380,42 500,62 620,32 740,52 860,38 980,56 1100,46 1220,60 1340,42 1440,50 1440,0 0,0" fill="var(--g8, #c8dbc4)" stroke="none" opacity=".6"/>
+  </svg>
+</div>
+
 <!-- OM OSS -->
 <section class="section" id="om-oss">
   <div class="container">
@@ -288,6 +328,18 @@
               fill="none" stroke="rgba(255,255,255,.02)" stroke-width="1" stroke-linejoin="round"/>
             <circle cx="170" cy="95" r="3" fill="rgba(200,169,106,.5)"/>
             <line x1="170" y1="68" x2="170" y2="88" stroke="rgba(200,169,106,.35)" stroke-width="1" stroke-dasharray="2 2"/>
+          </svg>
+        </div>
+        <!-- COMPASS DECORATION -->
+        <div class="compass-deco" aria-hidden="true">
+          <svg class="compass-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="2"/>
+            <circle cx="50" cy="50" r="35" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="50" y1="15" x2="50" y2="85" stroke="rgba(200,169,106,.5)" stroke-width="2" stroke-linecap="round" class="compass-needle" />
+            <line x1="15" y1="50" x2="85" y2="50" stroke="rgba(255,255,255,.15)" stroke-width="1.5" stroke-linecap="round" class="compass-needle" style="animation-delay:.15s"/>
+            <circle cx="50" cy="50" r="5" fill="rgba(200,169,106,.6)"/>
+            <text x="50" y="10" text-anchor="middle" fill="rgba(255,255,255,.3)" font-size="8" font-family="sans-serif">N</text>
+            <text x="50" y="94" text-anchor="middle" fill="rgba(255,255,255,.2)" font-size="8" font-family="sans-serif">S</text>
           </svg>
         </div>
         <div class="about-visual__card">
@@ -364,6 +416,7 @@ MO.renderReviews();
 MO.initReveal();
 MO.initTheme();
 MO.initParticles();
+MO.initMountainParallax();
 
 document.addEventListener('click', function (e) {
   var t = e.target.closest('[data-scroll]');
