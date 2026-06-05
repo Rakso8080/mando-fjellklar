@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "M&O — Fjellklær uten kompromiss",
+  "scripts": {
+    "deploy": "bash deploy.sh",
+    "deploy:live": "git add . && git commit -m 'Auto-oppdatering' && netlify deploy --prod --dir=."
+  },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
     "resend": "^4.0.0",
