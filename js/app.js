@@ -543,8 +543,24 @@
     var footR = document.getElementById('foot-r');
     var pole = document.getElementById('pole');
     var t = 0;
+    var running = true;
+
+    /* Pause when hero is out of view */
+    var hero = document.getElementById('hero');
+    if (hero) {
+      var obs = new IntersectionObserver(function (entries) {
+        running = entries[0].isIntersecting;
+        if (running && !window._hikerRAF) {
+          window._hikerRAF = true;
+          requestAnimationFrame(animate);
+        }
+      }, { threshold: 0 });
+      obs.observe(hero);
+    }
 
     function animate() {
+      if (!running) { window._hikerRAF = false; return; }
+      window._hikerRAF = true;
       t += 0.08;
       var sw = Math.sin(t) * 6;
       armL.setAttribute('x2', 10 + sw);
@@ -793,6 +809,14 @@
       style.textContent = '@keyframes particleFloat{0%,100%{transform:translateY(0) translateX(0) scale(1);opacity:0}20%{opacity:1}50%{transform:translateY(-60px) translateX(20px) scale(1.2);opacity:.8}80%{opacity:.4}100%{transform:translateY(-100px) translateX(-10px) scale(0.5);opacity:0}}';
       document.head.appendChild(style);
     }
+    /* Pause particles when hero is out of view */
+    var obs = new IntersectionObserver(function (entries) {
+      container.style.animationPlayState = entries[0].isIntersecting ? 'running' : 'paused';
+      container.querySelectorAll('div').forEach(function (el) {
+        el.style.animationPlayState = entries[0].isIntersecting ? 'running' : 'paused';
+      });
+    }, { threshold: 0 });
+    obs.observe(hero);
   };
 
   window.MO = MO;
