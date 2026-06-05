@@ -243,6 +243,7 @@ button, a, [role="button"], label, select { touch-action: manipulation; }
 .section > .container { position: relative; z-index: 1; }
 .section--alt { background: var(--gray-50); position: relative; }
 .section--sand { background: var(--s7); }
+.section--decorated { padding-top: 48px; padding-bottom: 48px; }
 .section--dark { background: var(--g1); }
 .section__eyebrow {
   font-size: 10.5px; font-weight: 600; letter-spacing: .22em;
@@ -1302,7 +1303,7 @@ footer { background: var(--slate); padding: 60px 0 28px; }
 .forest { width: 100%; height: 100%; display: block; }
 
 /* ── MOUNTAIN BACKGROUND ─────────────────────────────── */
-.mountain-bg { position: absolute; top: 0; left: 0; right: 0; pointer-events: none; z-index: 0; height: 200px; overflow: hidden; }
+.mountain-bg { position: absolute; top: 40px; left: 0; right: 0; pointer-events: none; z-index: 0; height: 160px; overflow: hidden; }
 .mountain-bg svg { width: 100%; height: 100%; display: block; }
 
 /* ── FALLING LEAVES ───────────────────────────────────── */
