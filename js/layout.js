@@ -98,8 +98,9 @@ MO.injectLayout = function(activePage) {
       <div class="footer__links">
         <a href="om-oss.html" class="footer__link" data-i18n="footer.about-link">${MO.t('footer.about-link')}</a>
         <button class="footer__link" onclick="MO.showModal('baerekraft')" data-i18n="footer.sustainability">${MO.t('footer.sustainability')}</button>
-        <button class="footer__link" onclick="MO.showModal('personvern')" data-i18n="footer.privacy">${MO.t('footer.privacy')}</button>
-        <button class="footer__link" onclick="MO.showModal('vilkar')" data-i18n="footer.terms">${MO.t('footer.terms')}</button>
+        <a href="personvern.html" class="footer__link" data-i18n="footer.privacy">${MO.t('footer.privacy')}</a>
+        <a href="vilkar.html" class="footer__link" data-i18n="footer.terms">${MO.t('footer.terms')}</a>
+        <a href="angrerett.html" class="footer__link">Angrerett</a>
       </div>
     </div>
   </div>

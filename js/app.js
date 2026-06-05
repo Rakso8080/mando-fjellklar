@@ -444,6 +444,79 @@ MO.skeletonHTML = function(n) {
   return '<div class="skeleton-grid">' + Array(n || 4).fill(c).join('') + '</div>';
 };
 
+/* ── SWIPE FOR Å LUKKE ────────────────────────────────── */
+MO.initSwipe = function() {
+  var targets = [
+    {el: 'cart-drawer',  close: MO.closeCart.bind(MO),    dir: 'right'},
+    {el: 'pdm-overlay',  close: MO.closePdm.bind(MO),     dir: 'down'},
+  ];
+  targets.forEach(function(t) {
+    var el = document.getElementById(t.el);
+    if (!el) return;
+    var sx = 0, sy = 0;
+    el.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+    el.addEventListener('touchend', function(e){
+      var dx = e.changedTouches[0].clientX - sx;
+      var dy = e.changedTouches[0].clientY - sy;
+      if (t.dir === 'right' && dx > 72 && Math.abs(dy) < 60) t.close();
+      if (t.dir === 'down'  && dy > 72 && Math.abs(dx) < 60) t.close();
+    }, {passive:true});
+  });
+};
+
+/* ── KONTAKT SELGER (brukte produkter) ────────────────── */
+MO.contactSeller = function(id) {
+  var p = MO.findProduct(id);
+  if (!p) return;
+  MO.closePdm();
+  setTimeout(function() {
+    MO.openModal('Spør om plagget',
+      '<p style="font-size:13.5px;color:var(--text-3);margin-bottom:18px">Lurer du på noe om <strong>' + MO.sanitize(p.brand + ' ' + p.name) + '</strong>? Vi svarer innen 24 timer.</p>' +
+      '<div class="form-field"><label class="form-label">Navn</label><input id="cs-name" class="form-input" placeholder="Ola Nordmann" maxlength="80"/></div>' +
+      '<div class="form-field"><label class="form-label">E-post</label><input id="cs-email" class="form-input" type="email" placeholder="din@epost.no"/></div>' +
+      '<div class="form-field"><label class="form-label">Spørsmål</label><textarea id="cs-msg" class="form-textarea" placeholder="F.eks. størrelse, mål, spesifikke slitasjemerker…" maxlength="600"></textarea></div>' +
+      '<button class="btn btn-primary btn-full" onclick="MO._sendContact(\'' + p.id + '\')">Send spørsmål</button>'
+    );
+  }, 180);
+};
+
+MO._sendContact = function(id) {
+  var p  = MO.findProduct(id);
+  var nm = (document.getElementById('cs-name')  || {}).value || '';
+  var em = (document.getElementById('cs-email') || {}).value || '';
+  var ms = (document.getElementById('cs-msg')   || {}).value || '';
+  if (!nm.trim() || !em.trim() || !ms.trim()) { MO.toast('Fyll inn alle felt'); return; }
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  if (!emailRe.test(em.trim())) { MO.toast('Ugyldig e-postadresse'); return; }
+  fetch('/.netlify/functions/send-email', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      type: 'contact-seller',
+      product: p ? (p.brand + ' ' + p.name) : id,
+      fromName: nm.trim().slice(0,80),
+      from: em.trim(),
+      message: ms.trim().slice(0,600),
+    }),
+  }).finally(function() {
+    MO.closeModal();
+    MO.toast('Spørsmål sendt! Vi svarer innen 24 timer 👍');
+  });
+};
+
+/* ── ORDREBEKREFTELSE E-POST ──────────────────────────── */
+MO.sendOrderEmail = function(email, orderNum, items, total) {
+  fetch('/.netlify/functions/send-email', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      type: 'order-confirm',
+      email: email, orderNum: orderNum,
+      items: items, total: total,
+    }),
+  }).catch(function(){});
+};
+
 /* ── LIVE SEARCH DROPDOWN ─────────────────────────────── */
 MO.initSearchDrop = function() {
   var inp = document.getElementById('search-input');
@@ -672,6 +745,7 @@ MO.openProduct = function(id) {
     '<div style="display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--text-4)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Gratis frakt over 999 kr</div>' +
     '</div>' +
     (featsHtml ? '<div class="pdm__features" style="margin-top:18px;padding-top:16px;border-top:1px solid var(--gray-100)">' + featsHtml + '</div>' : '') +
+    (p.type === 'brukt' ? '<button class="btn btn-outline btn-full" style="margin-top:14px" onclick="MO.contactSeller(\'' + id + '\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="margin-right:6px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Spør om plagget</button>' : '') +
     relatedHtml;
 
   document.getElementById('pdm-title').textContent = p.brand + ' — ' + p.name;
@@ -767,6 +841,7 @@ MO.initNav = function() {
   setTimeout(MO.initReveal, 80);
   MO.initCookies();
   MO.initSearchDrop();
+  MO.initSwipe();
   /* Tastatursnarvei: / åpner søk */
   document.addEventListener('keydown', function(e) {
     if (e.key === '/' && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) {

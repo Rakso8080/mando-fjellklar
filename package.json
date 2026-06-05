@@ -5,6 +5,7 @@
   "description": "M&O — Fjellklær uten kompromiss",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
+    "resend": "^4.0.0",
     "stripe": "^17.0.0"
   },
   "engines": {

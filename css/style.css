@@ -31,6 +31,28 @@ a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 button { font-family: var(--sans); cursor: pointer; border: none; background: none; }
 ul, ol { list-style: none; }
+
+/* ── MOBIL: FJERN TAP-FORSINKELSE OG HIGHLIGHT ──────── */
+* { -webkit-tap-highlight-color: transparent; }
+button, a, [role="button"], label, select { touch-action: manipulation; }
+
+/* ── MOBIL: HINDRE iOS-ZOOM PÅ INPUTFELT ───────────── */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  textarea, select { font-size: 16px; }
+}
+
+/* ── LANDSCAPE PÅ MOBIL ─────────────────────────────── */
+@media (orientation: landscape) and (max-height: 500px) {
+  .hero { min-height: auto; padding: 48px 0; }
+  .chat-window { max-height: calc(100vh - 72px); bottom: 64px; }
+  .mobile-nav { display: none; }
+  .page-body { padding-bottom: 0; }
+}
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
