@@ -5,6 +5,31 @@
 /* ── DATA ─────────────────────────────────────────────── */
 var MO = window.MO || {};
 
+/* ── GOOGLE ANALYTICS 4 ───────────────────────────────────
+   Bytt ut GA_MEASUREMENT_ID med din eigen ID (G-XXXXXXXXXX)
+   Hent frå: analytics.google.com → Admin → Data Streams
+──────────────────────────────────────────────────────── */
+var GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // ← bytt ut dette
+
+(function() {
+  if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+  window._gtag = gtag;
+})();
+
+/* Sporingshjelpefunksjonar */
+MO.trackEvent = function(name, params) {
+  if (window._gtag) window._gtag('event', name, params || {});
+};
+
 /* ── SIKKERHET: HTML-sanitering ───────────────────────────
    Brukes overalt der bruker-input settes inn i innerHTML.
    Forhindrer XSS (Cross-Site Scripting).
@@ -644,6 +669,7 @@ MO.addToCart = function(id, size) {
   MO.saveCart();
   MO.updateCartBadge();
   MO.toast(p.name.split(' ').slice(0,3).join(' ') + ' lagt i kurven');
+  MO.trackEvent('add_to_cart', { currency:'NOK', value: p.price, items:[{ item_id: p.id, item_name: p.brand + ' ' + p.name, price: p.price }] });
 };
 
 MO.removeFromCart = function(id, size) {

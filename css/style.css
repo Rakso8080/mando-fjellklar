@@ -731,6 +731,12 @@ footer { background: var(--slate); padding: 60px 0 28px; }
 .cookie-bar__text a { color: rgba(255,255,255,.85); text-decoration: underline; text-underline-offset: 2px; }
 .cookie-bar__actions { display: flex; gap: 8px; flex-shrink: 0; }
 
+/* ── SOCIAL LINKS ────────────────────────────────────── */
+.footer__social { display: flex; gap: 8px; margin-top: 18px; }
+.footer__social-link { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.55); transition: background .15s, color .15s; flex-shrink: 0; }
+.footer__social-link:hover { background: rgba(255,255,255,.14); color: #fff; }
+.footer__social-link svg { width: 16px; height: 16px; }
+
 /* ── PAYMENT LOGOS ───────────────────────────────────── */
 .footer__payments { display: flex; gap: 6px; align-items: center; margin-top: 16px; }
 .pay-badge { font-size: 10px; font-weight: 700; letter-spacing: .04em; padding: 4px 8px; border: 1px solid rgba(255,255,255,.15); border-radius: 5px; color: rgba(255,255,255,.5); }
