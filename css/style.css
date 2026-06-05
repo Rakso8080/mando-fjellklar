@@ -1378,7 +1378,7 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   .section__header > div:last-child { width: 100%; }
   .section__header .sort-select { width: 100%; }
   .section { padding: 72px 0; }
-  .hero__stats { gap: 24px; }
+  .section--decorated { padding-top: 40px; padding-bottom: 40px; }
   .hero__stat-num { font-size: 30px; }
 }
 /* ── iPAD PORTRAIT (≤768px) ──────────────────────────── */
@@ -1433,6 +1433,7 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   .hero__card-price { font-size: 15px; }
   .hero__eyebrow { font-size: 10px; margin-bottom: 16px; }
   .section { padding: 48px 0; }
+  .section--decorated { padding-top: 32px; padding-bottom: 32px; }
   .section__header { margin-bottom: 24px; }
   .section__header > div:last-child { width: 100%; }
   .section__header .sort-select { width: 100%; }
@@ -1555,6 +1556,7 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   .hero__stats { gap: 12px; }
   .hero__stat-num { font-size: 20px; }
   .section { padding: 36px 0; }
+  .section--decorated { padding-top: 24px; padding-bottom: 24px; }
   .section__header { margin-bottom: 16px; }
   .about__title { font-size: clamp(20px,6vw,24px); }
   .newsletter__title { font-size: clamp(22px,7vw,26px); }
