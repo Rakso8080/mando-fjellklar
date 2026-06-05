@@ -240,6 +240,7 @@ button, a, [role="button"], label, select { touch-action: manipulation; }
 
 /* ── SECTIONS ────────────────────────────────────────── */
 .section { padding: 96px 0; }
+.section > .container { position: relative; z-index: 1; }
 .section--alt { background: var(--gray-50); position: relative; }
 .section--sand { background: var(--s7); }
 .section--dark { background: var(--g1); }
@@ -1295,6 +1296,14 @@ footer { background: var(--slate); padding: 60px 0 28px; }
 .newsletter::before { content: ''; position: absolute; top: -80px; right: -80px; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(212,168,75,.12); pointer-events: none; animation: drift-ring 30s linear infinite; }
 .newsletter::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 120px; height: 120px; border-radius: 50%; border: 1px solid rgba(212,168,75,.08); pointer-events: none; animation: drift-ring 25s linear infinite reverse; }
 .newsletter__form { position: relative; z-index: 1; }
+
+/* ── BIRCH TREE BACKGROUND ──────────────────────────── */
+.birch-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.birch { position: absolute; height: 100%; width: auto; }
+.birch--left { left: 0; top: 0; transform: translateX(-30px); }
+.birch--right { right: 0; top: 0; transform: translateX(30px) scaleX(-1); }
+@media (max-width: 640px) { .birch--left, .birch--right { opacity: .4; } }
+@media (max-width: 400px) { .birch--right { display: none; } }
 
 /* ── FALLING LEAVES ───────────────────────────────────── */
 .leaves { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
