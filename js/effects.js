@@ -392,49 +392,6 @@
     });
   };
 
-  /* ── 10. 3D DYBDEPARALLAKSE PÅ PRODUKTKORT ──────── */
-  MO.init3DParallax = function () {
-    if ('ontouchstart' in window) return;
-    var grids = document.querySelectorAll('.product-grid');
-    if (!grids.length) return;
-
-    grids.forEach(function (grid) {
-      grid.addEventListener('mousemove', function (e) {
-        var cards = grid.querySelectorAll('.pcard');
-        cards.forEach(function (c) {
-          var r = c.getBoundingClientRect();
-          var x = (e.clientX - r.left) / r.width - 0.5;
-          var y = (e.clientY - r.top) / r.height - 0.5;
-
-          /* Base 3D tilt */
-          var tiltX = -y * 6;
-          var tiltY = x * 6;
-
-          /* Inner elements move at different depths */
-          var img = c.querySelector('.pcard__img');
-          var body = c.querySelector('.pcard__body');
-          var badges = c.querySelector('.pcard__badges');
-          var wish = c.querySelector('.pcard__wish');
-
-          if (img) img.style.translate = (x * 4) + 'px ' + (y * 3) + 'px';
-          if (badges) badges.style.translate = (x * 6) + 'px ' + (y * 4) + 'px';
-          if (wish) wish.style.translate = (-x * 5) + 'px ' + (-y * 3) + 'px';
-          if (body) body.style.translate = (x * 3) + 'px ' + (y * 2) + 'px';
-
-          c.style.transform = 'perspective(600px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg) scale(1.03)';
-        });
-      });
-
-      grid.addEventListener('mouseleave', function () {
-        grid.querySelectorAll('.pcard').forEach(function (c) {
-          c.style.transform = '';
-          var inner = c.querySelectorAll('.pcard__img, .pcard__body, .pcard__badges, .pcard__wish');
-          inner.forEach(function (el) { el.style.translate = ''; });
-        });
-      });
-    });
-  };
-
   window.MO = MO;
 
 })();

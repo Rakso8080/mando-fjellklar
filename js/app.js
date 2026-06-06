@@ -1227,31 +1227,6 @@
   };
 
   /* ──────────────────────────────────────────────
-     3D CARD TILT
-     ────────────────────────────────────────────── */
-  MO.initCardTilt = function () {
-    if ('ontouchstart' in window) return;
-    var grids = document.querySelectorAll('.product-grid');
-    if (!grids.length) return;
-    grids.forEach(function (grid) {
-      grid.addEventListener('mousemove', function (e) {
-        var cards = grid.querySelectorAll('.pcard');
-        cards.forEach(function (c) {
-          var r = c.getBoundingClientRect();
-          var x = e.clientX - r.left;
-          var y = e.clientY - r.top;
-          var dx = (x / r.width - .5) * 2;
-          var dy = (y / r.height - .5) * 2;
-          c.style.transform = 'perspective(600px) rotateX(' + (-dy * 5) + 'deg) rotateY(' + (dx * 5) + 'deg)';
-        });
-      });
-      grid.addEventListener('mouseleave', function () {
-        grid.querySelectorAll('.pcard').forEach(function (c) { c.style.transform = ''; });
-      });
-    });
-  };
-
-  /* ──────────────────────────────────────────────
      MOUSE TRAIL SPARKLES
      ────────────────────────────────────────────── */
   MO.initMouseTrail = function () {
