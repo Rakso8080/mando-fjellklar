@@ -671,7 +671,7 @@
 
   MO.renderProductGrid = function (gridId, type) {
     var items = MO.products.filter(function (p) { return p.type === type; });
-    document.getElementById(gridId).innerHTML = MO.skeletonHTML(4);
+    document.getElementById(gridId).innerHTML = MO.skeletonHTML(6);
     setTimeout(function () {
       document.getElementById(gridId).innerHTML = items.map(MO.cardHTML).join('');
       MO.initReveal();

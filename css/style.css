@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
-
 @font-face {
   font-family: 'DM Sans';
   font-style: normal;
@@ -298,6 +296,8 @@ button, a, [role="button"], label, select { touch-action: manipulation; }
     0 1px 3px rgba(0,0,0,.03),
     0 1px 2px rgba(0,0,0,.05);
   position: relative;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 .pcard::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0;
@@ -1491,9 +1491,9 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   .searchbar__input { font-size: 16px; }
   .searchbar__cancel { font-size: 12px; padding: 6px 10px; }
   .mobile-nav { display: grid; }
-  .mobile-nav__btn { padding: 6px 4px 4px; }
-  .mobile-nav__btn svg { width: 20px; height: 20px; }
-  .mobile-nav__lbl { font-size: 9px; }
+  .mobile-nav__btn { padding: 10px 6px 8px; min-height: 54px; }
+  .mobile-nav__btn svg { width: 22px; height: 22px; }
+  .mobile-nav__lbl { font-size: 10px; }
   .back-top { bottom: 76px; right: 12px; width: 36px; height: 36px; }
   .hero { min-height: auto; padding: 12px 0; }
   .hero__inner { padding: 24px 20px; gap: 16px; }
@@ -1503,7 +1503,7 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   .hero__ctas { gap: 6px; }
   .hero__stats { gap: 12px; margin-top: 16px; padding-top: 12px; }
   .hero__stat-num { font-size: 20px; }
-  .hero__stat-lbl { font-size: 9px; }
+  .hero__stat-lbl { font-size: 11px; }
   .hero__card { padding: 8px 10px; }
   .hero__card-img { width: 38px; height: 44px; }
   .hero__card-img svg { width: 18px; height: 18px; }
@@ -1525,43 +1525,31 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   .pcard { border-radius: 10px; }
   .pcard__img { aspect-ratio: 16/9; }
   .pcard__img-inner svg { width: 32px; height: 32px; }
-  .pcard__body { padding: 8px 10px 10px; }
-  .pcard__brand { font-size: 8px; }
-  .pcard__name { font-size: 11px; }
-  .pcard__cond { font-size: 10px; }
-  .pcard__price { font-size: 14px; }
-  .pcard__old { font-size: 10px; }
-  .pcard__save { font-size: 9px; }
-  .pcard__quick { display: none; }
-  .pcard__wish { width: 26px; height: 26px; top: 6px; right: 6px; }
-  .pcard__badges { top: 6px; left: 6px; gap: 3px; }
-  .badge { font-size: 8px; padding: 2px 6px; }
-  .pcard__compare { font-size: 9px; padding: 3px 8px; bottom: 38px; right: 6px; }
-  .pcard { border-radius: 12px; }
   .pcard__body { padding: 10px 12px 12px; }
-  .pcard__brand { font-size: 9px; }
-  .pcard__name { font-size: 12px; }
-  .pcard__cond { font-size: 11px; }
+  .pcard__brand { font-size: 11px; }
+  .pcard__name { font-size: 13px; }
+  .pcard__cond { font-size: 12px; }
   .pcard__price { font-size: 16px; }
-  .pcard__old { font-size: 11px; }
-  .pcard__save { font-size: 10px; }
+  .pcard__old { font-size: 12px; }
+  .pcard__save { font-size: 12px; }
   .pcard__quick { opacity: 1; transform: translateY(0); background: linear-gradient(transparent, rgba(0,0,0,.15)); }
-  .pcard__quick .btn { font-size: 10px; padding: 4px 8px; min-height: 28px; }
-  .pcard__wish { width: 28px; height: 28px; top: 8px; right: 8px; }
-  .pcard__badges { top: 8px; left: 8px; gap: 3px; }
-  .badge { font-size: 9px; padding: 2px 7px; }
-  .filters { gap: 5px; margin-bottom: 14px; }
-  .filter-btn { padding: 7px 14px; font-size: 12px; }
-  .filter-select { font-size: 12px; padding: 6px 24px 6px 10px; width: 100%; }
-  .sort-select { font-size: 12px; padding: 6px 24px 6px 10px; }
-  .result-count { font-size: 11px; margin-bottom: 10px; }
+  .pcard__quick .btn { font-size: 12px; padding: 6px 12px; min-height: 36px; }
+  .pcard__wish { width: 32px; height: 32px; top: 8px; right: 8px; }
+  .pcard__badges { top: 8px; left: 8px; gap: 4px; }
+  .badge { font-size: 11px; padding: 3px 8px; }
+  .pcard__compare { font-size: 11px; padding: 4px 10px; bottom: 42px; right: 8px; }
+  .filters { gap: 6px; margin-bottom: 14px; }
+  .filter-btn { padding: 8px 16px; font-size: 13px; }
+  .filter-select { font-size: 13px; padding: 8px 28px 8px 11px; width: 100%; }
+  .sort-select { font-size: 13px; padding: 8px 28px 8px 11px; }
+  .result-count { font-size: 12px; margin-bottom: 10px; }
   .trustbar { padding: 12px 0; }
   .trustbar__inner { gap: 10px; }
   .trust-item { padding: 8px 0; gap: 10px; }
   .trust-item__icon { width: 28px; height: 28px; }
   .trust-item__icon svg { width: 14px; height: 14px; }
   .trust-item__label { font-size: 12px; }
-  .trust-item__sub { font-size: 10.5px; }
+  .trust-item__sub { font-size: 11px; }
   .steps { gap: 20px; }
   .step { padding: 0; }
   .step__num { width: 40px; height: 40px; font-size: 16px; }
