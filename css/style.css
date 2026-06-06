@@ -1475,36 +1475,36 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   .nav__inner { padding: 0 16px; }
   .nav__links { display: none; }
   .nav__mobile-btn { display: flex; }
-  .nav__icon { width: 40px; height: 40px; }
-  .nav__actions { gap: 6px; }
-  .catbar__inner { padding: 0 16px; }
+  .nav__icon { width: 36px; height: 36px; }
+  .nav__actions { gap: 4px; }
+  .nav__logo-img { height: 22px; }
   .searchbar { padding: 12px 16px; }
   .searchbar__input { font-size: 16px; }
   .searchbar__cancel { font-size: 12px; padding: 6px 10px; }
   .mobile-nav { display: grid; }
-  .mobile-nav__btn { padding: 8px 4px 6px; }
-  .mobile-nav__btn svg { width: 22px; height: 22px; }
-  .mobile-nav__lbl { font-size: 10px; }
-  .page-body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+  .mobile-nav__btn { padding: 6px 4px 4px; }
+  .mobile-nav__btn svg { width: 20px; height: 20px; }
+  .mobile-nav__lbl { font-size: 9px; }
+  .page-body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
   .back-top { bottom: 76px; right: 12px; width: 36px; height: 36px; }
-  .hero { min-height: auto; padding: 20px 0; }
-  .hero__inner { padding: 28px 20px; gap: 20px; }
-  .hero__title { font-size: clamp(28px,7vw,36px); }
-  .hero__title .hero__title-line2 { font-size: clamp(7px,2.2vw,10px); }
-  .hero__sub { font-size: 14px; max-width: 100%; margin-bottom: 20px; }
-  .hero__ctas { gap: 8px; }
-  .hero__stats { gap: 16px; margin-top: 24px; padding-top: 16px; }
-  .hero__stat-num { font-size: 22px; }
-  .hero__stat-lbl { font-size: 10px; }
-  .hero__card { padding: 10px 12px; }
-  .hero__card-img { width: 44px; height: 50px; }
-  .hero__card-img svg { width: 20px; height: 20px; }
-  .hero__card-name { font-size: 12px; }
-  .hero__card-price { font-size: 14px; }
-  .hero__eyebrow { font-size: 10px; margin-bottom: 14px; }
-  .section { padding: 40px 0; }
-  .section--decorated { padding-top: 28px; padding-bottom: 28px; }
-  .section__header { margin-bottom: 20px; }
+  .hero { min-height: auto; padding: 12px 0; }
+  .hero__inner { padding: 24px 20px; gap: 16px; }
+  .hero__title { font-size: clamp(24px,7vw,32px); }
+  .hero__title .hero__title-line2 { font-size: clamp(6px,2.2vw,9px); }
+  .hero__sub { font-size: 13px; margin-bottom: 14px; }
+  .hero__ctas { gap: 6px; }
+  .hero__stats { gap: 12px; margin-top: 16px; padding-top: 12px; }
+  .hero__stat-num { font-size: 20px; }
+  .hero__stat-lbl { font-size: 9px; }
+  .hero__card { padding: 8px 10px; }
+  .hero__card-img { width: 38px; height: 44px; }
+  .hero__card-img svg { width: 18px; height: 18px; }
+  .hero__card-name { font-size: 11px; }
+  .hero__card-price { font-size: 13px; }
+  .hero__eyebrow { display: none; }
+  .section { padding: 28px 0; }
+  .section--decorated { padding-top: 20px; padding-bottom: 20px; }
+  .section__header { margin-bottom: 14px; }
   .section__header > div:last-child { width: 100%; }
   .section__header .sort-select { width: 100%; }
   .section__header [style*="display:flex"] { flex-direction: column; width: 100%; }
@@ -1512,8 +1512,8 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   .section__eyebrow { font-size: 10px; }
   .section__eyebrow::before { width: 16px; }
   .section__title { font-size: clamp(20px,5vw,26px); }
-  .product-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .skeleton-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .product-grid { grid-template-columns: 1fr; gap: 14px; }
+  .skeleton-grid { grid-template-columns: 1fr; gap: 14px; }
   .pcard { border-radius: 12px; }
   .pcard__body { padding: 10px 12px 12px; }
   .pcard__brand { font-size: 9px; }
@@ -1614,35 +1614,35 @@ footer { background: var(--slate); padding: 60px 0 28px; }
 }
 /* ── MOBILE SMALL (≤400px) ──────────────────────────── */
 @media (max-width: 400px) {
-  .container { padding: 0 16px; }
-  .nav__inner { padding: 0 12px; }
-  .nav__actions { gap: 4px; flex-wrap: wrap; }
-  .catbar__inner { padding: 0 12px; }
-  .product-grid { grid-template-columns: 1fr; gap: 12px; }
-  .skeleton-grid { grid-template-columns: 1fr; gap: 12px; }
+  .container { padding: 0 14px; }
+  .nav__inner { padding: 0 10px; }
+  .nav__actions { gap: 2px; flex-wrap: wrap; }
+  .product-grid { grid-template-columns: 1fr; gap: 10px; }
+  .skeleton-grid { grid-template-columns: 1fr; gap: 10px; }
   .hero__card { min-width: 100%; }
-  .hero__inner { padding: 24px 16px; }
-  .hero__title { font-size: clamp(22px,7vw,28px); }
-  .hero__title .hero__title-line2 { font-size: clamp(6px,2.2vw,9px); }
-  .hero__sub { font-size: 13px; }
-  .hero__stats { gap: 12px; }
-  .hero__stat-num { font-size: 20px; }
-  .section { padding: 32px 0; }
-  .section--decorated { padding-top: 20px; padding-bottom: 20px; }
-  .section__title { font-size: clamp(18px,6vw,22px); }
-  .section__header { margin-bottom: 16px; }
-  .about__title { font-size: clamp(18px,6vw,22px); }
-  .newsletter__title { font-size: clamp(20px,7vw,24px); }
-  .trustbar__inner { grid-template-columns: 1fr; gap: 8px; }
-  .trust-item { padding: 6px 0; }
+  .hero__inner { padding: 20px 14px; }
+  .hero__title { font-size: clamp(20px,7vw,26px); }
+  .hero__title .hero__title-line2 { font-size: clamp(5px,2.2vw,8px); }
+  .hero__sub { font-size: 12px; }
+  .hero__stats { gap: 8px; }
+  .hero__stat-num { font-size: 18px; }
+  .section { padding: 24px 0; }
+  .section--decorated { padding-top: 16px; padding-bottom: 16px; }
+  .section__title { font-size: clamp(16px,6vw,20px); }
+  .section__header { margin-bottom: 12px; }
+  .section__eyebrow { display: none; }
+  .about__title { font-size: clamp(16px,6vw,20px); }
+  .newsletter__title { font-size: clamp(18px,7vw,22px); }
+  .trustbar__inner { grid-template-columns: 1fr; gap: 6px; }
+  .trust-item { padding: 4px 0; }
   .pcard { border-radius: 10px; }
-  .pcard__body { padding: 8px 10px 10px; }
+  .pcard__body { padding: 6px 8px 10px; }
   .pcard__name { font-size: 11px; }
-  .pcard__price { font-size: 14px; }
+  .pcard__price { font-size: 13px; }
   .pcard__img { aspect-ratio: 3/4; }
   .modal { max-height: 90vh; }
-  .about-grid { gap: 16px; }
-  .cond-grid { gap: 8px; }
+  .about-grid { gap: 12px; }
+  .cond-grid { gap: 6px; }
   .cond-card { padding: 14px; }
   .btn { font-size: 13px; padding: 12px 18px; min-height: 44px; }
   .btn-lg { font-size: 14px; padding: 14px 22px; min-height: 48px; }
