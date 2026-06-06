@@ -3,76 +3,30 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Bestilling bekreftet — M&O</title>
-<meta name="robots" content="noindex"/>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.stripe.com; frame-src https://js.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self';"/>
+<title>Betaling bekreftet — M&O</title>
+<meta name="description" content="Takk for din bestilling hos M&O."/>
 <meta name="theme-color" content="#2d3a2a"/>
+<meta name="robots" content="noindex"/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
-<link rel="manifest" href="manifest.json"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-<div class="page-body">
-<section class="section" style="min-height:65vh;display:flex;align-items:center">
-  <div class="container" style="max-width:520px;margin:0 auto;text-align:center">
-    <div class="confirm-icon" style="margin-bottom:24px">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-    </div>
-    <h1 class="confirm-title" style="font-size:clamp(26px,4vw,36px)">Takk for bestillingen!</h1>
-    <p class="confirm-sub">Vi har mottatt betalingen og sender en bekreftelse til e-postadressen din. Varen leveres innen 1–3 virkedager.</p>
-    <p class="confirm-num" id="order-ref">Laster ordrenummer…</p>
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px">
-      <a href="index.html" class="btn btn-primary btn-lg">Fortsett å handle</a>
-      <button class="btn btn-ghost btn-lg btn-print" onclick="window.print()">Skriv ut kvittering</button>
-    </div>
-    <div style="margin-top:40px;padding:20px;background:var(--g10);border-radius:14px;border:1px solid var(--g8)" id="order-summary"></div>
+<div class="page-body" style="min-height:60vh;display:flex;align-items:center;justify-content:center">
+  <div style="text-align:center;padding:40px 20px;max-width:520px">
+    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--g5)" stroke-width="1.8" stroke-linecap="round" style="margin:0 auto 20px;display:block"><polyline points="20 6 9 17 4 12"/></svg>
+    <h1 style="font-family:var(--serif);font-size:32px;font-weight:500;color:var(--g3);margin-bottom:10px">Takk for bestillingen!</h1>
+    <p style="font-size:16px;color:var(--text-3);margin-bottom:8px">Din betaling er bekreftet.</p>
+    <p style="font-size:14px;color:var(--text-4);margin-bottom:28px">Du vil motta en bekreftelse på e-post med ordrenummer og leveringsinformasjon.</p>
+    <a href="index.html" class="btn btn-primary btn-lg">Fortsett å handle</a>
   </div>
-</section>
 </div>
-
 <script src="js/app.js"></script>
 <script src="js/layout.js"></script>
-<script src="https://js.stripe.com/v3/"></script>
 <script>
 MO.injectLayout('');
-
-/* Hent session-detaljer og tøm kurven */
-(function() {
-  var params = new URLSearchParams(window.location.search);
-  var sessionId = params.get('session_id');
-
-  /* Tøm kurven etter vellykket betaling */
-  MO.cart = [];
-  MO.saveCart();
-  MO.updateCartBadge();
-  sessionStorage.removeItem('mo_pending_cart');
-
-  var ref = document.getElementById('order-ref');
-  var summary = document.getElementById('order-summary');
-
-  if (sessionId && sessionId !== '{CHECKOUT_SESSION_ID}') {
-    ref.textContent = 'Stripe-referanse: ' + sessionId.slice(-12).toUpperCase();
-  } else {
-    ref.textContent = 'Ordrenummer: MO-' + Math.floor(10000 + Math.random() * 90000);
-  }
-
-  /* Vis hva som ble kjøpt (fra sessionStorage) */
-  var pending = JSON.parse(sessionStorage.getItem('mo_pending_cart') || '[]');
-  if (pending.length) {
-    summary.innerHTML = '<p style="font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--text-4);margin-bottom:12px;font-weight:500">Din bestilling</p>' +
-      pending.map(function(i) {
-        return '<div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-2);margin-bottom:8px">' +
-          '<span>' + i.brand + ' ' + i.name.split(' ').slice(0,3).join(' ') + ' · ' + i.size + '</span>' +
-          '<span style="font-family:var(--serif)">' + (i.price * i.qty).toLocaleString('no-NO') + ' kr</span>' +
-          '</div>';
-      }).join('');
-    sessionStorage.removeItem('mo_pending_cart');
-  } else {
-    summary.style.display = 'none';
-  }
-})();
+MO.cart = [];
+MO.saveCart();
+MO.updateCartBadge();
 </script>
 </body>
 </html>

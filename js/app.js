@@ -4,22 +4,22 @@
   var MO = window.MO || {};
 
   MO.products = [
-    {id:'n1',brand:'Norrøna',name:'Falketind Gore-Tex Jacket',price:2490,oldPrice:3299,sizes:['S','M','L','XL'],cat:'jakker',type:'nytt',features:['Gore-Tex 3-lags membran','Justerbar hette med visir','Ventilasjonslommer','Resirkulert materiale']},
-    {id:'n2',brand:'Bergans',name:'Fløyen Insulated Pants',price:890,oldPrice:1199,sizes:['XS','S','M','L','XL'],cat:'bukser',type:'nytt',features:['PrimaLoft isolasjon','Slank passform','Sideglidelåser','Vannavstøtende overflate']},
-    {id:'n3',brand:'Helly Hansen',name:'Odin Fleece Midlayer',price:649,oldPrice:899,sizes:['S','M','L','XL','XXL'],cat:'mellomlag',type:'nytt',features:['Polartec Power Stretch','Stretch-panel i sidene','Brystlomme','Kan brukes alene']},
-    {id:'n4',brand:'Kari Traa',name:'Rose Wool Base Layer',price:399,oldPrice:549,sizes:['XS','S','M','L'],cat:'mellomlag',type:'nytt',features:['100% merinoull','Naturlig temperaturregulering','Luktresistent','GOTS-sertifisert']},
-    {id:'n5',brand:'Mammut',name:'Convey Tour HS Hooded Jacket',price:3100,oldPrice:4499,sizes:['S','M','L','XL'],cat:'jakker',type:'nytt',features:['DRYtechnology','Integrert justerbar hette','Packable design','2.5-lags konstruksjon']},
-    {id:'n6',brand:'Black Diamond',name:'Crag Pants',price:1100,oldPrice:1599,sizes:['28','30','32','34'],cat:'bukser',type:'nytt',features:['Stretch-nylon','Klatreoptimalisert passform','Kne-ledd','Gusseted crotch']},
-    {id:'n7',brand:'Fjällräven',name:'Keb Eco-Shell Jacket',price:2800,oldPrice:3999,sizes:['XS','S','M','L','XL'],cat:'jakker',type:'nytt',features:['Eco-Shell membran','Resirkulerte materialer','3 utvendige lommer','Hette med stivt visir']},
-    {id:'n8',brand:'Salomon',name:'Outline Prism GTX Shoes',price:1390,oldPrice:1799,sizes:['39','40','41','42','43','44','45'],cat:'sko',type:'nytt',features:['Gore-Tex membran','Contagrip XT sål','EnergyCell+ demping','Quicklace system']},
-    {id:'b1',brand:"Arc'teryx",name:'Beta AR Jacket — Str. M',price:2100,oldPrice:5499,cond:'Topptrim',condDesc:'Brukt 2–3 ganger. Ingen synlige tegn på bruk.',sizes:['M'],cat:'jakker',type:'brukt',features:['Gore-Tex Pro 3-lags','N80p-X face fabric','WaterTight glidelåser','Magnetisk hette']},
-    {id:'b2',brand:'Patagonia',name:'R1 TechFace Hoody — Str. L',price:549,oldPrice:1799,cond:'Turerfaren',condDesc:'Noe pilling på ermene. Full funksjon og vaskbar.',sizes:['L'],cat:'mellomlag',type:'brukt',features:['Polartec Power Stretch Pro','Svært stretchy og pustende','Integrert hette','Fair Trade-sertifisert']},
-    {id:'b3',brand:'Salomon',name:'X Ultra 4 GTX — Str. 43',price:850,oldPrice:1749,cond:'Topptrim',condDesc:'Brukt én sesong. Lite skitt på såle, ellers som ny.',sizes:['43'],cat:'sko',type:'brukt',features:['Gore-Tex membran','Contagrip MA såle','OrthoLite innerssåle','Advanced Chassis']},
-    {id:'b4',brand:'Norrøna',name:'Bitihorn Dri1 Pants — Str. S',price:299,oldPrice:1099,cond:'Arbeidshest',condDesc:'Tydelig slitasje på knær. Alle sting og glidelåser fungerer.',sizes:['S'],cat:'bukser',type:'brukt',features:['Norrøna Dri1-stoff','Pustende og lett','Glidelås i bena','Elastisk linning']},
-    {id:'b5',brand:'Helly Hansen',name:'Odin 9 Worlds Jacket — XL',price:1600,oldPrice:4499,cond:'Topptrim',condDesc:'Brukt 3 ganger totalt. Som ny fra fabrikk.',sizes:['XL'],cat:'jakker',type:'brukt',features:['Helly Tech Pro 3L','Resirkulert nylon','Heldekkende glidelåser','Pakkes i egen pose']},
-    {id:'b6',brand:'Bergans',name:'Trollhetta Insulated Jacket — S',price:750,oldPrice:2299,cond:'Turerfaren',condDesc:'Litt pilling innvendig. God isolasjon og tett.',sizes:['S'],cat:'jakker',type:'brukt',features:['PrimaLoft Gold isolasjon','Resirkulert face fabric','Packable i lomme','DWR-behandlet']},
-    {id:'b7',brand:'Kari Traa',name:'Tikse Tights — M',price:180,oldPrice:599,cond:'Turerfaren',condDesc:'Vasket og klar. Noe pilling i skrittet.',sizes:['M'],cat:'bukser',type:'brukt',features:['Merinomix','God strekk','Bred linning','Reflekselement']},
-    {id:'b8',brand:'Black Diamond',name:'Stance Beanie',price:80,oldPrice:299,cond:'Topptrim',condDesc:'Brukt 2 ganger. Ingen bruksmerker.',sizes:['One size'],cat:'tilbehor',type:'brukt',features:['Merino-blend','Stretch-passform','Kan brettes','Naturlig luktresistent']},
+    {id:'n1',brand:'Norrøna',name:'Falketind Gore-Tex Jacket',price:2490,oldPrice:3299,sizes:['S','M','L','XL'],cat:'jakker',type:'nytt',features:['Gore-Tex 3-lags membran','Justerbar hette med visir','Ventilasjonslommer','Resirkulert materiale'],initials:'NF',stock:8},
+    {id:'n2',brand:'Bergans',name:'Fløyen Insulated Pants',price:890,oldPrice:1199,sizes:['XS','S','M','L','XL'],cat:'bukser',type:'nytt',features:['PrimaLoft isolasjon','Slank passform','Sideglidelåser','Vannavstøtende overflate'],initials:'BF',stock:12},
+    {id:'n3',brand:'Helly Hansen',name:'Odin Fleece Midlayer',price:649,oldPrice:899,sizes:['S','M','L','XL','XXL'],cat:'mellomlag',type:'nytt',features:['Polartec Power Stretch','Stretch-panel i sidene','Brystlomme','Kan brukes alene'],initials:'HH',stock:15},
+    {id:'n4',brand:'Kari Traa',name:'Rose Wool Base Layer',price:399,oldPrice:549,sizes:['XS','S','M','L'],cat:'mellomlag',type:'nytt',features:['100% merinoull','Naturlig temperaturregulering','Luktresistent','GOTS-sertifisert'],initials:'KT',stock:20},
+    {id:'n5',brand:'Mammut',name:'Convey Tour HS Hooded Jacket',price:3100,oldPrice:4499,sizes:['S','M','L','XL'],cat:'jakker',type:'nytt',features:['DRYtechnology','Integrert justerbar hette','Packable design','2.5-lags konstruksjon'],initials:'MM',stock:6},
+    {id:'n6',brand:'Black Diamond',name:'Crag Pants',price:1100,oldPrice:1599,sizes:['28','30','32','34'],cat:'bukser',type:'nytt',features:['Stretch-nylon','Klatreoptimalisert passform','Kne-ledd','Gusseted crotch'],initials:'BD',stock:10},
+    {id:'n7',brand:'Fjällräven',name:'Keb Eco-Shell Jacket',price:2800,oldPrice:3999,sizes:['XS','S','M','L','XL'],cat:'jakker',type:'nytt',features:['Eco-Shell membran','Resirkulerte materialer','3 utvendige lommer','Hette med stivt visir'],initials:'FJ',stock:4},
+    {id:'n8',brand:'Salomon',name:'Outline Prism GTX Shoes',price:1390,oldPrice:1799,sizes:['39','40','41','42','43','44','45'],cat:'sko',type:'nytt',features:['Gore-Tex membran','Contagrip XT sål','EnergyCell+ demping','Quicklace system'],initials:'SA',stock:9},
+    {id:'b1',brand:"Arc'teryx",name:'Beta AR Jacket — Str. M',price:2100,oldPrice:5499,cond:'Topptrim',condDesc:'Brukt 2–3 ganger. Ingen synlige tegn på bruk.',sizes:['M'],cat:'jakker',type:'brukt',features:['Gore-Tex Pro 3-lags','N80p-X face fabric','WaterTight glidelåser','Magnetisk hette'],initials:'AR',stock:1},
+    {id:'b2',brand:'Patagonia',name:'R1 TechFace Hoody — Str. L',price:549,oldPrice:1799,cond:'Turerfaren',condDesc:'Noe pilling på ermene. Full funksjon og vaskbar.',sizes:['L'],cat:'mellomlag',type:'brukt',features:['Polartec Power Stretch Pro','Svært stretchy og pustende','Integrert hette','Fair Trade-sertifisert'],initials:'PA',stock:1},
+    {id:'b3',brand:'Salomon',name:'X Ultra 4 GTX — Str. 43',price:850,oldPrice:1749,cond:'Topptrim',condDesc:'Brukt én sesong. Lite skitt på såle, ellers som ny.',sizes:['43'],cat:'sko',type:'brukt',features:['Gore-Tex membran','Contagrip MA såle','OrthoLite innerssåle','Advanced Chassis'],initials:'SA',stock:1},
+    {id:'b4',brand:'Norrøna',name:'Bitihorn Dri1 Pants — Str. S',price:299,oldPrice:1099,cond:'Arbeidshest',condDesc:'Tydelig slitasje på knær. Alle sting og glidelåser fungerer.',sizes:['S'],cat:'bukser',type:'brukt',features:['Norrøna Dri1-stoff','Pustende og lett','Glidelås i bena','Elastisk linning'],initials:'NO',stock:1},
+    {id:'b5',brand:'Helly Hansen',name:'Odin 9 Worlds Jacket — XL',price:1600,oldPrice:4499,cond:'Topptrim',condDesc:'Brukt 3 ganger totalt. Som ny fra fabrikk.',sizes:['XL'],cat:'jakker',type:'brukt',features:['Helly Tech Pro 3L','Resirkulert nylon','Heldekkende glidelåser','Pakkes i egen pose'],initials:'HH',stock:1},
+    {id:'b6',brand:'Bergans',name:'Trollhetta Insulated Jacket — S',price:750,oldPrice:2299,cond:'Turerfaren',condDesc:'Litt pilling innvendig. God isolasjon og tett.',sizes:['S'],cat:'jakker',type:'brukt',features:['PrimaLoft Gold isolasjon','Resirkulert face fabric','Packable i lomme','DWR-behandlet'],initials:'BE',stock:1},
+    {id:'b7',brand:'Kari Traa',name:'Tikse Tights — M',price:180,oldPrice:599,cond:'Turerfaren',condDesc:'Vasket og klar. Noe pilling i skrittet.',sizes:['M'],cat:'bukser',type:'brukt',features:['Merinomix','God strekk','Bred linning','Reflekselement'],initials:'KT',stock:1},
+    {id:'b8',brand:'Black Diamond',name:'Stance Beanie',price:80,oldPrice:299,cond:'Topptrim',condDesc:'Brukt 2 ganger. Ingen bruksmerker.',sizes:['One size'],cat:'tilbehor',type:'brukt',features:['Merino-blend','Stretch-passform','Kan brettes','Naturlig luktresistent'],initials:'BD',stock:1},
   ];
 
   MO.populateBrandFilters = function () {
@@ -190,12 +190,12 @@
     var saving = Math.round((1 - p.price / p.oldPrice) * 100);
     var wished = MO.isWished(p.id);
     var condBadge = p.cond ? '<span class="badge badge-' + (p.cond === 'Topptrim' ? 'top' : p.cond === 'Turerfaren' ? 'mid' : 'low') + '">' + p.cond + '</span>' : '';
+    var stockBadge = !p.stock || p.stock <= 1 ? '<span class="badge badge-last">Siste eks.</span>' : p.stock <= 3 ? '<span class="badge badge-stock">Få igjen</span>' : '<span class="badge badge-stock">På lager</span>';
     return '<article class="pcard" data-pid="' + p.id + '" tabindex="0">' +
       '<div class="pcard__img" data-cat="' + p.cat + '">' +
-      '<div class="pcard__img-inner"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg></div>' +
-      '<div class="pcard__badges"><span class="badge badge-' + (p.type === 'nytt' ? 'new' : 'used') + '">' + (p.type === 'nytt' ? 'Nytt' : 'Brukt') + '</span>' + condBadge + '</div>' +
+      '<div class="pcard__img-inner">' + (p.initials || p.brand.charAt(0)) + '</div>' +
+      '<div class="pcard__badges"><span class="badge badge-' + (p.type === 'nytt' ? 'new' : 'used') + '">' + (p.type === 'nytt' ? 'Nytt' : 'Brukt') + '</span>' + condBadge + stockBadge + '</div>' +
       '<button class="pcard__wish' + (wished ? ' active' : '') + '" data-wish="' + p.id + '" aria-label="Favoritt"><svg width="14" height="14" viewBox="0 0 24 24" fill="' + (wished ? '#c0392b' : 'none') + '" stroke="' + (wished ? '#c0392b' : 'currentColor') + '" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>' +
-      '<button class="pcard__compare' + (MO.inCompare(p.id) ? ' active' : '') + '" data-compare="' + p.id + '" aria-label="Sammenlign">Sammenlign</button>' +
       '<div class="pcard__quick"><button class="btn btn-white btn-sm btn-full" data-quickadd="' + p.id + '">+ Legg i kurv</button></div>' +
       '</div>' +
       '<div class="pcard__body">' +
@@ -282,6 +282,7 @@
       });
     }
     localStorage.setItem('mo_wish', JSON.stringify(MO.wishlist));
+    MO.updateWishBadge();
   };
 
   MO.isWished = function (id) { return MO.wishlist.indexOf(id) > -1; };
@@ -311,16 +312,38 @@
     MO._toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2800);
   };
 
+  MO._scrollY = 0;
+
+  MO._lockScroll = function () {
+    MO._scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + MO._scrollY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.overflow = 'hidden';
+    document.body.style.width = '100%';
+  };
+
+  MO._unlockScroll = function () {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.overflow = '';
+    document.body.style.width = '';
+    window.scrollTo(0, MO._scrollY);
+  };
+
   MO.openModal = function (title, html) {
     document.getElementById('gm-title').textContent = title;
     document.getElementById('gm-body').innerHTML = html;
     document.getElementById('modal-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
+    MO._lockScroll();
   };
 
   MO.closeModal = function () {
     document.getElementById('modal-overlay').classList.remove('open');
-    document.body.style.overflow = '';
+    MO._unlockScroll();
   };
 
   MO._selectedSize = {};
@@ -354,7 +377,7 @@
       '<div>' + infoHtml + '</div>' +
       '</div>';
     document.getElementById('pdm-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
+    MO._lockScroll();
     if ('ontouchstart' in window) {
       var startX, startY;
       var imgEl = document.querySelector('.pdm__grid .pdm__img');
@@ -378,7 +401,7 @@
 
   MO.closePdm = function () {
     document.getElementById('pdm-overlay').classList.remove('open');
-    document.body.style.overflow = '';
+    MO._unlockScroll();
   };
 
   MO.zoomImage = function (el) {
@@ -396,13 +419,21 @@
     MO.renderCartDrawer();
     document.getElementById('cart-overlay').classList.add('open');
     document.getElementById('cart-drawer').classList.add('open');
-    document.body.style.overflow = 'hidden';
+    MO._lockScroll();
   };
 
   MO.closeCart = function () {
     document.getElementById('cart-overlay').classList.remove('open');
     document.getElementById('cart-drawer').classList.remove('open');
-    document.body.style.overflow = '';
+    MO._unlockScroll();
+  };
+
+  MO.updateWishBadge = function () {
+    var el = document.getElementById('wish-badge-mobile');
+    if (!el) return;
+    var count = MO.wishlist.length;
+    el.textContent = count;
+    el.style.display = count > 0 ? 'flex' : 'none';
   };
 
   MO.renderCartDrawer = function () {
@@ -414,13 +445,21 @@
       if (foot) foot.style.display = 'none';
       return;
     }
-    body.innerHTML = MO.cart.map(function (item) {
-      return '<div class="cart-item"><div class="cart-item__img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg></div><div style="flex:1"><div class="cart-item__brand">' + item.brand + '</div><div class="cart-item__name">' + item.name + '</div><div class="cart-item__meta">Str. ' + item.size + (item.qty > 1 ? ' · Antall: ' + item.qty : '') + '</div><div class="cart-item__price">' + (item.price * item.qty).toLocaleString('no-NO') + ' kr</div><span class="cart-item__rm" data-rmcart=\'' + JSON.stringify({ id: item.id, size: item.size }) + '\'>Fjern</span></div></div>';
+    var total = MO.cartTotal();
+    body.innerHTML =
+      '<div class="drawer__free-ship">' +
+      (total >= 999
+        ? '<div class="drawer__free-ship-text"><span>Gratis frakt oppnådd!</span><span>✓</span></div><div class="drawer__free-ship-track"><div class="drawer__free-ship-fill" style="width:100%"></div></div>'
+        : '<div class="drawer__free-ship-text"><span>' + (999 - total).toLocaleString('no-NO') + ' kr igjen til gratis frakt</span><span>' + Math.round(total / 999 * 100) + '%</span></div><div class="drawer__free-ship-track"><div class="drawer__free-ship-fill" style="width:' + Math.round(total / 999 * 100) + '%"></div></div>'
+      ) +
+      '</div>' +
+      MO.cart.map(function (item) {
+        return '<div class="cart-item"><div class="cart-item__img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg></div><div style="flex:1"><div class="cart-item__brand">' + item.brand + '</div><div class="cart-item__name">' + item.name + '</div><div class="cart-item__meta">Str. ' + item.size + (item.qty > 1 ? ' · Antall: ' + item.qty : '') + '</div><div class="cart-item__price">' + (item.price * item.qty).toLocaleString('no-NO') + ' kr</div><span class="cart-item__rm" data-rmcart=\'' + JSON.stringify({ id: item.id, size: item.size }) + '\'>Fjern</span></div></div>';
     }).join('');
     if (foot) {
       foot.style.display = 'block';
       var sumEl = document.getElementById('cart-drawer-total');
-      if (sumEl) sumEl.textContent = MO.cartTotal().toLocaleString('no-NO') + ' kr';
+      if (sumEl) sumEl.textContent = total.toLocaleString('no-NO') + ' kr';
     }
   };
 
@@ -1181,43 +1220,6 @@
     }, { passive: true });
   };
 
-  /* ── FLOATING PARTICLES ──────────────────────────── */
-  MO.initParticles = function () {
-    if (window.innerWidth <= 768) return;
-    var hero = document.getElementById('hero');
-    if (!hero || hero.querySelector('.particles-container')) return;
-    var container = document.createElement('div');
-    container.className = 'particles-container';
-    container.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;';
-    hero.insertBefore(container, hero.firstChild);
-    var colors = ['rgba(200,169,106,.3)', 'rgba(255,255,255,.1)', 'rgba(107,143,98,.2)', 'rgba(200,169,106,.2)'];
-    for (var i = 0; i < 15; i++) {
-      var p = document.createElement('div');
-      var size = 4 + Math.random() * 12;
-      var x = Math.random() * 100;
-      var y = Math.random() * 100;
-      var dur = 8 + Math.random() * 12;
-      var col = colors[Math.floor(Math.random() * colors.length)];
-      p.style.cssText = 'position:absolute;left:' + x + '%;top:' + y + '%;width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:' + col + ';animation:particleFloat ' + dur + 's ease-in-out infinite;animation-delay:' + (Math.random() * 5) + 's;';
-      container.appendChild(p);
-    }
-    /* inject keyframes if not present */
-    if (!document.getElementById('particle-style')) {
-      var style = document.createElement('style');
-      style.id = 'particle-style';
-      style.textContent = '@keyframes particleFloat{0%,100%{transform:translateY(0) translateX(0) scale(1);opacity:0}20%{opacity:1}50%{transform:translateY(-60px) translateX(20px) scale(1.2);opacity:.8}80%{opacity:.4}100%{transform:translateY(-100px) translateX(-10px) scale(0.5);opacity:0}}';
-      document.head.appendChild(style);
-    }
-    /* Pause particles when hero is out of view */
-    var obs = new IntersectionObserver(function (entries) {
-      container.style.animationPlayState = entries[0].isIntersecting ? 'running' : 'paused';
-      container.querySelectorAll('div').forEach(function (el) {
-        el.style.animationPlayState = entries[0].isIntersecting ? 'running' : 'paused';
-      });
-    }, { threshold: 0 });
-    obs.observe(hero);
-  };
-
   /* ──────────────────────────────────────────────
      COUNT-UP ANIMATION
      ────────────────────────────────────────────── */
@@ -1247,25 +1249,6 @@
       });
     }, { threshold: .4 });
     nums.forEach(function (n) { obs.observe(n); });
-  };
-
-  /* ──────────────────────────────────────────────
-     MOUSE TRAIL SPARKLES
-     ────────────────────────────────────────────── */
-  MO.initMouseTrail = function () {
-    if ('ontouchstart' in window) return;
-    var last = 0;
-    document.addEventListener('mousemove', function (e) {
-      var now = Date.now();
-      if (now - last < 45) return;
-      last = now;
-      var el = document.createElement('i');
-      el.className = 'trail-sparkle';
-      el.style.left = (e.clientX - 2.5) + 'px';
-      el.style.top = (e.clientY - 2.5) + 'px';
-      document.body.appendChild(el);
-      setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 550);
-    });
   };
 
   MO.compareList = JSON.parse(localStorage.getItem('mo_compare') || '[]');
