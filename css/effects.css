@@ -177,16 +177,6 @@
   will-change: translate;
 }
 
-/* ── REDUCED MOTION ────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  .fog, .rain, .starry-sky,
-  .footprint, .wind-indicator,
-  .compass-interactive, .watercolor-section::before { display: none; }
-  .forest-bg.windy svg,
-  .forest-bg.strong-wind svg { animation-duration: 7s; }
-}
-
-/* ── MOBIL: SKJUL TUNGE EFFEKTER ──────────────────── */
 @media (max-width: 768px) {
   .rain { display: none; }
   .compass-interactive { width: 36px; height: 36px; bottom: 16px; right: 16px; }
