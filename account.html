@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Min konto — M&O</title>
 <meta name="robots" content="noindex"/>
-<meta name="theme-color" content="#2d3a2a"/>
+<meta name="theme-color" content="#2F3E46"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="M&O"/>
+<meta name="mobile-web-app-capable" content="yes"/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 <link rel="manifest" href="manifest.json"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -196,6 +200,11 @@ function saveSettings() {
     document.getElementById('user-avatar').textContent = initials;
   }
   MO.toast('Innstillinger lagret!');
+}
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
 }
 </script>
 </body>

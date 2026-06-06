@@ -13,7 +13,12 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="M&O — Fjellklær uten kompromiss"/>
 <meta name="twitter:description" content="Nye og brukte fjellklær fra de beste merkene, til priser som gir mening."/>
-<meta name="theme-color" content="#2d3a2a"/>
+<meta name="theme-color" content="#2F3E46"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="M&O"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="application-name" content="M&O"/>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.stripe.com; frame-src https://js.stripe.com; object-src 'none'; base-uri 'self'; form-action 'self';"/>
 <link rel="icon" href="favicon.png" type="image/png"/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
@@ -66,33 +71,115 @@
 
   <!-- MOUNTAIN RANGE -->
   <div class="mountains" aria-hidden="true">
-    <svg class="mountains__layer mountains__layer--bg" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <polyline points="0,400 80,280 160,320 260,200 340,280 440,160 540,250 640,180 740,260 840,140 940,230 1040,170 1140,250 1240,190 1340,280 1440,220 1440,400" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
-    </svg>
-    <svg class="mountains__layer mountains__layer--mid" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <polyline points="0,400 60,320 130,350 220,250 310,310 400,210 480,290 560,220 640,300 720,190 810,270 890,210 970,290 1060,230 1150,260 1250,210 1340,270 1440,240 1440,400" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-    </svg>
-    <svg class="mountains__layer mountains__layer--fg" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <polyline points="0,400 40,350 100,370 180,290 250,340 340,250 420,310 500,240 580,300 660,220 750,280 830,230 920,290 1000,260 1080,300 1180,240 1280,280 1380,250 1440,260 1440,400" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-      <polyline points="0,400 30,370 80,390 150,320 220,360 310,280 390,330 470,270 550,320 630,260 710,300 800,260 870,300 960,270 1030,290 1120,260 1210,290 1300,270 1380,280 1440,270 1440,400" fill="rgba(20,31,18,.3)" stroke="rgba(255,255,255,.04)" stroke-width=".5"/>
-    </svg>
-  </div>
+    <svg class="mountains__layer" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="mbg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(255,255,255,.03)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,.005)"/>
+        </linearGradient>
+        <linearGradient id="mmid1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(255,255,255,.055)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,.01)"/>
+        </linearGradient>
+        <linearGradient id="mmid2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(255,255,255,.08)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,.015)"/>
+        </linearGradient>
+        <linearGradient id="mfg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(255,255,255,.12)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,.03)"/>
+        </linearGradient>
+        <linearGradient id="mshadow" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="rgba(20,31,18,.12)"/>
+          <stop offset="100%" stop-color="rgba(20,31,18,.35)"/>
+        </linearGradient>
+        <linearGradient id="mshadow2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="rgba(20,31,18,.08)"/>
+          <stop offset="100%" stop-color="rgba(20,31,18,.25)"/>
+        </linearGradient>
+        <linearGradient id="rimlight" x1="1" y1="0" x2="0" y2="0">
+          <stop offset="0%" stop-color="rgba(255,255,255,.08)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </linearGradient>
+        <linearGradient id="mistglow" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="rgba(244,247,246,.12)"/>
+          <stop offset="100%" stop-color="rgba(244,247,246,0)"/>
+        </linearGradient>
+        <linearGradient id="snowhl" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="rgba(255,255,255,.45)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,.15)"/>
+        </linearGradient>
+      </defs>
 
-  <!-- CLOUDS -->
-  <div class="clouds" aria-hidden="true">
-    <svg class="cloud cloud--1" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="60" cy="50" rx="60" ry="25" fill="rgba(255,255,255,.06)"/>
-      <ellipse cx="100" cy="40" rx="50" ry="20" fill="rgba(255,255,255,.08)"/>
-      <ellipse cx="140" cy="50" rx="40" ry="18" fill="rgba(255,255,255,.05)"/>
-    </svg>
-    <svg class="cloud cloud--2" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="50" cy="50" rx="55" ry="22" fill="rgba(255,255,255,.04)"/>
-      <ellipse cx="100" cy="38" rx="45" ry="18" fill="rgba(255,255,255,.06)"/>
-      <ellipse cx="130" cy="50" rx="35" ry="15" fill="rgba(255,255,255,.03)"/>
-    </svg>
-    <svg class="cloud cloud--3" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="70" cy="50" rx="50" ry="20" fill="rgba(255,255,255,.05)"/>
-      <ellipse cx="110" cy="42" rx="40" ry="16" fill="rgba(255,255,255,.07)"/>
+      <!-- SKY LAYER — high distant peaks for top extension -->
+      <path d="M0,180 C40,165 80,155 120,148 C160,141 200,135 240,130 C280,125 320,122 360,120 C400,118 440,118 480,120 C520,122 560,126 600,132 C640,138 680,145 720,148 C760,151 800,150 840,148 C880,146 910,142 940,140 C970,138 1000,138 1030,140 C1060,142 1090,148 1120,155 C1150,162 1180,170 1210,180 C1240,190 1270,200 1300,210 C1330,220 1360,230 1390,238 C1410,244 1430,248 1440,250 L1440,400 L0,400 Z" fill="url(#mbg)" opacity=".6"/>
+      <path d="M0,120 C40,108 80,98 120,92 C160,86 200,82 240,80 C280,78 310,80 340,84 C370,88 400,95 430,100 C460,105 490,108 520,108 C550,108 580,105 610,102 C640,99 670,98 700,100 C730,102 760,108 790,115 C820,122 850,130 880,135 C910,140 940,142 970,140 C1000,138 1030,132 1060,125 C1090,118 1120,112 1150,110 C1180,108 1210,110 1240,115 C1270,120 1300,128 1330,138 C1360,148 1390,158 1410,165 C1430,172 1440,175 1440,175 L1440,400 L0,400 Z" fill="url(#mbg)" opacity=".3"/>
+
+      <!-- LAYER 1 — Deepest background, jagged silhouettes -->
+      <path d="M0,400 C15,390 35,388 50,380 C55,375 70,370 80,365 C90,360 105,358 120,350 C125,345 140,340 155,335 C160,330 170,325 185,320 C195,315 205,310 220,305 C230,300 240,295 255,290 C265,285 275,278 290,272 C300,266 310,260 325,255 C335,250 345,245 360,240 C375,235 385,230 400,225 C415,220 425,215 440,212 C455,209 465,205 480,200 C495,195 505,190 520,185 C535,180 545,175 560,170 C575,165 585,160 600,155 C615,150 625,145 640,140 C655,135 665,128 680,122 C695,116 705,110 720,108 C735,106 745,102 760,98 C775,94 785,90 800,88 C815,86 825,84 840,82 C855,80 865,78 880,78 C895,78 905,80 920,82 C935,84 945,88 960,92 C975,96 985,100 1000,106 C1015,112 1025,118 1040,125 C1055,132 1065,140 1080,148 C1095,156 1105,162 1120,170 C1135,178 1145,185 1160,192 C1175,199 1185,205 1200,212 C1215,219 1225,225 1240,232 C1255,239 1265,245 1280,252 C1295,259 1305,265 1320,272 C1335,279 1345,285 1360,292 C1375,299 1385,305 1400,312 C1415,319 1425,325 1440,332 L1440,400 Z" fill="url(#mbg)"/>
+
+      <!-- LAYER 2 — Mid-back, sharper ridges -->
+      <path d="M0,400 C8,385 18,382 28,372 C33,365 43,358 55,348 C60,340 68,333 78,325 C83,318 90,310 100,302 C105,295 112,288 122,280 C127,273 134,266 144,258 C149,252 156,245 166,238 C171,232 178,226 188,220 C193,215 200,208 210,202 C215,197 222,192 232,186 C237,180 244,175 254,170 C259,165 266,160 276,155 C281,150 288,146 298,142 C303,138 310,134 320,130 C325,127 332,124 342,121 C347,118 354,116 364,114 C369,112 376,111 386,110 C391,109 398,108 408,108 C413,108 420,109 430,110 C435,111 442,112 452,114 C457,116 464,118 474,121 C479,124 486,127 496,131 C501,135 508,139 518,144 C523,149 530,154 540,160 C545,166 552,172 562,178 C567,184 574,190 584,198 C589,204 596,210 606,218 C611,224 618,230 628,238 C633,244 640,250 650,258 C655,264 662,270 672,278 C677,284 684,290 694,298 C699,304 706,310 716,318 C721,324 728,330 738,338 C743,344 750,350 760,358 C765,364 772,370 782,378 C787,384 794,390 804,398 C809,404 816,410 826,418 C831,424 838,430 848,438 L1440,438 Z" fill="url(#mmid1)"/>
+      <path d="M0,400 C8,385 18,382 28,372 C33,365 43,358 55,348 C60,340 68,333 78,325 C83,318 90,310 100,302 C105,295 112,288 122,280 C127,273 134,266 144,258 C149,252 156,245 166,238 C171,232 178,226 188,220 C193,215 200,208 210,202 C215,197 222,192 232,186 C237,180 244,175 254,170 C259,165 266,160 276,155 C281,150 288,146 298,142 C303,138 310,134 320,130 C325,127 332,124 342,121 C347,118 354,116 364,114 C369,112 376,111 386,110 C391,109 398,108 408,108 C413,108 420,109 430,110 C435,111 442,112 452,114 C457,116 464,118 474,121 C479,124 486,127 496,131 C501,135 508,139 518,144 C523,149 530,154 540,160 C545,166 552,172 562,178 C567,184 574,190 584,198 C589,204 596,210 606,218 C611,224 618,230 628,238 C633,244 640,250 650,258 C655,264 662,270 672,278 C677,284 684,290 694,298 C699,304 706,310 716,318 C721,324 728,330 738,338 C743,344 750,350 760,358 C765,364 772,370 782,378 C787,384 794,390 804,398 C809,404 816,410 826,418 C831,424 838,430 848,438 L0,438 Z" fill="url(#mshadow2)" opacity=".5"/>
+
+      <!-- LAYER 3 — Mid-front, pronounced jagged peaks -->
+      <path d="M0,400 C5,370 12,365 18,352 C22,345 28,335 35,325 C40,318 46,308 54,298 C58,290 64,280 72,270 C76,262 82,252 90,242 C94,234 100,224 108,215 C112,208 118,198 126,190 C130,184 136,176 144,168 C148,162 154,155 162,148 C166,142 172,136 180,130 C184,125 190,120 198,115 C202,110 208,106 216,102 C220,98 226,95 234,92 C238,89 244,87 252,85 C256,83 262,82 270,81 C274,80 280,80 288,80 C292,80 298,81 306,83 C310,85 316,87 324,90 C328,93 334,96 342,100 C346,104 352,108 360,113 C364,118 370,123 378,129 C382,135 388,141 396,148 C400,155 406,162 414,170 C418,178 424,186 432,195 C436,204 442,213 450,222 C454,231 460,240 468,250 C472,260 478,270 486,280 C490,290 496,300 504,310 C508,320 514,330 522,340 C526,350 532,360 540,370 C544,380 550,390 558,400 L1440,400 Z" fill="url(#mmid2)"/>
+      <path d="M0,400 C5,370 12,365 18,352 C22,345 28,335 35,325 C40,318 46,308 54,298 C58,290 64,280 72,270 C76,262 82,252 90,242 C94,234 100,224 108,215 C112,208 118,198 126,190 C130,184 136,176 144,168 C148,162 154,155 162,148 C166,142 172,136 180,130 C184,125 190,120 198,115 C202,110 208,106 216,102 C220,98 226,95 234,92 C238,89 244,87 252,85 C256,83 262,82 270,81 C274,80 280,80 288,80 C292,80 298,81 306,83 C310,85 316,87 324,90 C328,93 334,96 342,100 C346,104 352,108 360,113 C364,118 370,123 378,129 C382,135 388,141 396,148 C400,155 406,162 414,170 C418,178 424,186 432,195 C436,204 442,213 450,222 C454,231 460,240 468,250 C472,260 478,270 486,280 C490,290 496,300 504,310 C508,320 514,330 522,340 C526,350 532,360 540,370 C544,380 550,390 558,400 L0,400 Z" fill="url(#mshadow2)" opacity=".55"/>
+
+      <!-- rim light on L3 left slopes -->
+      <g opacity=".12">
+        <path d="M30,355 C40,345 50,330 65,315 C75,300 85,290 98,275" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+        <path d="M200,175 C210,165 220,155 235,148 C245,141 255,135 270,128" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+        <path d="M410,78 C420,76 430,75 445,76 C455,77 465,80 480,84" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+      </g>
+
+      <!-- LAYER 4 — Foreground, highly detailed jagged peaks, asymmetric and realistic -->
+      <!-- Main body — 31 peaks with tight bezier control points for razor-sharp ridges -->
+      <path d="M0,400 C5,398 15,375 22,365 C28,368 38,390 45,392 C50,388 56,365 62,355 C68,358 75,378 82,380 C88,376 95,345 102,325 C108,330 115,365 122,370 C128,366 135,330 142,310 C148,315 155,355 162,360 C168,356 176,318 183,295 C190,302 198,355 205,360 C212,355 219,320 226,300 C232,306 240,355 248,360 C254,355 261,320 268,295 C274,300 282,350 290,355 C296,350 303,312 310,285 C316,292 324,350 332,355 C338,350 345,315 352,290 C358,296 366,350 374,355 C380,350 387,310 394,280 C400,286 408,350 416,355 C422,350 429,315 436,290 C442,296 450,350 458,355 C464,350 471,315 478,290 C484,296 492,350 500,355 C506,350 513,312 520,285 C526,292 534,350 542,355 C548,350 555,315 562,290 C568,296 576,350 584,355 C590,350 597,312 604,285 C610,292 618,350 626,355 C632,350 639,315 646,290 C652,296 660,350 668,355 C674,350 681,312 688,285 C694,292 702,350 710,355 C716,350 723,315 730,290 C736,296 744,350 752,355 C758,350 765,312 772,285 C778,292 786,350 794,355 C800,350 807,310 814,280 C820,286 828,350 836,355 C842,350 849,315 856,290 C862,296 870,350 878,355 C884,350 891,315 898,290 C904,296 912,350 920,355 C926,350 933,312 940,285 C946,292 954,350 962,355 C968,350 975,315 982,290 C988,296 996,350 1004,355 C1010,350 1017,312 1024,285 C1030,292 1038,350 1046,355 C1052,350 1059,315 1066,290 C1072,296 1080,350 1088,355 C1094,350 1101,312 1108,285 C1114,292 1122,350 1130,355 C1136,350 1143,315 1150,290 C1156,296 1164,350 1172,355 C1178,350 1185,312 1192,285 C1198,292 1206,350 1214,355 C1220,350 1227,315 1234,290 C1240,296 1248,350 1256,355 C1262,350 1269,312 1276,285 C1282,292 1290,350 1298,355 C1304,350 1311,315 1318,290 C1324,296 1332,350 1340,355 C1346,350 1353,312 1360,285 C1366,292 1374,350 1382,355 C1388,350 1395,315 1402,290 C1408,296 1416,348 1424,338 C1430,342 1436,360 1440,365 L1440,400 Z" fill="url(#mfg)"/>
+      <!-- Shadow side — right-facing slopes in deep moss-green -->
+      <path d="M0,400 C5,398 15,375 22,365 C28,368 38,390 45,392 C50,388 56,365 62,355 C68,358 75,378 82,380 C88,376 95,345 102,325 C108,330 115,365 122,370 C128,366 135,330 142,310 C148,315 155,355 162,360 C168,356 176,318 183,295 C190,302 198,355 205,360 C212,355 219,320 226,300 C232,306 240,355 248,360 C254,355 261,320 268,295 C274,300 282,350 290,355 C296,350 303,312 310,285 C316,292 324,350 332,355 C338,350 345,315 352,290 C358,296 366,350 374,355 C380,350 387,310 394,280 C400,286 408,350 416,355 C422,350 429,315 436,290 C442,296 450,350 458,355 C464,350 471,315 478,290 C484,296 492,350 500,355 C506,350 513,312 520,285 C526,292 534,350 542,355 C548,350 555,315 562,290 C568,296 576,350 584,355 C590,350 597,312 604,285 C610,292 618,350 626,355 C632,350 639,315 646,290 C652,296 660,350 668,355 C674,350 681,312 688,285 C694,292 702,350 710,355 C716,350 723,315 730,290 C736,296 744,350 752,355 C758,350 765,312 772,285 C778,292 786,350 794,355 C800,350 807,310 814,280 C820,286 828,350 836,355 C842,350 849,315 856,290 C862,296 870,350 878,355 C884,350 891,315 898,290 C904,296 912,350 920,355 C926,350 933,312 940,285 C946,292 954,350 962,355 C968,350 975,315 982,290 C988,296 996,350 1004,355 C1010,350 1017,312 1024,285 C1030,292 1038,350 1046,355 C1052,350 1059,315 1066,290 C1072,296 1080,350 1088,355 C1094,350 1101,312 1108,285 C1114,292 1122,350 1130,355 C1136,350 1143,315 1150,290 C1156,296 1164,350 1172,355 C1178,350 1185,312 1192,285 C1198,292 1206,350 1214,355 C1220,350 1227,315 1234,290 C1240,296 1248,350 1256,355 C1262,350 1269,312 1276,285 C1282,292 1290,350 1298,355 C1304,350 1311,315 1318,290 C1324,296 1332,350 1340,355 C1346,350 1353,312 1360,285 C1366,292 1374,350 1382,355 C1388,350 1395,315 1402,290 C1408,296 1416,348 1424,338 C1430,342 1436,360 1440,365 L0,365 Z" fill="url(#mshadow)"/>
+      <!-- Deep shadow pockets in the steepest east-facing couloirs -->
+      <path d="M620,355 C632,350 639,315 646,290 C652,296 660,350 668,355 Z" fill="url(#mshadow)" opacity=".8"/>
+      <path d="M1140,355 C1148,350 1155,315 1162,290 C1168,296 1176,350 1184,355 Z" fill="url(#mshadow)" opacity=".8"/>
+      <path d="M1340,355 C1346,350 1353,312 1360,285 C1366,292 1374,350 1382,355 Z" fill="url(#mshadow)" opacity=".8"/>
+
+      <!-- SNOWCAP PEAK 1 — left prominent peak (x=183) -->
+      <path d="M170,310 C176,318 180,305 183,295 C186,290 190,296 194,302 C198,305 195,310 190,312 C185,314 178,312 172,310 Z" fill="url(#snowhl)"/>
+      <path d="M183,295 C186,290 190,296 194,302 C192,305 188,306 183,304 Z" fill="rgba(255,255,255,.1)"/>
+
+      <!-- SNOWCAP PEAK 2 — center-left dominant (x=310) -->
+      <path d="M296,300 C303,312 308,295 310,285 C312,280 316,285 320,292 C324,296 320,302 314,304 C308,306 300,304 296,300 Z" fill="url(#snowhl)"/>
+      <path d="M310,285 C312,280 316,285 320,292 C316,294 312,294 310,290 Z" fill="rgba(255,255,255,.12)"/>
+
+      <!-- SNOWCAP PEAK 3 — center tallest (x=520) -->
+      <path d="M506,300 C513,312 518,292 520,285 C522,280 526,285 530,292 C534,296 530,302 524,304 C518,306 510,304 506,300 Z" fill="url(#snowhl)"/>
+      <path d="M520,285 C522,280 526,285 530,292 C526,294 522,294 520,290 Z" fill="rgba(255,255,255,.12)"/>
+
+      <!-- SNOWCAP PEAK 4 — right of center tall (x=688) -->
+      <path d="M674,296 C681,305 686,292 688,285 C690,280 694,285 698,292 C702,296 698,302 692,304 C686,306 678,304 674,296 Z" fill="url(#snowhl)"/>
+      <path d="M688,285 C690,280 694,285 698,292 C694,294 690,294 688,290 Z" fill="rgba(255,255,255,.12)"/>
+
+      <!-- SNOWCAP PEAK 5 — right section tallest (x=814) -->
+      <path d="M800,298 C807,308 812,288 814,280 C816,275 820,280 824,288 C828,292 824,298 818,300 C812,302 804,300 800,298 Z" fill="url(#snowhl)"/>
+      <path d="M814,280 C816,275 820,280 824,288 C820,290 816,290 814,286 Z" fill="rgba(255,255,255,.12)"/>
+
+      <!-- GLACIER STREAKS — vertical snow stripes on steep shadow faces -->
+      <g fill="rgba(255,255,255,.04)">
+        <path d="M226,300 C232,290 238,278 240,265 C242,252 240,245 235,242 C232,240 230,244 229,252 C228,260 228,272 227,285 C226,295 225,300 226,300 Z"/>
+        <path d="M478,290 C484,280 490,268 492,255 C494,242 492,235 487,232 C484,230 482,234 481,242 C480,250 480,262 479,275 C478,285 477,290 478,290 Z"/>
+        <path d="M856,290 C862,280 868,268 870,255 C872,242 870,235 865,232 C862,230 860,234 859,242 C858,250 858,262 857,275 C856,285 855,290 856,290 Z"/>
+        <path d="M1108,285 C1114,275 1120,262 1122,248 C1124,234 1122,228 1117,225 C1114,223 1112,228 1111,236 C1110,244 1110,258 1109,272 C1108,282 1107,285 1108,285 Z"/>
+      </g>
+
+      <!-- RIM LIGHT — sun from upper left, catching west-facing ridges -->
+      <path d="M0,400 C5,398 15,375 22,365 C28,368 38,390 45,392 C50,388 56,365 62,355 C68,358 75,378 82,380 C88,376 95,345 102,325" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="2.5" opacity=".6"/>
+      <path d="M183,295 C190,302 198,355 205,360" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1.5" opacity=".4"/>
+      <path d="M310,285 C316,292 324,350 332,355" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1.5" opacity=".4"/>
+      <path d="M520,285 C526,292 534,350 542,355" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1.5" opacity=".4"/>
+
+      <!-- MIST ZONES — atmospheric depth between ridges -->
+      <rect x="0" y="260" width="1440" height="140" fill="url(#mistglow)" pointer-events="none"/>
+      <rect x="0" y="300" width="1440" height="100" fill="url(#mistglow)" opacity=".6" pointer-events="none"/>
     </svg>
   </div>
 
@@ -202,125 +289,28 @@
 <section class="section section--topo section--decorated" id="nytt">
   <!-- MOUNTAIN BACKGROUND -->
   <div class="mountain-bg" aria-hidden="true">
-    <svg viewBox="0 0 1440 200" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <!-- Layer 1 - farthest -->
-      <path d="M0 200 L100 150 L200 180 L350 100 L500 160 L650 80 L800 150 L950 110 L1100 60 L1250 130 L1400 90 L1440 100 L1440 200 Z" fill="var(--g8)" opacity=".04"/>
-      <path d="M1100 60 L1080 78 L1090 88 L1100 82 L1110 88 L1120 78 L1100 60 Z" fill="var(--g8)" opacity=".15"/>
-      <path d="M650 80 L635 98 L645 108 L650 102 L655 108 L665 98 L650 80 Z" fill="var(--g8)" opacity=".15"/>
-      <path d="M350 100 L335 115 L343 123 L350 118 L357 123 L365 115 L350 100 Z" fill="var(--g8)" opacity=".12"/>
-      <!-- Layer 2 - mid -->
-      <path d="M0 200 L80 160 L180 190 L300 120 L420 170 L550 100 L680 160 L800 130 L920 80 L1050 140 L1200 110 L1350 160 L1440 140 L1440 200 Z" fill="var(--g7)" opacity=".06" stroke="var(--g6)" stroke-width=".3"/>
-      <path d="M920 80 L902 98 L910 108 L920 102 L930 108 L938 98 L920 80 Z" fill="var(--g7)" opacity=".2"/>
-      <path d="M550 100 L535 118 L543 128 L550 122 L557 128 L565 118 L550 100 Z" fill="var(--g7)" opacity=".18"/>
-      <path d="M300 120 L285 135 L293 143 L300 138 L307 143 L315 135 L300 120 Z" fill="var(--g7)" opacity=".15"/>
-      <!-- Layer 3 - front foreground -->
-      <path d="M0 200 L60 175 L140 195 L260 135 L360 180 L480 115 L600 165 L720 140 L840 95 L960 150 L1080 120 L1220 165 L1320 130 L1440 155 L1440 200 Z" fill="var(--g6)" opacity=".08" stroke="var(--g5)" stroke-width=".4"/>
-      <path d="M840 95 L825 113 L832 123 L840 117 L848 123 L855 113 L840 95 Z" fill="var(--g6)" opacity=".25"/>
-      <path d="M480 115 L467 132 L474 140 L480 135 L486 140 L493 132 L480 115 Z" fill="var(--g6)" opacity=".22"/>
-      <path d="M260 135 L247 150 L254 158 L260 153 L266 158 L273 150 L260 135 Z" fill="var(--g6)" opacity=".18"/>
-      <!-- Ridge detail lines -->
-      <path d="M100 150 L150 168 L200 180 L250 160 L320 100 L380 130 L440 160" fill="none" stroke="var(--g7)" stroke-width=".3" opacity=".06"/>
-      <path d="M80 160 L140 175 L180 190 L240 155 L300 120 L360 150 L420 170" fill="none" stroke="var(--g6)" stroke-width=".3" opacity=".08"/>
-      <path d="M60 175 L120 185 L180 195 L230 165 L290 145 L350 180" fill="none" stroke="var(--g5)" stroke-width=".25" opacity=".07"/>
+    <svg viewBox="0 0 1440 240" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="65%" stop-color="var(--g8)" stop-opacity="0"/>
-          <stop offset="100%" stop-color="var(--g8)" stop-opacity=".12"/>
+        <linearGradient id="sec-bg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--g8)" stop-opacity=".06"/>
+          <stop offset="100%" stop-color="var(--g8)" stop-opacity=".02"/>
+        </linearGradient>
+        <linearGradient id="sec-mid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--g7)" stop-opacity=".12"/>
+          <stop offset="100%" stop-color="var(--g6)" stop-opacity=".03"/>
+        </linearGradient>
+        <linearGradient id="sec-fg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--g6)" stop-opacity=".18"/>
+          <stop offset="100%" stop-color="var(--g5)" stop-opacity=".04"/>
         </linearGradient>
       </defs>
-      <rect width="1440" height="200" fill="url(#mist)" pointer-events="none"/>
+      <path d="M0,240 C30,218 60,205 90,198 C100,192 110,185 130,180 C140,176 150,170 170,165 C180,160 190,155 210,150 C220,146 230,140 250,136 C260,132 270,128 290,124 C300,120 310,118 330,115 C340,112 350,110 370,108 C380,106 390,105 410,104 C420,103 430,102 450,102 C460,102 470,103 490,105 C500,107 510,110 530,114 C540,118 550,122 570,128 C580,132 590,138 610,144 C620,150 630,155 650,162 C660,168 670,174 690,180 C700,185 710,190 730,196 C740,200 750,205 770,210 C780,214 790,218 810,222 C820,225 830,228 850,232 C860,234 870,236 890,238 C900,239 910,240 930,240 L1440,240 Z" fill="url(#sec-bg)"/>
+      <path d="M0,240 C20,195 50,178 80,170 C110,162 130,156 160,148 C190,140 210,134 240,128 C270,122 290,118 320,114 C350,110 370,108 400,106 C430,104 450,104 480,106 C510,108 530,112 560,118 C590,124 610,130 640,138 C670,146 690,154 720,162 C750,170 770,178 800,186 C830,194 850,200 880,208 C910,216 930,224 960,232 C990,240 1010,240 1040,240 L1440,240 Z" fill="url(#sec-mid)"/>
+      <path d="M0,240 C15,172 40,155 70,145 C100,135 120,128 150,118 C180,108 200,102 230,94 C260,86 280,82 310,78 C340,74 360,72 390,72 C420,72 440,76 470,82 C500,88 520,96 550,106 C580,116 600,128 630,142 C660,156 680,168 710,182 C740,196 760,208 790,220 C820,232 840,240 870,240 L1440,240 Z" fill="url(#sec-fg)"/>
+      <path d="M140,150 C148,146 155,148 158,145 C155,155 148,160 140,158 Z" fill="var(--g8)" opacity=".15"/>
+      <path d="M490,108 C498,104 505,106 508,102 C505,112 498,118 490,115 Z" fill="var(--g8)" opacity=".18"/>
+      <path d="M860,78 C868,74 875,76 878,72 C875,82 868,88 860,85 Z" fill="var(--g8)" opacity=".14"/>
     </svg>
-  </div>
-  <!-- FOREST BACKGROUND -->
-  <div class="forest-bg" aria-hidden="true">
-    <svg class="forest" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <path id="p" d="M0 0 L-5 16 L0 16 L-9 32 L0 32 L-13 48 L0 48 L-16 64 L0 64 L-18 80 L18 80 L0 64 L16 64 L0 48 L13 48 L0 32 L9 32 L0 16 L5 16 Z"/>
-        <path id="s" d="M0 0 L-4 20 L0 20 L-7 40 L0 40 L-10 58 L0 58 L-12 72 L0 72 L-14 80 L14 80 L0 72 L12 72 L0 58 L10 58 L0 40 L7 40 L0 20 L4 20 Z"/>
-        <path id="r" d="M0 80 L-4 80 L-4 68 Q-18 52 -18 32 Q-18 10 0 4 Q18 10 18 32 Q18 52 4 68 L4 80 Z"/>
-      </defs>
-      <!-- BACKGROUND -->
-      <g fill="var(--g7)" opacity=".04">
-        <use href="#s" transform="translate(40, 420) scale(.4)"/>
-        <use href="#r" transform="translate(100, 420) scale(.35)"/>
-        <use href="#p" transform="translate(160, 420) scale(.45)"/>
-        <use href="#s" transform="translate(220, 420) scale(.4)"/>
-        <use href="#r" transform="translate(280, 420) scale(.38)"/>
-        <use href="#p" transform="translate(340, 420) scale(.42)"/>
-        <use href="#s" transform="translate(400, 420) scale(.4)"/>
-        <use href="#r" transform="translate(460, 420) scale(.35)"/>
-        <use href="#p" transform="translate(520, 420) scale(.45)"/>
-        <use href="#s" transform="translate(580, 420) scale(.4)"/>
-        <use href="#r" transform="translate(640, 420) scale(.38)"/>
-        <use href="#p" transform="translate(700, 420) scale(.42)"/>
-        <use href="#s" transform="translate(760, 420) scale(.4)"/>
-        <use href="#r" transform="translate(820, 420) scale(.35)"/>
-        <use href="#p" transform="translate(880, 420) scale(.45)"/>
-        <use href="#s" transform="translate(940, 420) scale(.4)"/>
-        <use href="#r" transform="translate(1000, 420) scale(.38)"/>
-        <use href="#p" transform="translate(1060, 420) scale(.42)"/>
-        <use href="#s" transform="translate(1120, 420) scale(.4)"/>
-        <use href="#r" transform="translate(1180, 420) scale(.35)"/>
-        <use href="#p" transform="translate(1240, 420) scale(.45)"/>
-        <use href="#s" transform="translate(1300, 420) scale(.4)"/>
-        <use href="#r" transform="translate(1360, 420) scale(.38)"/>
-        <use href="#p" transform="translate(1420, 420) scale(.42)"/>
-      </g>
-      <!-- MIDGROUND -->
-      <g fill="var(--g8)" opacity=".08">
-        <use href="#p" transform="translate(60, 420) scale(.65)"/>
-        <use href="#s" transform="translate(140, 420) scale(.6)"/>
-        <use href="#r" transform="translate(220, 420) scale(.55)"/>
-        <use href="#p" transform="translate(300, 420) scale(.7)"/>
-        <use href="#s" transform="translate(380, 420) scale(.6)"/>
-        <use href="#r" transform="translate(460, 420) scale(.55)"/>
-        <use href="#p" transform="translate(540, 420) scale(.65)"/>
-        <use href="#s" transform="translate(620, 420) scale(.6)"/>
-        <use href="#p" transform="translate(700, 420) scale(.7)"/>
-        <use href="#r" transform="translate(780, 420) scale(.55)"/>
-        <use href="#s" transform="translate(860, 420) scale(.6)"/>
-        <use href="#p" transform="translate(940, 420) scale(.65)"/>
-        <use href="#s" transform="translate(1020, 420) scale(.6)"/>
-        <use href="#r" transform="translate(1100, 420) scale(.55)"/>
-        <use href="#p" transform="translate(1180, 420) scale(.7)"/>
-        <use href="#s" transform="translate(1260, 420) scale(.6)"/>
-        <use href="#r" transform="translate(1340, 420) scale(.55)"/>
-        <use href="#p" transform="translate(1420, 420) scale(.65)"/>
-      </g>
-      <!-- FOREGROUND -->
-      <g fill="var(--g8)" opacity=".14">
-        <use href="#p" transform="translate(80, 420) scale(.95)"/>
-        <use href="#s" transform="translate(190, 420) scale(.85)"/>
-        <use href="#r" transform="translate(310, 420) scale(.8)"/>
-        <use href="#p" transform="translate(440, 420) scale(.9)"/>
-        <use href="#s" transform="translate(570, 420) scale(.88)"/>
-        <use href="#r" transform="translate(700, 420) scale(.82)"/>
-        <use href="#p" transform="translate(830, 420) scale(.95)"/>
-        <use href="#s" transform="translate(960, 420) scale(.85)"/>
-        <use href="#r" transform="translate(1090, 420) scale(.8)"/>
-        <use href="#p" transform="translate(1220, 420) scale(.9)"/>
-        <use href="#s" transform="translate(1350, 420) scale(.88)"/>
-      </g>
-    </svg>
-  </div>
-  <!-- FALLING LEAVES -->
-  <div class="leaves" aria-hidden="true">
-    <svg class="leaf leaf--1" viewBox="0 0 30 34" xmlns="http://www.w3.org/2000/svg"><path d="M15 34 L12 26 L4 28 L8 20 L0 16 L8 12 L4 4 L12 8 L15 0 L18 8 L26 4 L22 12 L30 16 L22 20 L26 28 L18 26 Z" fill="#6b8f62" opacity=".45"/><path d="M15 0 L15 34" stroke="#4a6b42" stroke-width=".8" fill="none" opacity=".6"/><path d="M15 8 L10 11 M15 8 L20 11 M15 16 L9 18 M15 16 L21 18 M15 24 L11 26 M15 24 L19 26" stroke="#4a6b42" stroke-width=".4" fill="none" opacity=".4"/></svg>
-    <svg class="leaf leaf--2" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg"><path d="M14 32 Q6 28 4 22 Q0 18 3 14 Q0 10 5 7 Q2 4 8 2 Q6 0 14 0 Q22 0 20 2 Q26 4 23 7 Q28 10 25 14 Q28 18 24 22 Q22 28 14 32Z" fill="#b8860b" opacity=".4"/><path d="M14 0 L14 32" stroke="#8b6508" stroke-width=".8" fill="none" opacity=".6"/><path d="M14 8 L7 11 M14 8 L21 11 M14 16 L8 19 M14 16 L20 19 M14 24 L9 26 M14 24 L19 26" stroke="#8b6508" stroke-width=".4" fill="none" opacity=".4"/></svg>
-    <svg class="leaf leaf--3" viewBox="0 0 24 30" xmlns="http://www.w3.org/2000/svg"><path d="M12 30 Q4 24 2 16 Q0 8 12 0 Q24 8 22 16 Q20 24 12 30Z" fill="#8fbc8f" opacity=".4"/><path d="M12 0 L12 30" stroke="#6b9b6b" stroke-width=".8" fill="none" opacity=".6"/><path d="M12 8 L6 11 M12 8 L18 11 M12 16 L7 19 M12 16 L17 19" stroke="#6b9b6b" stroke-width=".4" fill="none" opacity=".4"/></svg>
-    <svg class="leaf leaf--4" viewBox="0 0 30 34" xmlns="http://www.w3.org/2000/svg"><path d="M15 34 L12 26 L4 28 L8 20 L0 16 L8 12 L4 4 L12 8 L15 0 L18 8 L26 4 L22 12 L30 16 L22 20 L26 28 L18 26 Z" fill="#c8a94a" opacity=".45"/><path d="M15 0 L15 34" stroke="#a88a2a" stroke-width=".8" fill="none" opacity=".6"/><path d="M15 8 L10 11 M15 8 L20 11 M15 16 L9 18 M15 16 L21 18" stroke="#a88a2a" stroke-width=".4" fill="none" opacity=".4"/></svg>
-    <svg class="leaf leaf--5" viewBox="0 0 22 26" xmlns="http://www.w3.org/2000/svg"><path d="M11 26 Q5 22 3 15 Q1 8 11 0 Q21 8 19 15 Q17 22 11 26Z" fill="#5a7a52" opacity=".35"/><path d="M11 0 L11 26" stroke="#3a5a32" stroke-width=".7" fill="none" opacity=".5"/><path d="M11 7 L6 10 M11 7 L16 10 M11 14 L7 16 M11 14 L15 16" stroke="#3a5a32" stroke-width=".3" fill="none" opacity=".35"/></svg>
-    <svg class="leaf leaf--6" viewBox="0 0 26 28" xmlns="http://www.w3.org/2000/svg"><path d="M13 28 Q7 24 4 18 Q1 12 4 7 Q1 3 13 0 Q25 3 22 7 Q25 12 22 18 Q19 24 13 28Z" fill="#d4a017" opacity=".4"/><path d="M13 0 L13 28" stroke="#b4800a" stroke-width=".7" fill="none" opacity=".5"/><path d="M13 7 L7 10 M13 7 L19 10 M13 16 L8 18 M13 16 L18 18" stroke="#b4800a" stroke-width=".3" fill="none" opacity=".35"/></svg>
-    <svg class="leaf leaf--7" viewBox="0 0 30 34" xmlns="http://www.w3.org/2000/svg"><path d="M15 34 L12 26 L4 28 L8 20 L0 16 L8 12 L4 4 L12 8 L15 0 L18 8 L26 4 L22 12 L30 16 L22 20 L26 28 L18 26 Z" fill="#7daa7d" opacity=".35"/><path d="M15 0 L15 34" stroke="#5d8a5d" stroke-width=".8" fill="none" opacity=".5"/><path d="M15 8 L10 11 M15 8 L20 11 M15 16 L9 18 M15 16 L21 18" stroke="#5d8a5d" stroke-width=".4" fill="none" opacity=".35"/></svg>
-    <svg class="leaf leaf--8" viewBox="0 0 24 30" xmlns="http://www.w3.org/2000/svg"><path d="M12 30 Q4 24 2 16 Q0 8 12 0 Q24 8 22 16 Q20 24 12 30Z" fill="#c8a94a" opacity=".35"/><path d="M12 0 L12 30" stroke="#a88a2a" stroke-width=".8" fill="none" opacity=".5"/><path d="M12 8 L6 11 M12 8 L18 11 M12 16 L7 19 M12 16 L17 19" stroke="#a88a2a" stroke-width=".4" fill="none" opacity=".35"/></svg>
-  </div>
-  <!-- SNOWFALL -->
-  <div class="snow" aria-hidden="true">
-    <i class="snow__f s1"></i><i class="snow__f s2"></i><i class="snow__f s3"></i>
-    <i class="snow__f s4"></i><i class="snow__f s5"></i><i class="snow__f s6"></i>
-    <i class="snow__f s7"></i><i class="snow__f s8"></i><i class="snow__f s9"></i>
-    <i class="snow__f s10"></i><i class="snow__f s11"></i><i class="snow__f s12"></i>
-    <i class="snow__f s13"></i>
   </div>
   <div class="container">
     <div class="section__header">
@@ -337,6 +327,7 @@
         </select>
       </div>
     </div>
+    <div class="filters-wrap">
     <div class="filters" id="filters-nytt">
       <select class="filter-select" id="type-nytt">
         <option value="alle" data-i18n="filter.type">Type: Alle</option>
@@ -378,6 +369,7 @@
         <option value="One size">One size</option>
       </select>
     </div>
+    </div>
     <p class="result-count" id="count-nytt"></p>
     <div class="product-grid" id="grid-nytt"></div>
   </div>
@@ -387,113 +379,28 @@
 <section class="section section--alt section--dots section--depth section--decorated" id="brukt">
   <!-- MOUNTAIN BACKGROUND -->
   <div class="mountain-bg" aria-hidden="true">
-    <svg viewBox="0 0 1440 200" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 200 L100 150 L200 180 L350 100 L500 160 L650 80 L800 150 L950 110 L1100 60 L1250 130 L1400 90 L1440 100 L1440 200 Z" fill="var(--g8)" opacity=".05"/>
-      <path d="M1100 60 L1080 78 L1090 88 L1100 82 L1110 88 L1120 78 L1100 60 Z" fill="var(--g8)" opacity=".18"/>
-      <path d="M650 80 L635 98 L645 108 L650 102 L655 108 L665 98 L650 80 Z" fill="var(--g8)" opacity=".18"/>
-      <path d="M350 100 L335 115 L343 123 L350 118 L357 123 L365 115 L350 100 Z" fill="var(--g8)" opacity=".14"/>
-      <path d="M0 200 L80 160 L180 190 L300 120 L420 170 L550 100 L680 160 L800 130 L920 80 L1050 140 L1200 110 L1350 160 L1440 140 L1440 200 Z" fill="var(--g7)" opacity=".08" stroke="var(--g6)" stroke-width=".3"/>
-      <path d="M920 80 L902 98 L910 108 L920 102 L930 108 L938 98 L920 80 Z" fill="var(--g7)" opacity=".25"/>
-      <path d="M550 100 L535 118 L543 128 L550 122 L557 128 L565 118 L550 100 Z" fill="var(--g7)" opacity=".22"/>
-      <path d="M300 120 L285 135 L293 143 L300 138 L307 143 L315 135 L300 120 Z" fill="var(--g7)" opacity=".18"/>
-      <path d="M0 200 L60 175 L140 195 L260 135 L360 180 L480 115 L600 165 L720 140 L840 95 L960 150 L1080 120 L1220 165 L1320 130 L1440 155 L1440 200 Z" fill="var(--g6)" opacity=".1" stroke="var(--g5)" stroke-width=".4"/>
-      <path d="M840 95 L825 113 L832 123 L840 117 L848 123 L855 113 L840 95 Z" fill="var(--g6)" opacity=".3"/>
-      <path d="M480 115 L467 132 L474 140 L480 135 L486 140 L493 132 L480 115 Z" fill="var(--g6)" opacity=".26"/>
-      <path d="M260 135 L247 150 L254 158 L260 153 L266 158 L273 150 L260 135 Z" fill="var(--g6)" opacity=".22"/>
-      <path d="M100 150 L150 168 L200 180 L250 160 L320 100 L380 130 L440 160" fill="none" stroke="var(--g7)" stroke-width=".3" opacity=".08"/>
-      <path d="M80 160 L140 175 L180 190 L240 155 L300 120 L360 150 L420 170" fill="none" stroke="var(--g6)" stroke-width=".3" opacity=".1"/>
-      <path d="M60 175 L120 185 L180 195 L230 165 L290 145 L350 180" fill="none" stroke="var(--g5)" stroke-width=".25" opacity=".08"/>
+    <svg viewBox="0 0 1440 240" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="mist2" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="65%" stop-color="var(--g8)" stop-opacity="0"/>
-          <stop offset="100%" stop-color="var(--g8)" stop-opacity=".15"/>
+        <linearGradient id="sec-bg2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--g8)" stop-opacity=".08"/>
+          <stop offset="100%" stop-color="var(--g8)" stop-opacity=".03"/>
+        </linearGradient>
+        <linearGradient id="sec-mid2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--g7)" stop-opacity=".15"/>
+          <stop offset="100%" stop-color="var(--g6)" stop-opacity=".04"/>
+        </linearGradient>
+        <linearGradient id="sec-fg2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--g6)" stop-opacity=".22"/>
+          <stop offset="100%" stop-color="var(--g5)" stop-opacity=".05"/>
         </linearGradient>
       </defs>
-      <rect width="1440" height="200" fill="url(#mist2)" pointer-events="none"/>
+      <path d="M0,240 C25,215 55,200 85,192 C115,184 135,178 160,170 C185,162 205,158 230,152 C255,146 275,142 300,138 C325,134 345,132 370,130 C395,128 415,128 440,130 C465,132 485,136 510,142 C535,148 555,156 580,166 C605,176 625,186 650,198 C675,210 695,220 720,232 C745,244 765,250 790,250 L1440,250 Z" fill="url(#sec-bg2)"/>
+      <path d="M0,240 C20,195 45,178 70,168 C95,158 115,150 140,140 C165,130 185,124 210,118 C235,112 255,108 280,105 C305,102 325,100 350,100 C375,100 395,103 420,108 C445,113 465,120 490,130 C515,140 535,152 560,166 C585,180 605,194 630,210 C655,226 675,238 700,248 C725,258 745,264 770,264 L1440,264 Z" fill="url(#sec-mid2)"/>
+      <path d="M0,240 C15,172 35,155 60,144 C85,133 105,124 130,114 C155,104 175,98 200,92 C225,86 245,82 270,80 C295,78 315,78 340,82 C365,86 385,92 410,102 C435,112 455,126 480,142 C505,158 525,172 550,188 C575,204 595,218 620,232 C645,246 665,256 690,260 L1440,260 Z" fill="url(#sec-fg2)"/>
+      <path d="M130,118 C138,114 145,116 148,112 C145,122 138,128 130,125 Z" fill="var(--g8)" opacity=".18"/>
+      <path d="M480,132 C488,128 495,130 498,126 C495,136 488,142 480,139 Z" fill="var(--g8)" opacity=".2"/>
+      <path d="M840,88 C848,84 855,86 858,82 C855,92 848,98 840,95 Z" fill="var(--g8)" opacity=".16"/>
     </svg>
-  </div>
-  <!-- FOREST BACKGROUND -->
-  <div class="forest-bg" aria-hidden="true">
-    <svg class="forest" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <path id="p" d="M0 0 L-5 16 L0 16 L-9 32 L0 32 L-13 48 L0 48 L-16 64 L0 64 L-18 80 L18 80 L0 64 L16 64 L0 48 L13 48 L0 32 L9 32 L0 16 L5 16 Z"/>
-        <path id="s" d="M0 0 L-4 20 L0 20 L-7 40 L0 40 L-10 58 L0 58 L-12 72 L0 72 L-14 80 L14 80 L0 72 L12 72 L0 58 L10 58 L0 40 L7 40 L0 20 L4 20 Z"/>
-        <path id="r" d="M0 80 L-4 80 L-4 68 Q-18 52 -18 32 Q-18 10 0 4 Q18 10 18 32 Q18 52 4 68 L4 80 Z"/>
-      </defs>
-      <g fill="var(--g7)" opacity=".06">
-        <use href="#s" transform="translate(40, 420) scale(.4)"/>
-        <use href="#r" transform="translate(100, 420) scale(.35)"/>
-        <use href="#p" transform="translate(160, 420) scale(.45)"/>
-        <use href="#s" transform="translate(220, 420) scale(.4)"/>
-        <use href="#r" transform="translate(280, 420) scale(.38)"/>
-        <use href="#p" transform="translate(340, 420) scale(.42)"/>
-        <use href="#s" transform="translate(400, 420) scale(.4)"/>
-        <use href="#r" transform="translate(460, 420) scale(.35)"/>
-        <use href="#p" transform="translate(520, 420) scale(.45)"/>
-        <use href="#s" transform="translate(580, 420) scale(.4)"/>
-        <use href="#r" transform="translate(640, 420) scale(.38)"/>
-        <use href="#p" transform="translate(700, 420) scale(.42)"/>
-        <use href="#s" transform="translate(760, 420) scale(.4)"/>
-        <use href="#r" transform="translate(820, 420) scale(.35)"/>
-        <use href="#p" transform="translate(880, 420) scale(.45)"/>
-        <use href="#s" transform="translate(940, 420) scale(.4)"/>
-        <use href="#r" transform="translate(1000, 420) scale(.38)"/>
-        <use href="#p" transform="translate(1060, 420) scale(.42)"/>
-        <use href="#s" transform="translate(1120, 420) scale(.4)"/>
-        <use href="#r" transform="translate(1180, 420) scale(.35)"/>
-        <use href="#p" transform="translate(1240, 420) scale(.45)"/>
-        <use href="#s" transform="translate(1300, 420) scale(.4)"/>
-        <use href="#r" transform="translate(1360, 420) scale(.38)"/>
-        <use href="#p" transform="translate(1420, 420) scale(.42)"/>
-      </g>
-      <g fill="var(--g8)" opacity=".12">
-        <use href="#p" transform="translate(60, 420) scale(.65)"/>
-        <use href="#s" transform="translate(140, 420) scale(.6)"/>
-        <use href="#r" transform="translate(220, 420) scale(.55)"/>
-        <use href="#p" transform="translate(300, 420) scale(.7)"/>
-        <use href="#s" transform="translate(380, 420) scale(.6)"/>
-        <use href="#r" transform="translate(460, 420) scale(.55)"/>
-        <use href="#p" transform="translate(540, 420) scale(.65)"/>
-        <use href="#s" transform="translate(620, 420) scale(.6)"/>
-        <use href="#p" transform="translate(700, 420) scale(.7)"/>
-        <use href="#r" transform="translate(780, 420) scale(.55)"/>
-        <use href="#s" transform="translate(860, 420) scale(.6)"/>
-        <use href="#p" transform="translate(940, 420) scale(.65)"/>
-        <use href="#s" transform="translate(1020, 420) scale(.6)"/>
-        <use href="#r" transform="translate(1100, 420) scale(.55)"/>
-        <use href="#p" transform="translate(1180, 420) scale(.7)"/>
-        <use href="#s" transform="translate(1260, 420) scale(.6)"/>
-        <use href="#r" transform="translate(1340, 420) scale(.55)"/>
-        <use href="#p" transform="translate(1420, 420) scale(.65)"/>
-      </g>
-      <g fill="var(--g8)" opacity=".2">
-        <use href="#p" transform="translate(80, 420) scale(.95)"/>
-        <use href="#s" transform="translate(190, 420) scale(.85)"/>
-        <use href="#r" transform="translate(310, 420) scale(.8)"/>
-        <use href="#p" transform="translate(440, 420) scale(.9)"/>
-        <use href="#s" transform="translate(570, 420) scale(.88)"/>
-        <use href="#r" transform="translate(700, 420) scale(.82)"/>
-        <use href="#p" transform="translate(830, 420) scale(.95)"/>
-        <use href="#s" transform="translate(960, 420) scale(.85)"/>
-        <use href="#r" transform="translate(1090, 420) scale(.8)"/>
-        <use href="#p" transform="translate(1220, 420) scale(.9)"/>
-        <use href="#s" transform="translate(1350, 420) scale(.88)"/>
-      </g>
-    </svg>
-  </div>
-  <div class="leaves" aria-hidden="true">
-    <svg class="leaf leaf--9" viewBox="0 0 24 30" xmlns="http://www.w3.org/2000/svg"><path d="M12 30 Q4 24 2 16 Q0 8 12 0 Q24 8 22 16 Q20 24 12 30Z" fill="#6b8f62" opacity=".45"/><path d="M12 0 L12 30" stroke="#4a6b42" stroke-width=".8" fill="none" opacity=".6"/><path d="M12 8 L6 11 M12 8 L18 11 M12 16 L7 19 M12 16 L17 19" stroke="#4a6b42" stroke-width=".4" fill="none" opacity=".4"/></svg>
-    <svg class="leaf leaf--10" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg"><path d="M14 32 Q6 28 4 22 Q0 18 3 14 Q0 10 5 7 Q2 4 8 2 Q6 0 14 0 Q22 0 20 2 Q26 4 23 7 Q28 10 25 14 Q28 18 24 22 Q22 28 14 32Z" fill="#c8a94a" opacity=".4"/><path d="M14 0 L14 32" stroke="#a88a2a" stroke-width=".8" fill="none" opacity=".6"/><path d="M14 8 L7 11 M14 8 L21 11 M14 16 L8 19 M14 16 L20 19 M14 24 L9 26 M14 24 L19 26" stroke="#a88a2a" stroke-width=".4" fill="none" opacity=".4"/></svg>
-    <svg class="leaf leaf--11" viewBox="0 0 30 34" xmlns="http://www.w3.org/2000/svg"><path d="M15 34 L12 26 L4 28 L8 20 L0 16 L8 12 L4 4 L12 8 L15 0 L18 8 L26 4 L22 12 L30 16 L22 20 L26 28 L18 26 Z" fill="#8fbc8f" opacity=".35"/><path d="M15 0 L15 34" stroke="#6b9b6b" stroke-width=".8" fill="none" opacity=".5"/><path d="M15 8 L10 11 M15 8 L20 11 M15 16 L9 18 M15 16 L21 18" stroke="#6b9b6b" stroke-width=".4" fill="none" opacity=".35"/></svg>
-    <svg class="leaf leaf--12" viewBox="0 0 28 32" xmlns="http://www.w3.org/2000/svg"><path d="M14 32 Q6 28 4 22 Q0 18 3 14 Q0 10 5 7 Q2 4 8 2 Q6 0 14 0 Q22 0 20 2 Q26 4 23 7 Q28 10 25 14 Q28 18 24 22 Q22 28 14 32Z" fill="#b8860b" opacity=".4"/><path d="M14 0 L14 32" stroke="#8b6508" stroke-width=".8" fill="none" opacity=".6"/><path d="M14 8 L7 11 M14 8 L21 11 M14 16 L8 19 M14 16 L20 19 M14 24 L9 26 M14 24 L19 26" stroke="#8b6508" stroke-width=".4" fill="none" opacity=".4"/></svg>
-  </div>
-  <!-- SNOWFALL -->
-  <div class="snow" aria-hidden="true">
-    <i class="snow__f s1"></i><i class="snow__f s2"></i><i class="snow__f s3"></i>
-    <i class="snow__f s4"></i><i class="snow__f s5"></i><i class="snow__f s6"></i>
-    <i class="snow__f s7"></i><i class="snow__f s8"></i><i class="snow__f s9"></i>
-    <i class="snow__f s10"></i><i class="snow__f s11"></i><i class="snow__f s12"></i>
-    <i class="snow__f s13"></i>
   </div>
   <div class="container">
     <div class="section__header">
@@ -511,6 +418,7 @@
         </select>
       </div>
     </div>
+    <div class="filters-wrap">
     <div class="filters" id="filters-brukt">
       <select class="filter-select" id="type-brukt">
         <option value="alle" data-i18n="filter.type">Type: Alle</option>
@@ -551,6 +459,7 @@
         <option value="45">45</option>
         <option value="One size">One size</option>
       </select>
+    </div>
     </div>
     <p class="result-count" id="count-brukt"></p>
     <div class="product-grid" id="grid-brukt"></div>
@@ -623,8 +532,8 @@
 <!-- MOUNTAIN DIVIDER -->
 <div class="mountain-divider" aria-hidden="true">
   <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <polyline points="0,80 120,50 240,65 360,30 480,55 600,20 720,45 840,25 960,50 1080,35 1200,55 1320,30 1440,40 1440,0 0,0" fill="var(--g9, #e8f0e6)" stroke="none"/>
-    <polyline points="0,80 140,58 260,70 380,42 500,62 620,32 740,52 860,38 980,56 1100,46 1220,60 1340,42 1440,50 1440,0 0,0" fill="var(--g8, #c8dbc4)" stroke="none" opacity=".6"/>
+    <path d="M0,80 C80,52 160,64 240,38 C320,12 400,44 480,28 C560,12 640,36 720,24 C800,12 880,40 960,30 C1040,20 1120,44 1200,34 C1280,24 1360,48 1440,40 L1440,0 L0,0 Z" fill="var(--g9, #e8f0e6)"/>
+    <path d="M0,80 C100,60 200,68 300,48 C400,28 500,54 600,38 C700,22 800,48 900,36 C1000,24 1100,52 1200,42 C1300,32 1380,56 1440,48 L1440,0 L0,0 Z" fill="var(--g8, #c8dbc4)" opacity=".5"/>
   </svg>
 </div>
 
@@ -758,6 +667,22 @@ document.addEventListener('click', function (e) {
   t = e.target.closest('.hero__card');
   if (t) { var pid = t.getAttribute('data-pid'); if (pid) MO.openProduct(pid); return; }
 });
+
+/* ── View Transitions API ───────────────────────────── */
+(function() {
+  if (!document.startViewTransition) return;
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href]');
+    if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+    var url = new URL(a.href);
+    if (url.origin !== location.origin || url.pathname === location.pathname) return;
+    if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+    e.preventDefault();
+    document.startViewTransition(function() {
+      window.location.href = a.href;
+    });
+  });
+})();
 </script>
 </body>
 </html>

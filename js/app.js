@@ -190,26 +190,29 @@
     var saving = Math.round((1 - p.price / p.oldPrice) * 100);
     var wished = MO.isWished(p.id);
     var condBadge = p.cond ? '<span class="badge badge-' + (p.cond === 'Topptrim' ? 'top' : p.cond === 'Turerfaren' ? 'mid' : 'low') + '">' + p.cond + '</span>' : '';
+    var stockLevel = p.stock > 3 ? 'high' : p.stock <= 1 ? 'low' : 'mid';
     var stockBadge = !p.stock || p.stock <= 1 ? '<span class="badge badge-last">Siste eks.</span>' : p.stock <= 3 ? '<span class="badge badge-stock">Få igjen</span>' : '<span class="badge badge-stock">På lager</span>';
+    var stockBar = p.stock && p.stock <= 8 ? '<div class="stock-bar"><div class="stock-bar__track"><div class="stock-bar__fill stock-bar__fill--' + stockLevel + '" style="width:' + (p.stock / 12 * 100) + '%"></div></div><div class="stock-bar__label"><span>' + (p.stock <= 1 ? 'Siste eksemplar' : p.stock <= 3 ? 'Få igjen' : p.stock + ' på lager') + '</span></div></div>' : '';
     return '<article class="pcard" data-pid="' + p.id + '" tabindex="0">' +
       '<div class="pcard__img" data-cat="' + p.cat + '">' +
       '<div class="pcard__img-inner">' + (p.initials || p.brand.charAt(0)) + '</div>' +
       '<div class="pcard__badges"><span class="badge badge-' + (p.type === 'nytt' ? 'new' : 'used') + '">' + (p.type === 'nytt' ? 'Nytt' : 'Brukt') + '</span>' + condBadge + stockBadge + '</div>' +
       '<button class="pcard__wish' + (wished ? ' active' : '') + '" data-wish="' + p.id + '" aria-label="Favoritt"><svg width="14" height="14" viewBox="0 0 24 24" fill="' + (wished ? '#c0392b' : 'none') + '" stroke="' + (wished ? '#c0392b' : 'currentColor') + '" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>' +
-      '<div class="pcard__quick"><button class="btn btn-white btn-sm btn-full" data-quickadd="' + p.id + '">+ Legg i kurv</button></div>' +
+      '<div class="pcard__quick"><button class="btn btn-white btn-sm btn-full" data-quickadd="' + p.id + '">+ Legg i kurv</button><button class="btn btn-ghost btn-sm btn-full" onclick="event.stopPropagation();MO.openProduct(\'' + p.id + '\')" style="margin-top:4px;font-size:11px">Hurtigvis</button></div>' +
       '</div>' +
       '<div class="pcard__body">' +
       '<p class="pcard__brand">' + p.brand + '</p>' +
       '<h3 class="pcard__name">' + p.name + '</h3>' +
       (p.condDesc ? '<p class="pcard__cond">' + p.condDesc.split('.')[0] + '.</p>' : '') +
-      '<div class="pcard__prices"><span class="pcard__price">' + p.price.toLocaleString('no-NO') + ' kr</span><span class="pcard__old">' + p.oldPrice.toLocaleString('no-NO') + ' kr</span><span class="pcard__save">–' + saving + '%</span></div>' +
+      '<div class="pcard__prices"><span class="pcard__price">' + p.price.toLocaleString('no-NO') + ' kr</span><span class="pcard__old">' + p.oldPrice.toLocaleString('no-NO') + ' kr</span><span class="pcard__save' + (saving >= 40 ? ' pulse' : '') + '">–' + saving + '%</span></div>' +
+      stockBar +
       '</div></article>';
   };
 
-  MO._quickAdd = function (id) {
+  MO._quickAdd = function (id, fromEl) {
     var p = MO.findProduct(id);
     if (!p) return;
-    MO.addToCart(id, p.sizes[Math.floor(p.sizes.length / 2)]);
+    MO.addToCart(id, p.sizes[Math.floor(p.sizes.length / 2)], fromEl);
   };
 
   MO.cart = JSON.parse(localStorage.getItem('mo_cart') || '[]');
@@ -218,7 +221,7 @@
     localStorage.setItem('mo_cart', JSON.stringify(MO.cart));
   };
 
-  MO.addToCart = function (id, size) {
+  MO.addToCart = function (id, size, fromEl) {
     var p = MO.findProduct(id);
     if (!p) return;
     var existing = MO.cart.find(function (i) { return i.id === id && i.size === size; });
@@ -226,7 +229,50 @@
     else MO.cart.push({ id: id, brand: p.brand, name: p.name, price: p.price, size: size, qty: 1, type: p.type });
     MO.saveCart();
     MO.updateCartBadge();
+    MO.bounceCartBadge();
+    if (fromEl) MO.flyToCart(fromEl);
     MO.toast(p.name.split(' ').slice(0, 3).join(' ') + ' lagt i kurven');
+  };
+
+  MO.bounceCartBadge = function () {
+    document.querySelectorAll('.cart-badge').forEach(function (el) {
+      el.classList.remove('bounce');
+      void el.offsetWidth;
+      el.classList.add('bounce');
+    });
+    var mobileBtn = document.querySelector('[data-mnav="cart"]');
+    if (mobileBtn) { mobileBtn.classList.remove('cart-bounce'); void mobileBtn.offsetWidth; mobileBtn.classList.add('cart-bounce'); }
+  };
+
+  MO.flyToCart = function (fromEl) {
+    var rect = fromEl.getBoundingClientRect();
+    var cartEl = document.getElementById('cart-badge-nav') || document.querySelector('[data-mnav="cart"]');
+    if (!cartEl) return;
+    var targetRect = cartEl.getBoundingClientRect();
+    var dot = document.createElement('div');
+    dot.className = 'flying-dot';
+    dot.style.left = (rect.left + rect.width / 2 - 7) + 'px';
+    dot.style.top = (rect.top + rect.height / 2 - 7) + 'px';
+    document.body.appendChild(dot);
+    var dx = targetRect.left + targetRect.width / 2 - rect.left - rect.width / 2;
+    var dy = targetRect.top + targetRect.height / 2 - rect.top - rect.height / 2;
+    dot.style.transition = 'transform .7s cubic-bezier(.25,.46,.45,.94), opacity .6s ease';
+    requestAnimationFrame(function () {
+      dot.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(.15)';
+      dot.style.opacity = '0';
+    });
+    setTimeout(function () { dot.remove(); }, 750);
+  };
+
+  MO.changeQty = function (id, size, delta) {
+    var item = MO.cart.find(function (i) { return i.id === id && i.size === size; });
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) { MO.removeFromCart(id, size); return; }
+    MO.saveCart();
+    MO.updateCartBadge();
+    if (window.location.pathname.indexOf('cart.html') > -1) MO.renderCartPage();
+    else MO.renderCartDrawer();
   };
 
   MO.removeFromCart = function (id, size) {
@@ -441,7 +487,7 @@
     var foot = document.getElementById('cart-drawer-foot');
     if (!body) return;
     if (MO.cart.length === 0) {
-      body.innerHTML = '<div class="drawer__empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><p style="font-weight:500;margin-bottom:5px">Handlekurven er tom</p><p style="font-size:13px">Finn noe du vil ha!</p><a href="index.html" class="btn btn-primary btn-sm" style="margin-top:14px;display:inline-flex">Se produkter</a></div>';
+      body.innerHTML = '<div class="empty-state"><svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="empty-state__path" d="M30,80 L25,35 L95,35 L90,80 Z" stroke="var(--g8)" stroke-width="1.5" fill="rgba(160,184,178,.08)"/><path class="empty-state__path empty-state__path--slow" d="M40,35 L40,25 C40,15 50,10 60,10 C70,10 80,15 80,25 L80,35" stroke="var(--g8)" stroke-width="1.5" fill="none"/><circle cx="55" cy="35" r="3" fill="var(--g8)" class="empty-state__dot"/><circle cx="65" cy="35" r="3" fill="var(--g8)" class="empty-state__dot"/><circle cx="60" cy="45" r="2" fill="var(--g8)" class="empty-state__dot"/><path class="empty-state__hiker" d="M60,55 L60,65 M60,60 L55,58 M60,60 L65,58 M60,65 L55,70 M60,65 L65,70" stroke="var(--g8)" stroke-width="1.5" stroke-linecap="round"/></svg><p style="font-weight:500;margin-bottom:5px;color:var(--text)">Handlekurven er tom</p><p style="font-size:13px;color:var(--text-4)">Finn noe du vil ha!</p><a href="index.html" class="btn btn-primary btn-sm" style="margin-top:14px;display:inline-flex">Se produkter</a></div>';
       if (foot) foot.style.display = 'none';
       return;
     }
@@ -514,6 +560,52 @@
     }
   };
 
+  MO.init3DTilt = function () {
+    if (!('ontouchstart' in window)) {
+      document.addEventListener('mousemove', function (e) {
+        var cards = document.querySelectorAll('.pcard:not(.tilt-active)');
+        cards.forEach(function (c) {
+          var r = c.getBoundingClientRect();
+          if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) {
+            c.classList.add('tilt-active');
+            var x = (e.clientX - r.left) / r.width - .5;
+            var y = (e.clientY - r.top) / r.height - .5;
+            c.style.transform = 'perspective(600px) rotateY(' + (x * 8) + 'deg) rotateX(' + (-y * 8) + 'deg)';
+            var img = c.querySelector('.pcard__img-inner');
+            if (img) img.style.transform = 'translateX(' + (-x * 6) + 'px) translateY(' + (-y * 6) + 'px)';
+          } else if (c.classList.contains('tilt-active')) {
+            c.classList.remove('tilt-active');
+            c.style.transform = '';
+            var img = c.querySelector('.pcard__img-inner');
+            if (img) img.style.transform = '';
+          }
+        });
+      }, { passive: true });
+    }
+  };
+
+  MO.initStickyFilter = function () {
+    var wrap = document.querySelector('.filters-wrap');
+    if (!wrap) return;
+    var filterEl = wrap.querySelector('.filters');
+    if (!filterEl) return;
+    var initialTop;
+    var ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          if (initialTop === undefined) initialTop = wrap.getBoundingClientRect().top;
+          var scrollY = window.scrollY || window.pageYOffset;
+          if (scrollY > initialTop + 20) { wrap.classList.add('is-sticky'); }
+          else { wrap.classList.remove('is-sticky'); }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  };
+
   MO.modals = {
     om: { title: 'Om M&O', html: '<p style="font-size:15px;line-height:1.82;color:var(--text-3)">M&O ble startet av to venner med en felles lidenskap for fjell og en felles frustrasjon over prisene i de tradisjonelle sportsbutikkene.<br><br>Vi mente at det ikke skulle koste en formue å utruste seg ordentlig. Løsningen ble å kutte alle unødvendige ledd — ingen mellommenn, ingen dyre butikklokaler — og i stedet selge direkte til deg som vil ut på tur.<br><br>I dag tilbyr vi over 400 produkter fra verdens beste merker, både splitter nye og nøye utvalgte brukte plagg. Alt er kontrollert, rengjort og ærlig beskrevet.</p><div style="display:flex;gap:10px;margin-top:20px"><a href="index.html" class="btn btn-primary" onclick="MO.closeModal()">Se sortimentet</a><button class="btn btn-ghost" onclick="MO.closeModal()">Lukk</button></div>' },
     selg: { title: 'Selg klær til oss', html: '<p style="font-size:14px;color:var(--text-3);margin-bottom:18px">Send oss bilder og vi gir deg et tilbud innen 24 timer. Vi tar imot pent brukte plagg fra kjente fjellmerker.</p><div class="form-field"><label class="form-label">Navn</label><input class="form-input" placeholder="Ola Nordmann"/></div><div class="form-field"><label class="form-label">E-postadresse</label><input class="form-input" type="email" placeholder="ola@fjell.no"/></div><div class="form-field"><label class="form-label">Beskriv plaggene</label><textarea class="form-textarea" placeholder="Merke, type, størrelse, stand..."></textarea></div><button class="btn btn-primary btn-full" data-close-toast="Forespørsel sendt! Vi svarer innen 24 timer">Send inn</button>' },
@@ -566,7 +658,7 @@
 
   MO.openWishlistPage = function () {
     if (MO.wishlist.length === 0) {
-      MO.openModal('Favoritter', '<div style="text-align:center;padding:40px 0;color:var(--text-4)"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="margin:0 auto 16px;display:block"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><p style="font-weight:500;margin-bottom:6px;color:var(--text)">Ingen favoritter ennå</p><p style="font-size:13px">Trykk hjertet på produktene du liker</p></div>');
+      MO.openModal('Favoritter', '<div class="empty-state"><svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="empty-state__path" d="M60,85 L25,45 C15,35 15,20 25,15 C35,10 48,12 60,25 C72,12 85,10 95,15 C105,20 105,35 95,45 Z" stroke="var(--g8)" stroke-width="1.5" fill="rgba(160,184,178,.06)"/><circle cx="42" cy="40" r="3" fill="var(--g8)" class="empty-state__dot"/><circle cx="60" cy="35" r="3" fill="var(--g8)" class="empty-state__dot"/><circle cx="78" cy="40" r="3" fill="var(--g8)" class="empty-state__dot"/></svg><p style="font-weight:500;margin-bottom:6px;color:var(--text)">Ingen favoritter ennå</p><p style="font-size:13px;color:var(--text-4)">Trykk hjertet på produktene du liker</p></div>');
       return;
     }
     var items = MO.wishlist.map(function (id) {
@@ -584,6 +676,7 @@
       document.getElementById(gridId).innerHTML = items.map(MO.cardHTML).join('');
       MO.initReveal();
       MO.initProductHash();
+      if (MO.initLazyCards) setTimeout(MO.initLazyCards, 50);
     }, 300);
   };
 
@@ -625,10 +718,24 @@
       if (window.innerWidth <= 768 && !showAll && arr.length > MOBILE_LIMIT) {
         html += '<div class="se-mer-wrap"><button class="btn btn-ghost se-mer-btn" onclick="MO._showMore(\'' + gridId.split('-')[1] + '\')">Se mer (' + (arr.length - MOBILE_LIMIT) + ' flere)</button></div>';
       }
-      document.getElementById(gridId).innerHTML = html;
+      var grid = document.getElementById(gridId);
+      grid.innerHTML = html;
+      /* Stagger entrance animation */
+      var cards = grid.querySelectorAll('.pcard');
+      cards.forEach(function (c, i) {
+        c.classList.add('stagger-enter');
+        c.style.transitionDelay = (i * 50) + 'ms';
+      });
+      requestAnimationFrame(function () {
+        cards.forEach(function (c) { c.classList.add('stagger-in'); });
+        requestAnimationFrame(function () {
+          cards.forEach(function (c) { c.classList.remove('stagger-enter', 'stagger-in'); c.style.transitionDelay = ''; });
+        });
+      });
       var countEl = document.getElementById(countId);
       if (countEl) countEl.innerHTML = 'Viser <strong>' + limited.length + '</strong> av <strong>' + arr.length + '</strong> produkter';
       MO.initReveal();
+      if (MO.initLazyCards) setTimeout(MO.initLazyCards, 50);
     }
 
     function renderNytt() {
@@ -682,6 +789,7 @@
     setCount('grid-nytt', 'count-nytt', nytt);
     setCount('grid-brukt', 'count-brukt', brukt);
     MO.populateBrandFilters();
+    if (MO.initLazyCards) setTimeout(MO.initLazyCards, 50);
   };
 
   MO.initHikerAnimation = function () {
@@ -756,8 +864,11 @@
             return (p.name + p.brand + (p.cond || '') + p.cat).toLowerCase().includes(q);
           });
         };
-        document.getElementById('grid-nytt').innerHTML = fn(allNytt).map(MO.cardHTML).join('');
-        document.getElementById('grid-brukt').innerHTML = fn(allBrukt).map(MO.cardHTML).join('');
+        var nyttResults = fn(allNytt);
+        var bruktResults = fn(allBrukt);
+        var emptySvg = '<div class="empty-state"><svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="45" r="18" stroke="var(--g8)" stroke-width="1.5" fill="rgba(160,184,178,.06)" class="empty-state__path"/><line x1="63" y1="58" x2="80" y2="75" stroke="var(--g8)" stroke-width="1.5" stroke-linecap="round" class="empty-state__path empty-state__path--slow"/><circle cx="35" cy="42" r="2.5" fill="var(--g8)" class="empty-state__dot"/><circle cx="50" cy="36" r="2.5" fill="var(--g8)" class="empty-state__dot"/><circle cx="60" cy="42" r="2.5" fill="var(--g8)" class="empty-state__dot"/></svg><p style="font-weight:500;color:var(--text)">Ingen treff</p><p style="font-size:13px;color:var(--text-4)">Prøv et annet søkeord</p></div>';
+        document.getElementById('grid-nytt').innerHTML = nyttResults.length ? nyttResults.map(MO.cardHTML).join('') : emptySvg;
+        document.getElementById('grid-brukt').innerHTML = bruktResults.length ? bruktResults.map(MO.cardHTML).join('') : emptySvg;
       }, 200);
     });
 
@@ -768,8 +879,8 @@
 
   MO.initEventDelegation = function () {
     document.addEventListener('click', function (e) {
-      var t = e.target.closest('[data-quickadd]');
-      if (t) { e.stopPropagation(); MO._quickAdd(t.getAttribute('data-quickadd')); return; }
+      var       t = e.target.closest('[data-quickadd]');
+      if (t) { e.stopPropagation(); MO._quickAdd(t.getAttribute('data-quickadd'), t); return; }
 
       t = e.target.closest('[data-wish]');
       if (t) { e.stopPropagation(); MO.toggleWish(t.getAttribute('data-wish')); t.classList.toggle('active'); var svg = t.querySelector('svg'); if (svg) { var on = t.classList.contains('active'); svg.setAttribute('fill', on ? '#c0392b' : 'none'); svg.setAttribute('stroke', on ? '#c0392b' : 'currentColor'); } return; }
@@ -781,13 +892,13 @@
       if (t) { try { var d = JSON.parse(t.getAttribute('data-rmcart')); MO.removeFromCart(d.id, d.size); MO.renderCartDrawer(); } catch (e) {} return; }
 
       t = e.target.closest('[data-atcmodal]');
-      if (t) { MO._atcModal(t.getAttribute('data-atcmodal')); return; }
+      if (t) { MO._atcModal(t.getAttribute('data-atcmodal'), t); return; }
 
       t = e.target.closest('[data-wishmodal]');
       if (t) { MO.toggleWish(t.getAttribute('data-wishmodal')); MO.closePdm(); return; }
 
       t = e.target.closest('[data-wishopen]');
-      if (t) { MO.closeModal(); MO.openProduct(t.getAttribute('data-wishopen')); return; }
+      if (t) { MO.closeModal(); window.location.href = 'produkt.html?id=' + t.getAttribute('data-wishopen'); return; }
 
       t = e.target.closest('[data-selsz]');
       if (t) { try { var sd = JSON.parse(t.getAttribute('data-selsz')); t.closest('.pdm__sizes').querySelectorAll('.pdm__sz').forEach(function (b) { b.classList.remove('active'); }); t.classList.add('active'); MO._selectedSize[sd.id] = sd.sz; } catch (e) {} return; }
@@ -798,7 +909,7 @@
       t = e.target.closest('.pcard');
       if (t && !e.target.closest('.pcard__wish') && !e.target.closest('.pcard__quick') && !e.target.closest('.pcard__compare')) {
         var pid = t.getAttribute('data-pid');
-        if (pid) MO.openProduct(pid);
+        if (pid) { e.preventDefault(); window.location.href = 'produkt.html?id=' + pid; }
         return;
       }
 
@@ -815,12 +926,12 @@
     });
   };
 
-  MO._atcModal = function (id) {
+  MO._atcModal = function (id, fromEl) {
     var p = MO.findProduct(id);
     if (!p) return;
     var sz = p.sizes.length === 1 ? p.sizes[0] : MO._selectedSize[id];
     if (!sz) { MO.toast('Velg størrelse først'); return; }
-    MO.addToCart(id, sz);
+    MO.addToCart(id, sz, fromEl);
     MO.closePdm();
   };
 
@@ -1320,6 +1431,143 @@
     MO.openModal('Sammenligning (' + MO.compareList.length + ' produkter)', html);
   };
   MO.initCompare = function () { MO.updateCompareUI(); };
+
+  /* ── LAZY LOAD CARDS (IntersectionObserver) ───────── */
+  MO.initLazyCards = function () {
+    var cards = document.querySelectorAll('.pcard');
+    if (!cards.length) return;
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('card-visible');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: '0px 0px 80px 0px', threshold: 0 });
+      cards.forEach(function (c) { obs.observe(c); });
+    } else {
+      cards.forEach(function (c) { c.classList.add('card-visible'); });
+    }
+  };
+
+  /* ── PWA INSTALL PROMPT ──────────────────────────── */
+  MO._installDeferred = null;
+  MO._installShown = false;
+  MO.initInstallPrompt = function () {
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      MO._installDeferred = e;
+      if (!MO._installShown) {
+        MO._installShown = true;
+        MO.showInstallBanner();
+      }
+    });
+    /* Sjekk om allerede installert */
+    if (window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone) {
+      return;
+    }
+  };
+  MO.showInstallBanner = function () {
+    var banner = document.createElement('div');
+    banner.className = 'install-banner';
+    banner.id = 'install-banner';
+    banner.innerHTML =
+      '<svg class="install-banner__icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+      '<rect width="40" height="40" rx="10" fill="rgba(255,255,255,.15)"/>' +
+      '<path d="M20 12v12m0 0l-4-4m4 4l4-4M14 26h12" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>' +
+      '</svg>' +
+      '<div class="install-banner__text"><strong>M&O</strong> — Installer for lynrask tilgang</div>' +
+      '<button class="install-banner__btn" id="install-btn">Installer</button>' +
+      '<button class="install-banner__close" id="install-close">&times;</button>';
+    document.body.appendChild(banner);
+    requestAnimationFrame(function () { banner.classList.add('show'); });
+
+    document.getElementById('install-btn').addEventListener('click', function () {
+      if (MO._installDeferred) {
+        MO._installDeferred.prompt();
+        MO._installDeferred.userChoice.then(function () {
+          banner.remove();
+          MO._installDeferred = null;
+        });
+      }
+    });
+    document.getElementById('install-close').addEventListener('click', function () {
+      banner.remove();
+    });
+  };
+
+  /* ── AMBIENT TIME-BASED GLOW ──────────────────────── */
+  MO.initAmbientGlow = function () {
+    var hero = document.getElementById('hero');
+    if (!hero) return;
+    var classes = ['ambient-morning', 'ambient-day', 'ambient-evening', 'ambient-night'];
+    function update() {
+      var h = new Date().getHours();
+      hero.classList.remove.apply(hero.classList, classes);
+      if (h >= 4 && h < 10) hero.classList.add('ambient-morning');
+      else if (h >= 10 && h < 17) hero.classList.add('ambient-day');
+      else if (h >= 17 && h < 21) hero.classList.add('ambient-evening');
+      else hero.classList.add('ambient-night');
+    }
+    update();
+    setInterval(update, 60000);
+  };
+
+  /* ── PRODUCT DETAIL PAGE ──────────────────────────── */
+  MO.renderProductPage = function () {
+    var params = new URLSearchParams(window.location.search);
+    var id = params.get('id');
+    if (!id) {
+      document.getElementById('pdp-root').innerHTML = '<div class="empty-state"><p>Produkt ikke funnet</p><a href="index.html" class="btn btn-primary" style="margin-top:16px;display:inline-flex">Tilbake til butikken</a></div>';
+      return;
+    }
+    var p = MO.findProduct(id);
+    if (!p) {
+      document.getElementById('pdp-root').innerHTML = '<div class="empty-state"><p>Produkt ikke funnet</p><a href="index.html" class="btn btn-primary" style="margin-top:16px;display:inline-flex">Tilbake til butikken</a></div>';
+      return;
+    }
+    var saving = Math.round((1 - p.price / p.oldPrice) * 100);
+    var condHtml = p.cond ? '<div class="pdp__cond"><strong>' + p.cond + '</strong> — ' + (p.condDesc || '') + '</div>' : '';
+    var sizesHtml = p.sizes.map(function (s) {
+      return '<button class="pdp__sz" data-selsz=\'' + JSON.stringify({ id: p.id, sz: s }) + '\'>' + s + '</button>';
+    }).join('');
+    var featsHtml = (p.features || []).map(function (f) {
+      return '<div class="pdp__feat"><span class="pdp__feat-dot"></span>' + f + '</div>';
+    }).join('');
+    var stockLevel = p.stock > 3 ? 'På lager' : p.stock <= 1 ? 'Siste eksemplar' : 'Få igjen (' + p.stock + ')';
+
+    document.getElementById('pdp-root').innerHTML =
+      '<a href="javascript:history.back()" class="pdp__back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>Tilbake</a>' +
+      '<div class="pdp__grid">' +
+      '<div class="pdp__gallery"><div style="font-family:var(--serif);font-size:48px;font-weight:600;color:var(--gray-300)">' + (p.initials || p.brand.charAt(0)) + '</div></div>' +
+      '<div class="pdp__info">' +
+      '<p class="pdp__brand">' + p.brand + '</p>' +
+      '<h1 class="pdp__name">' + p.name + '</h1>' +
+      '<div class="pdp__prices"><span class="pdp__price">' + p.price.toLocaleString('no-NO') + ' kr</span><span class="pdp__old">' + p.oldPrice.toLocaleString('no-NO') + ' kr</span><span class="pdp__save">–' + saving + '%</span></div>' +
+      '<div style="font-size:13px;color:var(--text-4)">' + stockLevel + ' · ' + (p.type === 'nytt' ? 'Nytt' : 'Brukt') + '</div>' +
+      condHtml +
+      '<p class="form-label" style="margin:4px 0 8px">Størrelse <button class="pdm__sizeguide" onclick="MO.showSizeGuide()" style="font-size:11px;color:var(--g5);background:none;border:none;cursor:pointer;text-decoration:underline">Hjelp</button></p>' +
+      '<div class="pdp__sizes">' + sizesHtml + '</div>' +
+      '<div class="pdp__ctas">' +
+      '<button class="btn btn-primary btn-full btn-lg" data-atcmodal="' + p.id + '">Legg i handlekurv</button>' +
+      '<button class="btn btn-ghost btn-full" data-wishmodal="' + p.id + '">♡ Legg til favoritter</button>' +
+      '</div>' +
+      (featsHtml ? '<div class="pdp__features">' + featsHtml + '</div>' : '') +
+      '</div></div>';
+    document.title = p.brand + ' — ' + p.name + ' — M&O Fjellklær';
+  };
+
+  /* ── RUN ON DOM READY ────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', function () {
+    if (MO.initLazyCards) MO.initLazyCards();
+    if (MO.initInstallPrompt) MO.initInstallPrompt();
+    if (MO.init3DTilt) setTimeout(MO.init3DTilt, 300);
+    if (MO.initStickyFilter) setTimeout(MO.initStickyFilter, 300);
+    if (MO.initAmbientGlow) MO.initAmbientGlow();
+    if (document.getElementById('pdp-root')) MO.renderProductPage();
+  });
 
   window.MO = MO;
 

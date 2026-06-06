@@ -6,7 +6,11 @@
 <title>Spørsmål & svar — M&O</title>
 <meta name="description" content="Svar på vanlige spørsmål om bestilling, frakt, retur og brukte varer hos M&O."/>
 <meta property="og:title" content="FAQ — M&O"/>
-<meta name="theme-color" content="#2d3a2a"/>
+<meta name="theme-color" content="#2F3E46"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="M&O"/>
+<meta name="mobile-web-app-capable" content="yes"/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 <link rel="manifest" href="manifest.json"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -105,6 +109,11 @@ MO.faqFilter = function(btn, cat) {
 };
 
 MO.renderFaqs(faqs);
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
 </script>
 </body>
 </html>

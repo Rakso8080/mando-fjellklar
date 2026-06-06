@@ -8,7 +8,11 @@
 <meta property="og:title" content="Handlekurv — M&O"/>
 <meta property="og:description" content="Gjør klar bestillingen din hos M&O."/>
 <meta property="og:type" content="website"/>
-<meta name="theme-color" content="#2d3a2a"/>
+<meta name="theme-color" content="#2F3E46"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="M&O"/>
+<meta name="mobile-web-app-capable" content="yes"/>
 <meta name="robots" content="noindex"/>
 <link rel="icon" href="favicon.svg" type="image/svg+xml"/>
 <link rel="manifest" href="manifest.json"/>
@@ -92,6 +96,10 @@ function renderCartPage() {
         '</div></div>';
     }).join('') +
     '</div>' +
+    '<div class="express-pay">' +
+    '<button class="express-pay__btn express-pay__btn--vipps" onclick="MO.checkout()" aria-label="Betal med Vipps"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg> Vipps</button>' +
+    '<button class="express-pay__btn express-pay__btn--apple" onclick="MO.checkout()" aria-label="Betal med Apple Pay"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C5.71 17.7 4.3 13.42 6.43 10.16c1.02-1.55 2.56-2.45 4.2-2.48 1.28-.03 2.49.48 3.35.48.85 0 2.44-.59 3.68-.5.63.01 2.39.25 3.52 1.91-.09.06-2.1 1.23-2.08 3.67.02 2.91 2.55 3.88 2.58 3.9-.02.07-.4 1.38-1.33 2.73l-.1.02zM14.06 5.17c.78-.95 2.08-1.64 3.2-1.67.04 1.23-.34 2.39-1.09 3.24-.75.85-1.81 1.39-2.94 1.32-.05-1.08.35-2.2 1.04-2.89z"/></svg> Apple Pay</button>' +
+    '</div>' +
     '<div class="cart-summary">' +
     '<p class="cart-summary__title">Ordresammendrag</p>' +
     '<div class="cart-summary__row"><span>Subtotal</span><span>' + total.toLocaleString('no-NO') + ' kr</span></div>' +
@@ -174,6 +182,11 @@ MO._startStripeCheckout = function() {
 };
 
 renderCartPage();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
 </script>
 </body>
 </html>

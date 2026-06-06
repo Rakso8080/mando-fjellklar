@@ -113,10 +113,6 @@
   transition: transform .8s ease;
 }
 
-/* Tree sway enhanced by wind */
-.forest-bg.windy svg { animation-duration: 3s; }
-.forest-bg.strong-wind svg { animation-duration: 1.8s; }
-
 /* ── 7. INTERAKTIVT KOMPASS ────────────────────────── */
 .compass-interactive {
   position: fixed; bottom: 24px; right: 24px;

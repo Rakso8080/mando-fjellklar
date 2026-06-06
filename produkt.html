@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Produkt — M&O Fjellklær</title>
+<meta name="description" content="Se produktdetaljer, størrelser og legg i handlekurven."/>
+<meta name="theme-color" content="#2F3E46"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="M&O"/>
+<link rel="icon" href="favicon.png" type="image/png"/>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="css/style.css?v=2"/>
+</head>
+<body>
+<div id="pdp-root" class="pdp"><div style="text-align:center;padding:80px 20px;color:var(--text-4)">Laster produkt…</div></div>
+<script src="js/app.js?v=2"></script>
+<script src="js/layout.js?v=2"></script>
+<script>
+(function () {
+  MO.injectLayout(document.body.classList.contains('page-om') ? 'om' : 'produkt');
+  // Re-run product render after layout injects nav
+  if (MO.renderProductPage) MO.renderProductPage();
+})();
+</script>
+<script src="js/effects.js?v=2"></script>
+</body>
+</html>

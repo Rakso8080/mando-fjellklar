@@ -5,12 +5,19 @@
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#4a6741"
-,
-  "background_color": "#fafaf8",
+  "theme_color": "#2F3E46",
+  "background_color": "#F4F7F6",
   "lang": "nb",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "scope": "/",
+  "capture_links": "existing-client-navigate",
+  "launch_handler": {
+    "client_mode": "auto"
+  },
   "icons": [
     { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any maskable" }
   ],
-  "categories": ["shopping", "sports"]
+  "categories": ["shopping", "sports"],
+  "screenshots": []
 }
