@@ -1482,11 +1482,13 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   .nav__inner { padding: 0 16px; }
   .nav__links { display: none; }
   .nav__mobile-btn { display: flex; }
-  .nav__lang, .theme-toggle, .nav__icon:not(.nav__mobile-btn) { display: none; }
-  .nav { backdrop-filter: none; -webkit-backdrop-filter: none; height: 48px; }
-  .nav__icon { width: 36px; height: 36px; }
-  .nav__actions { gap: 4px; }
-  .nav__logo-img { height: 22px; }
+  .nav { backdrop-filter: none; -webkit-backdrop-filter: none; height: 52px; }
+  .nav__icon { width: 32px; height: 32px; font-size: 13px !important; }
+  .nav__actions { gap: 2px; }
+  .nav__logo-img { height: 20px; }
+  .theme-toggle { width: 32px; height: 32px; font-size: 14px !important; }
+  .nav__lang { width: 30px; height: 30px; font-size: 10px; }
+  .nav__mobile-btn { display: flex; }
   .searchbar { padding: 12px 16px; }
   .searchbar__input { font-size: 16px; }
   .searchbar__cancel { font-size: 12px; padding: 6px 10px; }
