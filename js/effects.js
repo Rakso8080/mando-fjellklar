@@ -8,6 +8,7 @@
 
   /* ── 1. TÅKE/MIST ──────────────────────────────── */
   MO.initFog = function () {
+    if (window.innerWidth <= 768) return;
     var hero = document.getElementById('hero');
     if (!hero || hero.querySelector('.fog')) return;
     var div = document.createElement('div');
@@ -379,6 +380,7 @@
 
   /* ── 9. AKVARELL-OVERFANG ────────────────────────── */
   MO.initWatercolor = function () {
+    if (window.innerWidth <= 768) return;
     var sections = document.querySelectorAll('.section--decorated, .about-highlight, .newsletter');
     sections.forEach(function (s) {
       s.classList.add('watercolor-section');

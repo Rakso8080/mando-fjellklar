@@ -1475,6 +1475,7 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   .nav__inner { padding: 0 16px; }
   .nav__links { display: none; }
   .nav__mobile-btn { display: flex; }
+  .nav { backdrop-filter: none; -webkit-backdrop-filter: none; }
   .nav__icon { width: 36px; height: 36px; }
   .nav__actions { gap: 4px; }
   .nav__logo-img { height: 22px; }
@@ -1616,6 +1617,7 @@ footer { background: var(--slate); padding: 60px 0 28px; }
 @media (max-width: 400px) {
   .container { padding: 0 14px; }
   .nav__inner { padding: 0 10px; }
+  .nav { backdrop-filter: none; -webkit-backdrop-filter: none; }
   .nav__actions { gap: 2px; flex-wrap: wrap; }
   .product-grid { grid-template-columns: 1fr; gap: 10px; }
   .skeleton-grid { grid-template-columns: 1fr; gap: 10px; }

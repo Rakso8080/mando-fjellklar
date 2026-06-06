@@ -1138,6 +1138,7 @@
 
   /* ── MOUNTAIN PARALLAX ON SCROLL ────────────────── */
   MO.initMountainParallax = function () {
+    if (window.innerWidth <= 768) return;
     var layers = document.querySelectorAll('.mountains__layer');
     if (!layers.length) return;
     var ticking = false;
@@ -1161,6 +1162,7 @@
 
   /* ── FLOATING PARTICLES ──────────────────────────── */
   MO.initParticles = function () {
+    if (window.innerWidth <= 768) return;
     var hero = document.getElementById('hero');
     if (!hero || hero.querySelector('.particles-container')) return;
     var container = document.createElement('div');
