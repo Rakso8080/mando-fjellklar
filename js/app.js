@@ -22,6 +22,22 @@
     {id:'b8',brand:'Black Diamond',name:'Stance Beanie',price:80,oldPrice:299,cond:'Topptrim',condDesc:'Brukt 2 ganger. Ingen bruksmerker.',sizes:['One size'],cat:'tilbehor',type:'brukt',features:['Merino-blend','Stretch-passform','Kan brettes','Naturlig luktresistent']},
   ];
 
+  MO.populateBrandFilters = function () {
+    var brands = [];
+    MO.products.forEach(function(p) {
+      if (brands.indexOf(p.brand) === -1) brands.push(p.brand);
+    });
+    brands.sort();
+    ['nytt', 'brukt'].forEach(function(prefix) {
+      var el = document.getElementById('brand-' + prefix);
+      if (!el) return;
+      el.innerHTML = '<option value="alle">Merke: Alle</option>';
+      brands.forEach(function(b) {
+        el.innerHTML += '<option value="' + b.replace(/'/g, '\\"') + '">' + b + '</option>';
+      });
+    });
+  };
+
   MO.findProduct = function (id) {
     return MO.products.find(function (p) { return p.id === id; }) || null;
   };
@@ -179,6 +195,7 @@
       '<div class="pcard__img-inner"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg></div>' +
       '<div class="pcard__badges"><span class="badge badge-' + (p.type === 'nytt' ? 'new' : 'used') + '">' + (p.type === 'nytt' ? 'Nytt' : 'Brukt') + '</span>' + condBadge + '</div>' +
       '<button class="pcard__wish' + (wished ? ' active' : '') + '" data-wish="' + p.id + '" aria-label="Favoritt"><svg width="14" height="14" viewBox="0 0 24 24" fill="' + (wished ? '#c0392b' : 'none') + '" stroke="' + (wished ? '#c0392b' : 'currentColor') + '" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>' +
+      '<button class="pcard__compare' + (MO.inCompare(p.id) ? ' active' : '') + '" data-compare="' + p.id + '" aria-label="Sammenlign">Sammenlign</button>' +
       '<div class="pcard__quick"><button class="btn btn-white btn-sm btn-full" data-quickadd="' + p.id + '">+ Legg i kurv</button></div>' +
       '</div>' +
       '<div class="pcard__body">' +
@@ -213,9 +230,22 @@
   };
 
   MO.removeFromCart = function (id, size) {
-    MO.cart = MO.cart.filter(function (i) { return !(i.id === id && i.size === size); });
+    var removed = null;
+    MO.cart = MO.cart.filter(function (i) {
+      if (i.id === id && i.size === size) { removed = i; return false; }
+      return true;
+    });
     MO.saveCart();
     MO.updateCartBadge();
+    if (removed) {
+      MO.toast('Fjernet fra handlekurv', function () {
+        MO.cart.push(removed);
+        MO.saveCart();
+        MO.updateCartBadge();
+        MO.renderCartDrawer();
+        MO.toast('Lagt tilbake i handlekurv');
+      });
+    }
   };
 
   MO.cartTotal = function () {
@@ -236,11 +266,20 @@
     var idx = MO.wishlist.indexOf(id);
     var p = MO.findProduct(id);
     if (idx > -1) {
+      var removed = MO.wishlist[idx];
       MO.wishlist.splice(idx, 1);
-      MO.toast('Fjernet fra favoritter');
+      MO.toast('Fjernet fra favoritter', function () {
+        MO.wishlist.push(removed);
+        localStorage.setItem('mo_wish', JSON.stringify(MO.wishlist));
+        MO.toast('Lagt tilbake i favoritter');
+      });
     } else {
       MO.wishlist.push(id);
-      MO.toast((p ? p.name.split(' ').slice(0, 3).join(' ') : 'Produkt') + ' lagt til favoritter');
+      MO.toast((p ? p.name.split(' ').slice(0, 3).join(' ') : 'Produkt') + ' lagt til favoritter', function () {
+        MO.wishlist.pop();
+        localStorage.setItem('mo_wish', JSON.stringify(MO.wishlist));
+        MO.toast('Fjernet fra favoritter');
+      });
     }
     localStorage.setItem('mo_wish', JSON.stringify(MO.wishlist));
   };
@@ -249,10 +288,24 @@
 
   MO._toastTimer = null;
 
-  MO.toast = function (msg) {
+  MO.toast = function (msg, undoFn) {
     var t = document.getElementById('toast');
     if (!t) return;
-    document.getElementById('toast-msg').textContent = msg;
+    var msgEl = document.getElementById('toast-msg');
+    msgEl.textContent = msg;
+    var existingUndo = t.querySelector('.toast__undo');
+    if (existingUndo) existingUndo.remove();
+    if (undoFn) {
+      var undoBtn = document.createElement('button');
+      undoBtn.className = 'toast__undo';
+      undoBtn.textContent = 'Angre';
+      t.appendChild(undoBtn);
+      undoBtn.onclick = function(e) {
+        e.stopPropagation();
+        undoFn();
+        t.classList.remove('show');
+      };
+    }
     t.classList.add('show');
     clearTimeout(MO._toastTimer);
     MO._toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2800);
@@ -288,7 +341,7 @@
       '<h2 class="pdm__name">' + p.name + '</h2>' +
       (p.condDesc ? '<p class="pdm__cond">' + condHtml + p.condDesc + '</p>' : '') +
       '<div class="pdm__prices"><span class="pdm__price">' + p.price.toLocaleString('no-NO') + ' kr</span><span class="pdm__old">' + p.oldPrice.toLocaleString('no-NO') + ' kr</span><span class="pdm__save">–' + saving + '%</span></div>' +
-      '<p class="pdm__lbl">Størrelse</p>' +
+      '<p class="pdm__lbl">Størrelse <button class="pdm__sizeguide" onclick="MO.showSizeGuide()" style="font-size:11px;color:var(--g5);background:none;border:none;cursor:pointer;text-decoration:underline;padding:0;font-family:var(--sans)">Hjelp</button></p>' +
       '<div class="pdm__sizes">' + sizesHtml + '</div>' +
       '<button class="btn btn-primary btn-full btn-lg" data-atcmodal="' + id + '" style="margin-top:16px">Legg i handlekurv</button>' +
       '<button class="btn btn-ghost btn-full" data-wishmodal="' + id + '" style="margin-top:8px">♡ Legg til favoritter</button>' +
@@ -297,16 +350,46 @@
     document.getElementById('pdm-title').textContent = p.brand + ' — ' + p.name;
     document.getElementById('pdm-body').innerHTML =
       '<div class="pdm__grid">' +
-      '<div class="pdm__img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg></div>' +
+      '<div class="pdm__img pdm__img--zoomable" onclick="MO.zoomImage(this)" style="cursor:zoom-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg></div>' +
       '<div>' + infoHtml + '</div>' +
       '</div>';
     document.getElementById('pdm-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
+    if ('ontouchstart' in window) {
+      var startX, startY;
+      var imgEl = document.querySelector('.pdm__grid .pdm__img');
+      if (imgEl) {
+        imgEl.addEventListener('touchstart', function (e) {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+        }, { passive: true });
+        imgEl.addEventListener('touchend', function (e) {
+          if (!startX) return;
+          var dx = e.changedTouches[0].clientX - startX;
+          var dy = e.changedTouches[0].clientY - startY;
+          if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+            MO.toast(dx > 0 ? 'Forrige bilde' : 'Neste bilde');
+          }
+          startX = null;
+        }, { passive: true });
+      }
+    }
   };
 
   MO.closePdm = function () {
     document.getElementById('pdm-overlay').classList.remove('open');
     document.body.style.overflow = '';
+  };
+
+  MO.zoomImage = function (el) {
+    var overlay = document.createElement('div');
+    overlay.className = 'zoom-overlay';
+    overlay.onclick = function () { overlay.remove(); };
+    var content = el.cloneNode(true);
+    content.onclick = function (e) { e.stopPropagation(); };
+    overlay.appendChild(content);
+    document.body.appendChild(overlay);
+    requestAnimationFrame(function () { overlay.classList.add('active'); });
   };
 
   MO.openCart = function () {
@@ -433,8 +516,6 @@
   };
 
   MO.catFilter = function (btn, cat) {
-    document.querySelectorAll('.catbar__btn').forEach(function (b) { b.classList.remove('active'); });
-    if (btn) btn.classList.add('active');
     var fn = function (arr) {
       if (cat === 'alle') return arr;
       if (cat === 'salg') return arr.filter(function (p) { return Math.round((1 - p.price / p.oldPrice) * 100) >= 50; });
@@ -475,9 +556,11 @@
     function getFilterState(prefix) {
       var typeEl = document.getElementById('type-' + prefix);
       var sizeEl = document.getElementById('size-' + prefix);
+      var brandEl = document.getElementById('brand-' + prefix);
       return {
         type: typeEl ? typeEl.value : 'alle',
-        size: sizeEl ? sizeEl.value : 'alle'
+        size: sizeEl ? sizeEl.value : 'alle',
+        brand: brandEl ? brandEl.value : 'alle'
       };
     }
 
@@ -485,6 +568,7 @@
       var result = arr;
       if (state.type !== 'alle') result = result.filter(function (p) { return p.cat === state.type; });
       if (state.size !== 'alle') result = result.filter(function (p) { return p.sizes.indexOf(state.size) !== -1; });
+      if (state.brand !== 'alle') result = result.filter(function (p) { return p.brand === state.brand; });
       return result;
     }
 
@@ -523,8 +607,10 @@
 
     document.getElementById('type-nytt') && document.getElementById('type-nytt').addEventListener('change', renderNytt);
     document.getElementById('size-nytt') && document.getElementById('size-nytt').addEventListener('change', renderNytt);
+    document.getElementById('brand-nytt') && document.getElementById('brand-nytt').addEventListener('change', renderNytt);
     document.getElementById('type-brukt') && document.getElementById('type-brukt').addEventListener('change', renderBrukt);
     document.getElementById('size-brukt') && document.getElementById('size-brukt').addEventListener('change', renderBrukt);
+    document.getElementById('brand-brukt') && document.getElementById('brand-brukt').addEventListener('change', renderBrukt);
 
     MO.renderProductGrid('grid-nytt', 'nytt');
     MO.renderProductGrid('grid-brukt', 'brukt');
@@ -535,6 +621,7 @@
     };
     setCount('grid-nytt', 'count-nytt', nytt);
     setCount('grid-brukt', 'count-brukt', brukt);
+    MO.populateBrandFilters();
   };
 
   MO.initHikerAnimation = function () {
@@ -627,6 +714,9 @@
       t = e.target.closest('[data-wish]');
       if (t) { e.stopPropagation(); MO.toggleWish(t.getAttribute('data-wish')); t.classList.toggle('active'); var svg = t.querySelector('svg'); if (svg) { var on = t.classList.contains('active'); svg.setAttribute('fill', on ? '#c0392b' : 'none'); svg.setAttribute('stroke', on ? '#c0392b' : 'currentColor'); } return; }
 
+      t = e.target.closest('[data-compare]');
+      if (t) { e.stopPropagation(); MO.toggleCompare(t.getAttribute('data-compare')); t.classList.toggle('active'); return; }
+
       t = e.target.closest('[data-rmcart]');
       if (t) { try { var d = JSON.parse(t.getAttribute('data-rmcart')); MO.removeFromCart(d.id, d.size); MO.renderCartDrawer(); } catch (e) {} return; }
 
@@ -646,7 +736,7 @@
       if (t) { MO.closeModal(); MO.toast(t.getAttribute('data-close-toast')); return; }
 
       t = e.target.closest('.pcard');
-      if (t && !e.target.closest('.pcard__wish') && !e.target.closest('.pcard__quick')) {
+      if (t && !e.target.closest('.pcard__wish') && !e.target.closest('.pcard__quick') && !e.target.closest('.pcard__compare')) {
         var pid = t.getAttribute('data-pid');
         if (pid) MO.openProduct(pid);
         return;
@@ -1003,8 +1093,8 @@
   };
 
   /* ── COLOR THEME TOGGLE ───────────────────────────── */
-  MO.themes = ['default', 'warm', 'cool', 'earth', 'sunset'];
-  MO.themeIcons = ['🎨', '🔥', '❄️', '🌿', '🌅'];
+  MO.themes = ['default', 'warm', 'cool', 'earth', 'sunset', 'dark'];
+  MO.themeIcons = ['🎨', '🔥', '❄️', '🌿', '🌅', '🌙'];
   MO.currentTheme = localStorage.getItem('mo_theme') || 'default';
 
   MO.initTheme = function () {
@@ -1031,6 +1121,19 @@
 
   MO.applyTheme = function (theme) {
     document.documentElement.setAttribute('data-theme', theme === 'default' ? '' : theme);
+  };
+
+  MO.showSizeGuide = function () {
+    var html = '<div class="size-guide"><table class="size-guide__table"><thead><tr><th>Størrelse</th><th>Bryst (cm)</th><th>Midje (cm)</th><th>Hofte (cm)</th><th>Innside ben (cm)</th></tr></thead><tbody>' +
+      '<tr><td>XS</td><td>84–89</td><td>70–75</td><td>86–91</td><td>76–78</td></tr>' +
+      '<tr><td>S</td><td>90–95</td><td>76–81</td><td>92–97</td><td>78–80</td></tr>' +
+      '<tr><td>M</td><td>96–101</td><td>82–87</td><td>98–103</td><td>80–82</td></tr>' +
+      '<tr><td>L</td><td>102–107</td><td>88–93</td><td>104–109</td><td>82–84</td></tr>' +
+      '<tr><td>XL</td><td>108–113</td><td>94–99</td><td>110–115</td><td>84–86</td></tr>' +
+      '<tr><td>XXL</td><td>114–119</td><td>100–105</td><td>116–121</td><td>86–88</td></tr>' +
+      '</tbody></table>' +
+      '<p class="size-guide__note">Skostørrelser følger EU-standard. Mål deg selv eller et plagg du har fra før.</p></div>';
+    MO.openModal('Størrelsesguide', html);
   };
 
   /* ── MOUNTAIN PARALLAX ON SCROLL ────────────────── */
@@ -1166,6 +1269,76 @@
       setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 550);
     });
   };
+
+  MO.compareList = JSON.parse(localStorage.getItem('mo_compare') || '[]');
+  MO.toggleCompare = function (id) {
+    var idx = MO.compareList.indexOf(id);
+    if (idx > -1) {
+      MO.compareList.splice(idx, 1);
+    } else {
+      if (MO.compareList.length >= 4) { MO.toast('Maks 4 produkter til sammenligning'); return; }
+      MO.compareList.push(id);
+    }
+    localStorage.setItem('mo_compare', JSON.stringify(MO.compareList));
+    MO.updateCompareUI();
+  };
+  MO.inCompare = function (id) { return MO.compareList.indexOf(id) > -1; };
+  MO.updateCompareUI = function () {
+    var bar = document.getElementById('compare-bar');
+    if (!bar) {
+      if (!MO.compareList.length) return;
+      bar = document.createElement('div');
+      bar.id = 'compare-bar';
+      bar.className = 'compare-bar';
+      document.body.appendChild(bar);
+    }
+    if (!MO.compareList.length) { if (bar.parentNode) bar.remove(); return; }
+    bar.innerHTML = '';
+    var inner = document.createElement('div');
+    inner.className = 'compare-bar__inner';
+    MO.compareList.forEach(function (id) {
+      var p = MO.findProduct(id);
+      if (!p) return;
+      var chip = document.createElement('span');
+      chip.className = 'compare-bar__chip';
+      chip.innerHTML = p.brand.split(' ').slice(0, 1).join('') + ' ' + p.name.split(' ').slice(0, 2).join(' ') + '<button onclick="MO.toggleCompare(\'' + id + '\')">&times;</button>';
+      inner.appendChild(chip);
+    });
+    if (MO.compareList.length >= 2) {
+      var btn = document.createElement('button');
+      btn.className = 'btn btn-primary btn-sm';
+      btn.textContent = 'Sammenlign';
+      btn.onclick = MO.showCompare;
+      inner.appendChild(btn);
+    }
+    var clearBtn = document.createElement('button');
+    clearBtn.className = 'btn btn-ghost btn-sm';
+    clearBtn.textContent = 'Tøm';
+    clearBtn.onclick = function () { MO.compareList = []; localStorage.setItem('mo_compare', JSON.stringify(MO.compareList)); MO.updateCompareUI(); };
+    inner.appendChild(clearBtn);
+    bar.appendChild(inner);
+  };
+  MO.showCompare = function () {
+    if (MO.compareList.length < 2) { MO.toast('Velg minst 2 produkter'); return; }
+    var products = MO.compareList.map(function (id) { return MO.findProduct(id); }).filter(Boolean);
+    var rows = [];
+    var fields = [
+      { label: 'Merke', fn: function (p) { return p.brand; } },
+      { label: 'Navn', fn: function (p) { return p.name; } },
+      { label: 'Kategori', fn: function (p) { var m = { jakker: 'Jakke', mellomlag: 'Mellomlag', bukser: 'Bukse', sko: 'Sko', tilbehor: 'Tilbehør' }; return m[p.cat] || p.cat; } },
+      { label: 'Pris', fn: function (p) { return p.price.toLocaleString('no-NO') + ' kr'; } },
+      { label: 'Rabatt', fn: function (p) { return '-' + Math.round((1 - p.price / p.oldPrice) * 100) + '%'; } },
+      { label: 'Størrelser', fn: function (p) { return p.sizes.join(', '); } },
+    ];
+    fields.forEach(function (f) {
+      rows.push('<tr><td class="compare__label">' + f.label + '</td>' + products.map(function (p) {
+        return '<td class="compare__cell">' + f.fn(p) + '</td>';
+      }).join('') + '</tr>');
+    });
+    var html = '<div class="compare-table-wrap"><table class="compare-table"><tbody>' + rows.join('') + '</tbody></table></div>';
+    MO.openModal('Sammenligning (' + MO.compareList.length + ' produkter)', html);
+  };
+  MO.initCompare = function () { MO.updateCompareUI(); };
 
   window.MO = MO;
 

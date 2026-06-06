@@ -381,6 +381,9 @@
         <option value="sko" data-i18n="filter.sko">Sko</option>
         <option value="tilbehor" data-i18n="filter.tilbehor">Tilbehør</option>
       </select>
+      <select class="filter-select" id="brand-nytt">
+        <option value="alle">Merke: Alle</option>
+      </select>
       <select class="filter-select" id="size-nytt">
         <option value="alle" data-i18n="filter.size">Størrelse: Alle</option>
         <option value="XS">XS</option>
@@ -551,6 +554,9 @@
         <option value="bukser" data-i18n="filter.bukser">Bukser</option>
         <option value="sko" data-i18n="filter.sko">Sko</option>
         <option value="tilbehor" data-i18n="filter.tilbehor">Tilbehør</option>
+      </select>
+      <select class="filter-select" id="brand-brukt">
+        <option value="alle">Merke: Alle</option>
       </select>
       <select class="filter-select" id="size-brukt">
         <option value="alle" data-i18n="filter.size">Størrelse: Alle</option>
@@ -756,6 +762,7 @@
 MO.injectLayout('home');
 
 MO.initIndexFilters();
+MO.initCompare();
 MO.initHikerAnimation();
 MO.initSearch();
 MO.initEventDelegation();
@@ -768,6 +775,10 @@ MO.initMountainParallax();
 MO.initCountUp();
 MO.initCardTilt();
 MO.initMouseTrail();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
 
 MO.initFog();
 MO.initStars();

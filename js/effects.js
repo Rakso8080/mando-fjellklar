@@ -28,6 +28,7 @@
 
   /* ── 2. STJERNEHIMMEL ──────────────────────────── */
   MO.initStars = function () {
+    if (window.innerWidth <= 768) return;
     var hero = document.getElementById('hero');
     if (!hero || hero.querySelector('.starry-sky')) return;
     var container = document.createElement('div');
@@ -109,7 +110,7 @@
   /* ── 3. REGN ────────────────────────────────────── */
   MO.initRain = function () {
     var hero = document.getElementById('hero');
-    if (!hero || hero.querySelector('.rain') || window.innerWidth <= 768) return;
+    if (!hero || hero.querySelector('.rain') || window.innerWidth <= 480) return;
     var container = document.createElement('div');
     container.className = 'rain';
     hero.appendChild(container);
@@ -159,6 +160,7 @@
 
   /* ── 6. VIND-EFFEKT ────────────────────────────── */
   MO.initWind = function () {
+    if (window.innerWidth <= 768) return;
     var indicator = document.createElement('div');
     indicator.className = 'wind-indicator';
     indicator.innerHTML =
@@ -217,6 +219,7 @@
 
   /* ── 7. INTERAKTIVT KOMPASS ─────────────────────── */
   MO.initCompass = function () {
+    if (window.innerWidth <= 768) return;
     var el = document.createElement('div');
     el.className = 'compass-interactive';
     el.innerHTML =
@@ -261,6 +264,7 @@
 
   /* ── 8. PARTIKKEL-TEKST ─────────────────────────── */
   MO.initParticleText = function () {
+    if (window.innerWidth <= 768) return;
     var targets = document.querySelectorAll('.hero__title-line1, .hero__title-line2');
     if (!targets.length) return;
 
