@@ -163,20 +163,6 @@
   opacity: 1;
 }
 
-/* ── 10. 3D DYBDEPARALLAKSE PÅ PRODUKTKORT ────────── */
-.pcard {
-  transition: transform .15s ease-out, box-shadow .15s ease-out;
-  will-change: transform;
-  cursor: pointer;
-}
-.pcard:hover {
-  z-index: 10;
-}
-.pcard__img, .pcard__body, .pcard__badges, .pcard__wish {
-  transition: translate .15s ease-out;
-  will-change: translate;
-}
-
 @media (max-width: 768px) {
   .rain { display: none; }
   .compass-interactive { width: 36px; height: 36px; bottom: 16px; right: 16px; }
