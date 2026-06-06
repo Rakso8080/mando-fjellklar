@@ -472,55 +472,59 @@
     var brukt = MO.products.filter(function (p) { return p.type === 'brukt'; });
     var nyttSort = 'default', bruktSort = 'default';
 
-    MO.filterNytt = function (btn, cat) {
-      var container = document.querySelector('#filters-nytt');
-      if (container) {
-        container.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active-new'); });
-      }
-      if (btn) { btn.classList.add('active-new'); btn.setAttribute('data-cat', cat); }
-      var arr = cat === 'alle' ? nytt : nytt.filter(function (p) { return p.cat === cat; });
+    function getFilterState(prefix) {
+      var typeEl = document.getElementById('type-' + prefix);
+      var sizeEl = document.getElementById('size-' + prefix);
+      return {
+        type: typeEl ? typeEl.value : 'alle',
+        size: sizeEl ? sizeEl.value : 'alle'
+      };
+    }
+
+    function filterProducts(arr, state) {
+      var result = arr;
+      if (state.type !== 'alle') result = result.filter(function (p) { return p.cat === state.type; });
+      if (state.size !== 'alle') result = result.filter(function (p) { return p.sizes.indexOf(state.size) !== -1; });
+      return result;
+    }
+
+    function renderNytt() {
+      var state = getFilterState('nytt');
+      var arr = filterProducts(nytt, state);
       arr = MO.sortProducts(arr, nyttSort);
       document.getElementById('grid-nytt').innerHTML = arr.map(MO.cardHTML).join('');
       var countEl = document.getElementById('count-nytt');
       if (countEl) countEl.innerHTML = 'Viser <strong>' + arr.length + '</strong> produkter';
       MO.initReveal();
-    };
+    }
 
-    MO.filterBrukt = function (btn, stand) {
-      var container = document.querySelector('#filters-brukt');
-      if (container) {
-        container.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active-used'); });
-      }
-      if (btn) { btn.classList.add('active-used'); btn.setAttribute('data-stand', stand); }
-      var arr = stand === 'alle' ? brukt : brukt.filter(function (p) { return p.cond === stand; });
+    function renderBrukt() {
+      var state = getFilterState('brukt');
+      var arr = filterProducts(brukt, state);
       arr = MO.sortProducts(arr, bruktSort);
       document.getElementById('grid-brukt').innerHTML = arr.map(MO.cardHTML).join('');
       var countEl = document.getElementById('count-brukt');
       if (countEl) countEl.innerHTML = 'Viser <strong>' + arr.length + '</strong> produkter';
       MO.initReveal();
-    };
+    }
+
+    MO.filterNytt = renderNytt;
+    MO.filterBrukt = renderBrukt;
 
     MO.applySortNytt = function (method) {
       nyttSort = method;
-      var activeBtn = document.querySelector('#filters-nytt .active-new');
-      var cat = activeBtn ? (activeBtn.getAttribute('data-cat') || 'alle') : 'alle';
-      var arr = MO.sortProducts(cat === 'alle' ? nytt : nytt.filter(function (p) { return p.cat === cat; }), method);
-      document.getElementById('grid-nytt').innerHTML = arr.map(MO.cardHTML).join('');
-      var countEl = document.getElementById('count-nytt');
-      if (countEl) countEl.innerHTML = 'Viser <strong>' + arr.length + '</strong> produkter';
-      MO.initReveal();
+      renderNytt();
     };
 
     MO.applySortBrukt = function (method) {
       bruktSort = method;
-      var activeBtn = document.querySelector('#filters-brukt .active-used');
-      var stand = activeBtn ? (activeBtn.getAttribute('data-stand') || 'alle') : 'alle';
-      var arr = MO.sortProducts(stand === 'alle' ? brukt : brukt.filter(function (p) { return p.cond === stand; }), method);
-      document.getElementById('grid-brukt').innerHTML = arr.map(MO.cardHTML).join('');
-      var countEl = document.getElementById('count-brukt');
-      if (countEl) countEl.innerHTML = 'Viser <strong>' + arr.length + '</strong> produkter';
-      MO.initReveal();
+      renderBrukt();
     };
+
+    document.getElementById('type-nytt') && document.getElementById('type-nytt').addEventListener('change', renderNytt);
+    document.getElementById('size-nytt') && document.getElementById('size-nytt').addEventListener('change', renderNytt);
+    document.getElementById('type-brukt') && document.getElementById('type-brukt').addEventListener('change', renderBrukt);
+    document.getElementById('size-brukt') && document.getElementById('size-brukt').addEventListener('change', renderBrukt);
 
     MO.renderProductGrid('grid-nytt', 'nytt');
     MO.renderProductGrid('grid-brukt', 'brukt');
@@ -650,16 +654,6 @@
 
       t = e.target.closest('.catbar__btn');
       if (t) { var cat = t.textContent.trim().toLowerCase(); var catMap = { 'alle': 'alle', 'jakker & yttertøy': 'jakker', 'mellomlag': 'mellomlag', 'bukser': 'bukser', 'sko & støvler': 'sko', 'tilbehør': 'tilbehor', 'tilbud': 'salg' }; var resolvedCat = catMap[cat] || 'alle'; if (resolvedCat === 'salg' || cat === '🔥 tilbud') resolvedCat = 'salg'; MO.catFilter(t, resolvedCat); return; }
-
-      t = e.target.closest('.filter-btn');
-      if (t) {
-        var container = t.closest('.filters');
-        if (!container) return;
-        var id = container.id;
-        if (id === 'filters-nytt') { var c = t.getAttribute('data-cat') || t.textContent.trim().toLowerCase(); MO.filterNytt(t, c === 'alle' ? 'alle' : c); return; }
-        if (id === 'filters-brukt') { var s = t.getAttribute('data-stand') || t.textContent.trim().toLowerCase(); MO.filterBrukt(t, s === 'alle stander' ? 'alle' : s); return; }
-        return;
-      }
 
       t = e.target.closest('.faq-q');
       if (t) { t.closest('.faq-item').classList.toggle('open'); return; }
@@ -894,10 +888,13 @@
     'wish.empty': { no: 'Ingen favoritter ennå', en: 'No favorites yet', de: 'Noch keine Favoriten', zh: '暂无收藏', es: 'Aún no hay favoritos' },
     'wish.emptysub': { no: 'Trykk hjertet på produktene du liker', en: 'Tap the heart on products you like', de: 'Tippe auf das Herz bei Produkten, die dir gefallen', zh: '点击您喜欢的产品上的心形', es: 'Toca el corazón en los productos que te gusten' },
     /* Filters */
+    'filter.type': { no: 'Type: Alle', en: 'Type: All', de: 'Typ: Alle', zh: '类型: 全部', es: 'Tipo: Todos' },
+    'filter.size': { no: 'Størrelse: Alle', en: 'Size: All', de: 'Größe: Alle', zh: '尺寸: 全部', es: 'Talla: Todas' },
     'filter.jakker': { no: 'Jakker', en: 'Jackets', de: 'Jacken', zh: '夹克', es: 'Chaquetas' },
     'filter.mellomlag': { no: 'Mellomlag', en: 'Mid Layers', de: 'Mittelschichten', zh: '中间层', es: 'Capas medias' },
     'filter.bukser': { no: 'Bukser', en: 'Pants', de: 'Hosen', zh: '裤子', es: 'Pantalones' },
     'filter.sko': { no: 'Sko', en: 'Shoes', de: 'Schuhe', zh: '鞋子', es: 'Zapatos' },
+    'filter.tilbehor': { no: 'Tilbehør', en: 'Accessories', de: 'Zubehör', zh: '配件', es: 'Accesorios' },
     'filter.topptrim': { no: 'Topptrim', en: 'Mint', de: 'Neuwertig', zh: '极佳', es: 'Excelente' },
     'filter.turerfaren': { no: 'Turerfaren', en: 'Trail tested', de: 'Weg-erprobt', zh: '路途考验', es: 'Probado' },
     'filter.arbeidshest': { no: 'Arbeidshest', en: 'Workhorse', de: 'Arbeitspferd', zh: '耐用', es: 'Resistente' },
@@ -979,14 +976,8 @@
     }
     /* Update toast messages to be dynamic */
     /* Re-render product grids if shown */
-    if (typeof MO.filterNytt === 'function') {
-      var activeNew = document.querySelector('#filters-nytt .active-new');
-      if (activeNew) MO.filterNytt(activeNew, activeNew.getAttribute('data-cat') || 'alle');
-    }
-    if (typeof MO.filterBrukt === 'function') {
-      var activeUsed = document.querySelector('#filters-brukt .active-used');
-      if (activeUsed) MO.filterBrukt(activeUsed, activeUsed.getAttribute('data-stand') || 'alle');
-    }
+    if (typeof MO.filterNytt === 'function') MO.filterNytt();
+    if (typeof MO.filterBrukt === 'function') MO.filterBrukt();
   };
 
   MO.initLang = function () {

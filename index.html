@@ -373,11 +373,42 @@
       </div>
     </div>
     <div class="filters" id="filters-nytt">
-      <button class="filter-btn active-new" data-cat="alle" data-i18n="section.alle">Alle</button>
-      <button class="filter-btn" data-cat="jakker" data-i18n="filter.jakker">Jakker</button>
-      <button class="filter-btn" data-cat="mellomlag" data-i18n="filter.mellomlag">Mellomlag</button>
-      <button class="filter-btn" data-cat="bukser" data-i18n="filter.bukser">Bukser</button>
-      <button class="filter-btn" data-cat="sko" data-i18n="filter.sko">Sko</button>
+      <select class="filter-select" id="type-nytt">
+        <option value="alle" data-i18n="filter.type">Type: Alle</option>
+        <option value="jakker" data-i18n="filter.jakker">Jakker</option>
+        <option value="mellomlag" data-i18n="filter.mellomlag">Mellomlag</option>
+        <option value="bukser" data-i18n="filter.bukser">Bukser</option>
+        <option value="sko" data-i18n="filter.sko">Sko</option>
+        <option value="tilbehor" data-i18n="filter.tilbehor">Tilbehør</option>
+      </select>
+      <select class="filter-select" id="size-nytt">
+        <option value="alle" data-i18n="filter.size">Størrelse: Alle</option>
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+        <option value="32">32</option>
+        <option value="33">33</option>
+        <option value="34">34</option>
+        <option value="35">35</option>
+        <option value="36">36</option>
+        <option value="37">37</option>
+        <option value="38">38</option>
+        <option value="39">39</option>
+        <option value="40">40</option>
+        <option value="41">41</option>
+        <option value="42">42</option>
+        <option value="43">43</option>
+        <option value="44">44</option>
+        <option value="45">45</option>
+        <option value="One size">One size</option>
+      </select>
     </div>
     <p class="result-count" id="count-nytt"></p>
     <div class="product-grid" id="grid-nytt"></div>
@@ -513,10 +544,42 @@
       </div>
     </div>
     <div class="filters" id="filters-brukt">
-      <button class="filter-btn active-used" data-stand="alle" data-i18n="section.alle.stander">Alle stander</button>
-      <button class="filter-btn" data-stand="Topptrim" data-i18n="filter.topptrim">Topptrim</button>
-      <button class="filter-btn" data-stand="Turerfaren" data-i18n="filter.turerfaren">Turerfaren</button>
-      <button class="filter-btn" data-stand="Arbeidshest" data-i18n="filter.arbeidshest">Arbeidshest</button>
+      <select class="filter-select" id="type-brukt">
+        <option value="alle" data-i18n="filter.type">Type: Alle</option>
+        <option value="jakker" data-i18n="filter.jakker">Jakker</option>
+        <option value="mellomlag" data-i18n="filter.mellomlag">Mellomlag</option>
+        <option value="bukser" data-i18n="filter.bukser">Bukser</option>
+        <option value="sko" data-i18n="filter.sko">Sko</option>
+        <option value="tilbehor" data-i18n="filter.tilbehor">Tilbehør</option>
+      </select>
+      <select class="filter-select" id="size-brukt">
+        <option value="alle" data-i18n="filter.size">Størrelse: Alle</option>
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+        <option value="31">31</option>
+        <option value="32">32</option>
+        <option value="33">33</option>
+        <option value="34">34</option>
+        <option value="35">35</option>
+        <option value="36">36</option>
+        <option value="37">37</option>
+        <option value="38">38</option>
+        <option value="39">39</option>
+        <option value="40">40</option>
+        <option value="41">41</option>
+        <option value="42">42</option>
+        <option value="43">43</option>
+        <option value="44">44</option>
+        <option value="45">45</option>
+        <option value="One size">One size</option>
+      </select>
     </div>
     <p class="result-count" id="count-brukt"></p>
     <div class="product-grid" id="grid-brukt"></div>
