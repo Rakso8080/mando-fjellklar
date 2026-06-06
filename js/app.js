@@ -520,10 +520,19 @@
 
   MO.initNav = function () {
     var ticking = false;
+    var lastScrollY = window.scrollY;
     window.addEventListener('scroll', function () {
       if (!ticking) {
         requestAnimationFrame(function () {
-          document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 8);
+          var sy = window.scrollY;
+          var nav = document.getElementById('main-nav');
+          nav.classList.toggle('scrolled', sy > 8);
+          if (sy > 80 && sy > lastScrollY) {
+            nav.classList.add('nav-hidden');
+          } else {
+            nav.classList.remove('nav-hidden');
+          }
+          lastScrollY = sy;
           ticking = false;
         });
         ticking = true;
