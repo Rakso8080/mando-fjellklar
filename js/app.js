@@ -572,45 +572,66 @@
       return result;
     }
 
+    var MOBILE_LIMIT = 6;
+    var nyttShowAll = false, bruktShowAll = false;
+
+    function showMore(prefix) {
+      if (prefix === 'nytt') { nyttShowAll = true; renderNytt(); }
+      else { bruktShowAll = true; renderBrukt(); }
+    }
+
+    function renderGrid(gridId, countId, arr, sort, showAll) {
+      var limited = window.innerWidth > 768 || showAll ? arr : arr.slice(0, MOBILE_LIMIT);
+      var html = limited.map(MO.cardHTML).join('');
+      if (window.innerWidth <= 768 && !showAll && arr.length > MOBILE_LIMIT) {
+        html += '<div class="se-mer-wrap"><button class="btn btn-ghost se-mer-btn" onclick="MO._showMore(\'' + gridId.split('-')[1] + '\')">Se mer (' + (arr.length - MOBILE_LIMIT) + ' flere)</button></div>';
+      }
+      document.getElementById(gridId).innerHTML = html;
+      var countEl = document.getElementById(countId);
+      if (countEl) countEl.innerHTML = 'Viser <strong>' + limited.length + '</strong> av <strong>' + arr.length + '</strong> produkter';
+      MO.initReveal();
+    }
+
     function renderNytt() {
       var state = getFilterState('nytt');
       var arr = filterProducts(nytt, state);
       arr = MO.sortProducts(arr, nyttSort);
-      document.getElementById('grid-nytt').innerHTML = arr.map(MO.cardHTML).join('');
-      var countEl = document.getElementById('count-nytt');
-      if (countEl) countEl.innerHTML = 'Viser <strong>' + arr.length + '</strong> produkter';
-      MO.initReveal();
+      renderGrid('grid-nytt', 'count-nytt', arr, nyttSort, nyttShowAll);
     }
 
     function renderBrukt() {
       var state = getFilterState('brukt');
       var arr = filterProducts(brukt, state);
       arr = MO.sortProducts(arr, bruktSort);
-      document.getElementById('grid-brukt').innerHTML = arr.map(MO.cardHTML).join('');
-      var countEl = document.getElementById('count-brukt');
-      if (countEl) countEl.innerHTML = 'Viser <strong>' + arr.length + '</strong> produkter';
-      MO.initReveal();
+      renderGrid('grid-brukt', 'count-brukt', arr, bruktSort, bruktShowAll);
     }
 
-    MO.filterNytt = renderNytt;
-    MO.filterBrukt = renderBrukt;
+    MO._showMore = function (prefix) { showMore(prefix); };
+
+    MO.filterNytt = function () { nyttShowAll = false; renderNytt(); };
+    MO.filterBrukt = function () { bruktShowAll = false; renderBrukt(); };
 
     MO.applySortNytt = function (method) {
       nyttSort = method;
+      nyttShowAll = false;
       renderNytt();
     };
 
     MO.applySortBrukt = function (method) {
       bruktSort = method;
+      bruktShowAll = false;
       renderBrukt();
     };
 
-    document.getElementById('type-nytt') && document.getElementById('type-nytt').addEventListener('change', renderNytt);
-    document.getElementById('size-nytt') && document.getElementById('size-nytt').addEventListener('change', renderNytt);
-    document.getElementById('brand-nytt') && document.getElementById('brand-nytt').addEventListener('change', renderNytt);
-    document.getElementById('type-brukt') && document.getElementById('type-brukt').addEventListener('change', renderBrukt);
-    document.getElementById('size-brukt') && document.getElementById('size-brukt').addEventListener('change', renderBrukt);
-    document.getElementById('brand-brukt') && document.getElementById('brand-brukt').addEventListener('change', renderBrukt);
+    function resetAndRenderNytt() { nyttShowAll = false; renderNytt(); }
+    function resetAndRenderBrukt() { bruktShowAll = false; renderBrukt(); }
+
+    document.getElementById('type-nytt') && document.getElementById('type-nytt').addEventListener('change', resetAndRenderNytt);
+    document.getElementById('size-nytt') && document.getElementById('size-nytt').addEventListener('change', resetAndRenderNytt);
+    document.getElementById('brand-nytt') && document.getElementById('brand-nytt').addEventListener('change', resetAndRenderNytt);
+    document.getElementById('type-brukt') && document.getElementById('type-brukt').addEventListener('change', resetAndRenderBrukt);
+    document.getElementById('size-brukt') && document.getElementById('size-brukt').addEventListener('change', resetAndRenderBrukt);
+    document.getElementById('brand-brukt') && document.getElementById('brand-brukt').addEventListener('change', resetAndRenderBrukt);
 
     MO.renderProductGrid('grid-nytt', 'nytt');
     MO.renderProductGrid('grid-brukt', 'brukt');
