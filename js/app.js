@@ -3,6 +3,19 @@
 
   var MO = window.MO || {};
 
+  MO.auth = {
+    user: null,
+    isLoggedIn: function () { return !!this.user; },
+    requireAuth: function () { if (!this.isLoggedIn()) { MO.showToast('Logg inn for å fortsette'); return false; } return true; },
+    login: function () { MO.showToast('Logg inn kommer snart'); },
+    register: function () { MO.showToast('Registrering kommer snart'); },
+    logout: function () { MO.showToast('Logget ut'); this.user = null; },
+  };
+
+  MO.recentViewed = [];
+
+  MO.applyPromo = function () { MO.showToast('Rabattkode ikke tilgjengelig ennå'); };
+
   MO.products = [
     {id:'n1',brand:'Norrøna',name:'Falketind Gore-Tex Jacket',price:2490,oldPrice:3299,sizes:['S','M','L','XL'],cat:'jakker',type:'nytt',features:['Gore-Tex 3-lags membran','Justerbar hette med visir','Ventilasjonslommer','Resirkulert materiale'],initials:'NF',stock:8},
     {id:'n2',brand:'Bergans',name:'Fløyen Insulated Pants',price:890,oldPrice:1199,sizes:['XS','S','M','L','XL'],cat:'bukser',type:'nytt',features:['PrimaLoft isolasjon','Slank passform','Sideglidelåser','Vannavstøtende overflate'],initials:'BF',stock:12},
