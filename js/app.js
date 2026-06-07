@@ -4,36 +4,44 @@
   var MO = window.MO || {};
 
   MO.auth = {
-    user: null,
+    user: JSON.parse(localStorage.getItem('mo_user') || 'null'),
     isLoggedIn: function () { return !!this.user; },
     requireAuth: function () { if (!this.isLoggedIn()) { MO.toast('Logg inn for å fortsette'); return false; } return true; },
-    login: function () { MO.toast('Logg inn kommer snart'); },
-    register: function () { MO.toast('Registrering kommer snart'); },
-    logout: function () { MO.toast('Logget ut'); this.user = null; },
+    login: function (email, password) {
+      return new Promise(function (resolve, reject) {
+        if (email === 'test@test.no' && password === 'test123') {
+          var u = { email: email, name: 'Testbruker' };
+          MO.auth.user = u;
+          localStorage.setItem('mo_user', JSON.stringify(u));
+          resolve();
+        } else {
+          reject(new Error('Feil e-post eller passord. Prøv test@test.no / test123'));
+        }
+      });
+    },
+    register: function (email, password, name) {
+      return new Promise(function (resolve, reject) {
+        if (!name) { reject(new Error('Skriv inn navn')); return; }
+        var u = { email: email, name: name };
+        MO.auth.user = u;
+        localStorage.setItem('mo_user', JSON.stringify(u));
+        resolve();
+      });
+    },
+    logout: function () {
+      this.user = null;
+      localStorage.removeItem('mo_user');
+      MO.toast('Logget ut');
+    },
   };
 
   MO.recentViewed = [];
 
   MO.applyPromo = function () { MO.toast('Rabattkode ikke tilgjengelig ennå'); };
 
-  MO.products = [
-    {id:'n1',brand:'Norrøna',name:'Falketind Gore-Tex Jacket',price:2490,oldPrice:3299,sizes:['S','M','L','XL'],cat:'jakker',type:'nytt',features:['Gore-Tex 3-lags membran','Justerbar hette med visir','Ventilasjonslommer','Resirkulert materiale'],initials:'NF',stock:8},
-    {id:'n2',brand:'Bergans',name:'Fløyen Insulated Pants',price:890,oldPrice:1199,sizes:['XS','S','M','L','XL'],cat:'bukser',type:'nytt',features:['PrimaLoft isolasjon','Slank passform','Sideglidelåser','Vannavstøtende overflate'],initials:'BF',stock:12},
-    {id:'n3',brand:'Helly Hansen',name:'Odin Fleece Midlayer',price:649,oldPrice:899,sizes:['S','M','L','XL','XXL'],cat:'mellomlag',type:'nytt',features:['Polartec Power Stretch','Stretch-panel i sidene','Brystlomme','Kan brukes alene'],initials:'HH',stock:15},
-    {id:'n4',brand:'Kari Traa',name:'Rose Wool Base Layer',price:399,oldPrice:549,sizes:['XS','S','M','L'],cat:'mellomlag',type:'nytt',features:['100% merinoull','Naturlig temperaturregulering','Luktresistent','GOTS-sertifisert'],initials:'KT',stock:20},
-    {id:'n5',brand:'Mammut',name:'Convey Tour HS Hooded Jacket',price:3100,oldPrice:4499,sizes:['S','M','L','XL'],cat:'jakker',type:'nytt',features:['DRYtechnology','Integrert justerbar hette','Packable design','2.5-lags konstruksjon'],initials:'MM',stock:6},
-    {id:'n6',brand:'Black Diamond',name:'Crag Pants',price:1100,oldPrice:1599,sizes:['28','30','32','34'],cat:'bukser',type:'nytt',features:['Stretch-nylon','Klatreoptimalisert passform','Kne-ledd','Gusseted crotch'],initials:'BD',stock:10},
-    {id:'n7',brand:'Fjällräven',name:'Keb Eco-Shell Jacket',price:2800,oldPrice:3999,sizes:['XS','S','M','L','XL'],cat:'jakker',type:'nytt',features:['Eco-Shell membran','Resirkulerte materialer','3 utvendige lommer','Hette med stivt visir'],initials:'FJ',stock:4},
-    {id:'n8',brand:'Salomon',name:'Outline Prism GTX Shoes',price:1390,oldPrice:1799,sizes:['39','40','41','42','43','44','45'],cat:'sko',type:'nytt',features:['Gore-Tex membran','Contagrip XT sål','EnergyCell+ demping','Quicklace system'],initials:'SA',stock:9},
-    {id:'b1',brand:"Arc'teryx",name:'Beta AR Jacket — Str. M',price:2100,oldPrice:5499,cond:'Topptrim',condDesc:'Brukt 2–3 ganger. Ingen synlige tegn på bruk.',sizes:['M'],cat:'jakker',type:'brukt',features:['Gore-Tex Pro 3-lags','N80p-X face fabric','WaterTight glidelåser','Magnetisk hette'],initials:'AR',stock:1},
-    {id:'b2',brand:'Patagonia',name:'R1 TechFace Hoody — Str. L',price:549,oldPrice:1799,cond:'Turerfaren',condDesc:'Noe pilling på ermene. Full funksjon og vaskbar.',sizes:['L'],cat:'mellomlag',type:'brukt',features:['Polartec Power Stretch Pro','Svært stretchy og pustende','Integrert hette','Fair Trade-sertifisert'],initials:'PA',stock:1},
-    {id:'b3',brand:'Salomon',name:'X Ultra 4 GTX — Str. 43',price:850,oldPrice:1749,cond:'Topptrim',condDesc:'Brukt én sesong. Lite skitt på såle, ellers som ny.',sizes:['43'],cat:'sko',type:'brukt',features:['Gore-Tex membran','Contagrip MA såle','OrthoLite innerssåle','Advanced Chassis'],initials:'SA',stock:1},
-    {id:'b4',brand:'Norrøna',name:'Bitihorn Dri1 Pants — Str. S',price:299,oldPrice:1099,cond:'Arbeidshest',condDesc:'Tydelig slitasje på knær. Alle sting og glidelåser fungerer.',sizes:['S'],cat:'bukser',type:'brukt',features:['Norrøna Dri1-stoff','Pustende og lett','Glidelås i bena','Elastisk linning'],initials:'NO',stock:1},
-    {id:'b5',brand:'Helly Hansen',name:'Odin 9 Worlds Jacket — XL',price:1600,oldPrice:4499,cond:'Topptrim',condDesc:'Brukt 3 ganger totalt. Som ny fra fabrikk.',sizes:['XL'],cat:'jakker',type:'brukt',features:['Helly Tech Pro 3L','Resirkulert nylon','Heldekkende glidelåser','Pakkes i egen pose'],initials:'HH',stock:1},
-    {id:'b6',brand:'Bergans',name:'Trollhetta Insulated Jacket — S',price:750,oldPrice:2299,cond:'Turerfaren',condDesc:'Litt pilling innvendig. God isolasjon og tett.',sizes:['S'],cat:'jakker',type:'brukt',features:['PrimaLoft Gold isolasjon','Resirkulert face fabric','Packable i lomme','DWR-behandlet'],initials:'BE',stock:1},
-    {id:'b7',brand:'Kari Traa',name:'Tikse Tights — M',price:180,oldPrice:599,cond:'Turerfaren',condDesc:'Vasket og klar. Noe pilling i skrittet.',sizes:['M'],cat:'bukser',type:'brukt',features:['Merinomix','God strekk','Bred linning','Reflekselement'],initials:'KT',stock:1},
-    {id:'b8',brand:'Black Diamond',name:'Stance Beanie',price:80,oldPrice:299,cond:'Topptrim',condDesc:'Brukt 2 ganger. Ingen bruksmerker.',sizes:['One size'],cat:'tilbehor',type:'brukt',features:['Merino-blend','Stretch-passform','Kan brettes','Naturlig luktresistent'],initials:'BD',stock:1},
-  ];
+  MO.products = window.MO_PRODUCTS || [];
+
+  MO.wishlist = JSON.parse(localStorage.getItem("mo_wish") || "[]");
 
   MO.populateBrandFilters = function () {
     var brands = [];
@@ -565,11 +573,72 @@
 
   MO.openSearch = function () {
     document.getElementById('searchbar').classList.add('open');
-    setTimeout(function () { document.getElementById('search-input').focus(); }, 80);
+    var inp = document.getElementById('search-input');
+    inp.value = '';
+    setTimeout(function () { inp.focus(); MO.doSearch(''); }, 80);
   };
 
   MO.closeSearch = function () {
     document.getElementById('searchbar').classList.remove('open');
+  };
+
+  MO.doSearch = function (q) {
+    var el = document.getElementById('search-results');
+    if (!el) return;
+    q = q.trim().toLowerCase();
+    if (!q) { el.innerHTML = ''; return; }
+    var matches = MO.products.filter(function (p) {
+      return p.name.toLowerCase().indexOf(q) !== -1 ||
+             p.brand.toLowerCase().indexOf(q) !== -1 ||
+             p.cat.indexOf(q) !== -1;
+    });
+    if (!matches.length) { el.innerHTML = '<div class="searchbar__empty">Ingen treff</div>'; return; }
+    el.innerHTML = matches.slice(0, 8).map(function (p) {
+      var chip = p.cond ? '<span class="searchbar__badge">Brukt — ' + p.cond + '</span>' : '<span class="searchbar__badge badge-new">Nytt</span>';
+      var sale = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) + '%' : '';
+      return '<a href="produkt.html?id=' + p.id + '" class="searchbar__row" onclick="MO.closeSearch()">' +
+        '<div class="searchbar__img" style="background:linear-gradient(150deg,' + MO._brandGrad(p.brand) + ')">' + p.initials + '</div>' +
+        '<div><div class="searchbar__brand">' + p.brand + '</div><div class="searchbar__name">' + p.name + '</div>' +
+        '<div class="searchbar__price">' + p.price.toLocaleString('no-NO') + ' kr' + (sale ? ' <span class="searchbar__sale">−' + sale + '</span>' : '') + '</div>' +
+        chip + '</div></a>';
+    }).join('');
+  };
+
+  MO.initWishlist = function () {
+    MO.wishlist = JSON.parse(localStorage.getItem('mo_wish') || '[]');
+    MO.updateWishBadge();
+  };
+
+  MO.toggleWish = function (id) {
+    var idx = MO.wishlist.indexOf(id);
+    if (idx === -1) { MO.wishlist.push(id); } else { MO.wishlist.splice(idx, 1); }
+    localStorage.setItem('mo_wish', JSON.stringify(MO.wishlist));
+    MO.updateWishBadge();
+    MO.updateWishIcons();
+  };
+
+  MO.updateWishBadge = function () {
+    var n = MO.wishlist.length;
+    [document.getElementById('wish-badge-mobile'), document.getElementById('wish-badge-nav')].forEach(function (el) {
+      if (el) { el.textContent = n > 0 ? n : ''; el.style.display = n > 0 ? '' : 'none'; }
+    });
+  };
+
+  MO.updateWishIcons = function () {
+    document.querySelectorAll('.pcard__wish').forEach(function (el) {
+      var pid = el.getAttribute('data-pid');
+      if (pid) el.classList.toggle('active', MO.wishlist.indexOf(pid) !== -1);
+    });
+  };
+
+  MO.openWishlistPage = function () {
+    if (!MO.wishlist.length) { MO.toast('Du har ingen favoritter ennå'); return; }
+    var items = MO.wishlist.map(MO.findProduct).filter(Boolean);
+    var html = items.map(function (p) {
+      return '<div class="wish-item">' + MO.cardHTML(p) +
+        '<button class="btn btn-sm btn-ghost" onclick="MO.toggleWish(\'' + p.id + '\');MO.openWishlistPage()" style="margin-top:8px">Fjern</button></div>';
+    }).join('');
+    MO.openModal('Dine favoritter (' + items.length + ')', '<div class="product-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))">' + html + '</div>');
   };
 
   MO.initNav = function () {
@@ -604,6 +673,12 @@
 
     MO.updateCartBadge();
     MO.initRipple();
+    MO.initWishlist();
+    var si = document.getElementById('search-input');
+    if (si) {
+      si.addEventListener('input', function () { MO.doSearch(this.value); });
+      si.addEventListener('keydown', function (e) { if (e.key === 'Enter') { var first = document.querySelector('.searchbar__row'); if (first) first.click(); } });
+    }
   };
 
   MO.initRipple = function () {
@@ -1695,6 +1770,60 @@
     if (MO.initAmbientGlow) MO.initAmbientGlow();
     if (document.getElementById('pdp-root')) MO.renderProductPage();
   });
+
+  MO.renderCheckout = function () {
+    if (!MO.isCheckoutPage) return;
+    if (!MO.cart.length) { window.location.href = 'cart.html'; return; }
+    var total = MO.cartTotal();
+    var frakt = total >= 999 ? 0 : 69;
+    var itemsHtml = MO.cart.map(function (i) {
+      return '<div class="checkout-summary__row"><span>' + i.name + ' × ' + i.qty + '</span><span>' + (i.price * i.qty).toLocaleString('no-NO') + ' kr</span></div>';
+    }).join('');
+    var pageEl = document.querySelector('.page-body') || document.getElementById('page-body');
+    if (!pageEl) { pageEl = document.body; }
+    pageEl.innerHTML = '<div class="page-section"><div class="checkout-grid"><div><div class="cart-steps" style="margin-bottom:24px"><div class="cart-step active"><span class="cart-step__dot">1</span>Handlekurv</div><span class="cart-step__line"></span><div class="cart-step active"><span class="cart-step__dot">2</span>Betaling</div><span class="cart-step__line"></span><div class="cart-step"><span class="cart-step__dot">3</span>Bekreftelse</div></div><form class="checkout-form" onsubmit="MO.placeOrder(event)"><div class="form-group"><label>E-post</label><input type="email" required placeholder="ola@nordmann.no"></div><div class="form-row"><div class="form-group"><label>Fornavn</label><input type="text" required placeholder="Ola"></div><div class="form-group"><label>Etternavn</label><input type="text" required placeholder="Nordmann"></div></div><div class="form-group"><label>Adresse</label><input type="text" required placeholder="Gateveien 1"></div><div class="form-row"><div class="form-group"><label>Postnummer</label><input type="text" required placeholder="0150"></div><div class="form-group"><label>By</label><input type="text" required placeholder="Oslo"></div></div><div class="form-group"><label>Telefon</label><input type="tel" required placeholder="+47 900 00 000"></div><div class="payment-badges"><span class="payment-badge">💳 Vipps</span><span class="payment-badge">🍎 Apple Pay</span><span class="payment-badge">💳 Kort</span><span class="payment-badge">💰 Klarna</span></div><button type="submit" class="btn btn-primary btn-full btn-lg">Betal ' + total.toLocaleString('no-NO') + ' kr</button></form></div><div class="checkout-summary"><h3 style="font-size:15px;margin-bottom:12px;color:var(--g3)">Din ordre</h3>' + itemsHtml + '<div class="checkout-summary__row"><span>Frakt</span><span>' + (frakt === 0 ? 'Gratis' : frakt.toLocaleString('no-NO') + ' kr') + '</span></div><div class="checkout-summary__row checkout-summary__row--total"><span>Totalt</span><span>' + (total + frakt).toLocaleString('no-NO') + ' kr</span></div></div></div></div>';
+  };
+
+  MO.placeOrder = function (e) {
+    e.preventDefault();
+    localStorage.setItem('mo_last_order', JSON.stringify({ items: MO.cart, total: MO.cartTotal() + (MO.cartTotal() >= 999 ? 0 : 69), date: new Date().toISOString() }));
+    MO.cart = [];
+    MO.saveCart();
+    MO.updateCartBadge();
+    window.location.href = 'bekreftelse.html';
+  };
+
+  MO.renderConfirmation = function () {
+    var pageEl = document.querySelector('.page-body') || document.getElementById('page-body') || document.body;
+    var order = JSON.parse(localStorage.getItem('mo_last_order') || 'null');
+    if (!order) { pageEl.innerHTML = '<div class="page-section" style="text-align:center;padding:80px 20px"><p>Ingen ordre funnet.</p><a href="index.html" class="btn btn-primary">Gå til butikken</a></div>'; return; }
+    var itemsHtml = order.items.map(function (i) {
+      return '<tr><td style="padding:6px 0">' + i.name + ' × ' + i.qty + '</td><td style="text-align:right">' + (i.price * i.qty).toLocaleString('no-NO') + ' kr</td></tr>';
+    }).join('');
+    pageEl.innerHTML = '<div class="page-section"><div class="checkout-grid"><div class="confirm-box"><div class="confirm-box__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div><h1>Bestillingen din er bekreftet!</h1><p>Du får en bekreftelse på e-post innen få minutter. Ordrenr: <strong>#M&O-' + Math.random().toString(36).substring(2,8).toUpperCase() + '</strong></p><table style="width:100%;max-width:360px;margin:0 auto 24px;font-size:14px;color:var(--text-3);text-align:left">' + itemsHtml + '<tr><td style="border-top:1px solid var(--gray-200);padding-top:10px;font-weight:600;color:var(--g3)">Totalt</td><td style="border-top:1px solid var(--gray-200);padding-top:10px;text-align:right;font-weight:600;color:var(--g3)">' + order.total.toLocaleString('no-NO') + ' kr</td></tr></table><a href="index.html" class="btn btn-primary">Fortsett å handle</a></div></div></div>';
+    localStorage.removeItem('mo_last_order');
+  };
+
+  MO.renderCategoryPage = function () {
+    var pageEl = document.querySelector('.page-body') || document.getElementById('page-body') || document.body;
+    var params = new URLSearchParams(window.location.search);
+    var cat = params.get('cat');
+    var brand = params.get('brand');
+    var filtered = MO.products;
+    var title = '';
+    if (cat) { filtered = filtered.filter(function (p) { return p.cat === cat; }); title = cat.charAt(0).toUpperCase() + cat.slice(1); }
+    if (brand) { filtered = filtered.filter(function (p) { return p.brand === brand; }); title = brand; }
+    if (!title) { pageEl.innerHTML = '<div class="page-section" style="text-align:center;padding:80px 20px"><p>Velg en kategori eller et merke.</p></div>'; return; }
+    var catNames = { jakker: 'Jakker', bukser: 'Bukser', mellomalg: 'Mellomlag', sko: 'Sko', tilbehor: 'Tilbehør' };
+    pageEl.innerHTML = '<div class="cat-header"><h1>' + (catNames[cat] || title) + '</h1><p>' + filtered.length + ' produkter</p></div><div class="cat-grid"><div class="product-grid">' + filtered.map(MO.cardHTML).join('') + '</div></div>';
+  };
+
+  MO.isCheckoutPage = window.location.pathname.indexOf('sjekkut.html') > -1;
+  MO.isConfPage = window.location.pathname.indexOf('bekreftelse.html') > -1;
+  MO.isKategoriPage = window.location.pathname.indexOf('kategori.html') > -1;
+  if (MO.isCheckoutPage) setTimeout(MO.renderCheckout, 50);
+  if (MO.isConfPage) setTimeout(MO.renderConfirmation, 50);
+  if (MO.isKategoriPage) setTimeout(MO.renderCategoryPage, 50);
 
   window.MO = MO;
 

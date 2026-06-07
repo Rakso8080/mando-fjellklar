@@ -118,6 +118,7 @@
 </section>
 </div>
 
+<script src="data/products.js"></script>
 <script src="js/app.js"></script>
 <script src="js/layout.js"></script>
 <script>
@@ -195,7 +196,7 @@ function saveSettings() {
   if (name && MO.auth.user) {
     MO.auth.user.name  = name;
     MO.auth.user.email = email;
-    localStorage.setItem('mo_auth', JSON.stringify(MO.auth.user));
+    localStorage.setItem('mo_user', JSON.stringify(MO.auth.user));
     document.getElementById('user-name').textContent = name;
     document.getElementById('user-email').textContent = email;
     var initials = name.split(' ').map(function(w){ return w[0]; }).slice(0,2).join('').toUpperCase();
