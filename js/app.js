@@ -6,15 +6,15 @@
   MO.auth = {
     user: null,
     isLoggedIn: function () { return !!this.user; },
-    requireAuth: function () { if (!this.isLoggedIn()) { MO.showToast('Logg inn for å fortsette'); return false; } return true; },
-    login: function () { MO.showToast('Logg inn kommer snart'); },
-    register: function () { MO.showToast('Registrering kommer snart'); },
-    logout: function () { MO.showToast('Logget ut'); this.user = null; },
+    requireAuth: function () { if (!this.isLoggedIn()) { MO.toast('Logg inn for å fortsette'); return false; } return true; },
+    login: function () { MO.toast('Logg inn kommer snart'); },
+    register: function () { MO.toast('Registrering kommer snart'); },
+    logout: function () { MO.toast('Logget ut'); this.user = null; },
   };
 
   MO.recentViewed = [];
 
-  MO.applyPromo = function () { MO.showToast('Rabattkode ikke tilgjengelig ennå'); };
+  MO.applyPromo = function () { MO.toast('Rabattkode ikke tilgjengelig ennå'); };
 
   MO.products = [
     {id:'n1',brand:'Norrøna',name:'Falketind Gore-Tex Jacket',price:2490,oldPrice:3299,sizes:['S','M','L','XL'],cat:'jakker',type:'nytt',features:['Gore-Tex 3-lags membran','Justerbar hette med visir','Ventilasjonslommer','Resirkulert materiale'],initials:'NF',stock:8},
@@ -206,6 +206,7 @@
     var stockLevel = p.stock > 3 ? 'high' : p.stock <= 1 ? 'low' : 'mid';
     var stockBadge = !p.stock || p.stock <= 1 ? '<span class="badge badge-last">Siste eks.</span>' : p.stock <= 3 ? '<span class="badge badge-stock">Få igjen</span>' : '<span class="badge badge-stock">På lager</span>';
     var stockBar = p.stock && p.stock <= 8 ? '<div class="stock-bar"><div class="stock-bar__track"><div class="stock-bar__fill stock-bar__fill--' + stockLevel + '" style="width:' + (p.stock / 12 * 100) + '%"></div></div><div class="stock-bar__label"><span>' + (p.stock <= 1 ? 'Siste eksemplar' : p.stock <= 3 ? 'Få igjen' : p.stock + ' på lager') + '</span></div></div>' : '';
+    var sizesHTML = p.sizes.length && p.sizes.length <= 6 ? '<div class="pcard__sizes">' + p.sizes.map(function (s) { return '<span class="pcard__size">' + s + '</span>'; }).join('') + '</div>' : '';
     return '<article class="pcard" data-pid="' + p.id + '" tabindex="0">' +
       '<div class="pcard__img" data-cat="' + p.cat + '">' +
       '<div class="pcard__img-inner">' + (p.initials || p.brand.charAt(0)) + '</div>' +
@@ -218,7 +219,7 @@
       '<h3 class="pcard__name">' + p.name + '</h3>' +
       (p.condDesc ? '<p class="pcard__cond">' + p.condDesc.split('.')[0] + '.</p>' : '') +
       '<div class="pcard__prices"><span class="pcard__price">' + p.price.toLocaleString('no-NO') + ' kr</span><span class="pcard__old">' + p.oldPrice.toLocaleString('no-NO') + ' kr</span><span class="pcard__save' + (saving >= 40 ? ' pulse' : '') + '">–' + saving + '%</span></div>' +
-      stockBar +
+      stockBar + sizesHTML +
       '</div></article>';
   };
 
@@ -562,6 +563,23 @@
     });
 
     MO.updateCartBadge();
+    MO.initRipple();
+  };
+
+  MO.initRipple = function () {
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.btn, .mobile-nav__btn, .filter-btn, .back-top, .pcard__wish');
+      if (!btn) return;
+      var r = document.createElement('span');
+      r.className = 'ripple-effect';
+      var rect = btn.getBoundingClientRect();
+      var d = Math.max(rect.width, rect.height) * 1.2;
+      r.style.width = r.style.height = d + 'px';
+      r.style.left = (e.clientX - rect.left - d / 2) + 'px';
+      r.style.top = (e.clientY - rect.top - d / 2) + 'px';
+      btn.appendChild(r);
+      r.addEventListener('animationend', function () { r.remove(); });
+    });
   };
 
   MO.initReveal = function () {
