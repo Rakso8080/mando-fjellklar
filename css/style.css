@@ -45,6 +45,10 @@ img { display: block; max-width: 100%; }
 button { font-family: var(--sans); cursor: pointer; border: none; background: none; }
 ul, ol { list-style: none; }
 
+/* ── FOKUS-STILER ──────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--g5); outline-offset: 2px; border-radius: 4px; }
+button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
+
 /* ── SELEKTERING ──────────────────────────────────────── */
 ::selection { background: var(--g5); color: #fff; }
 
@@ -274,7 +278,7 @@ ul, ol { list-style: none; }
 }
 
 /* ── SECTIONS ────────────────────────────────────────── */
-.section { padding: 96px 0; }
+.section { padding: 100px 0; }
 .section > .container { position: relative; z-index: 1; }
 .section--alt { background: var(--gray-50); position: relative; }
 .section--sand { background: var(--s7); }
@@ -1502,7 +1506,7 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   .section__header > div:last-child { width: 100%; }
   .section__header .sort-select { width: 100%; }
   .section { padding: 72px 0; }
-  .section--decorated { padding-top: 40px; padding-bottom: 40px; }
+  .section--decorated { padding-top: 48px; padding-bottom: 48px; }
   .hero__stat-num { font-size: 30px; }
 }
 /* ── iPAD PORTRAIT (≤768px) ──────────────────────────── */
@@ -1840,6 +1844,21 @@ footer { background: var(--slate); padding: 60px 0 28px; }
   background: #fff; cursor: default;
 }
 .pcard__size:hover { border-color: var(--g7); color: var(--g3); }
+
+/* ── TURMETER ──────────────────────────────────────────── */
+.pcard__tur { font-size: 11px; color: var(--g6); margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+.pcard__tur-icon { font-size: 12px; }
+
+/* ── SISTE SJANSE ──────────────────────────────────────── */
+.pcard__last { font-size: 11px; color: #c0392b; margin-top: 4px; display: flex; align-items: center; gap: 4px; font-weight: 500; animation: pulseFast 1.5s ease-in-out infinite; }
+.pcard__last-icon { font-size: 12px; }
+
+/* ── KONSISTENT KORT-HØYDE ───────────────────────────── */
+@media (min-width: 641px) {
+  .product-grid .pcard { display: flex; flex-direction: column; }
+  .product-grid .pcard__body { flex: 1; display: flex; flex-direction: column; }
+  .product-grid .pcard__sizes { margin-top: auto; }
+}
 
 /* ── PULSE GLOW ON DISCOUNT BADGES ──────────────────── */
 .pcard__save.pulse { animation: pulseGlow 1.8s ease-in-out infinite; }

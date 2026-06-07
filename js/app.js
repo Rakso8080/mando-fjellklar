@@ -199,6 +199,33 @@
     return sorted;
   };
 
+  MO._brandGrad = function (brand) {
+    var colors = [
+      ['#1a3a2a','#2d5a3e'],['#2a3a5a','#3d5a8a'],['#5a2a1a','#8a3d2a'],
+      ['#3a2a5a','#5a3d8a'],['#2a5a3a','#3d8a5a'],['#5a4a2a','#8a6a3a'],
+      ['#1a2a2a','#2d4a3a'],['#4a2a2a','#7a3d3d']
+    ];
+    var h = 0; for (var i = 0; i < brand.length; i++) h = ((h << 5) - h) + brand.charCodeAt(i);
+    return colors[Math.abs(h) % colors.length].join(',');
+  };
+
+  MO._turMeter = function (p) {
+    if (p.type !== 'brukt' || !p.cond) return '';
+    var trips = { 'Topptrim': '40–60', 'Turerfaren': '15–40', 'Arbeidshest': '5–15' }[p.cond] || '';
+    return trips ? '<div class="pcard__tur"><span class="pcard__tur-icon">🥾</span>ca. ' + trips + ' turer igjen</div>' : '';
+  };
+
+  MO._lastChance = function (p) {
+    if (!p.stock || p.stock > 1) return '';
+    var expires = MO._lastChanceCache = MO._lastChanceCache || {};
+    if (!expires[p.id]) {
+      var h = 6 + Math.floor(Math.random() * 36);
+      expires[p.id] = Date.now() + h * 3600000;
+    }
+    var left = Math.max(0, Math.round((expires[p.id] - Date.now()) / 3600000));
+    return '<div class="pcard__last" data-exp="' + expires[p.id] + '"><span class="pcard__last-icon">⏳</span>Siste sjanse — ' + left + 't</div>';
+  };
+
   MO.cardHTML = function (p) {
     var saving = Math.round((1 - p.price / p.oldPrice) * 100);
     var wished = MO.isWished(p.id);
@@ -207,11 +234,15 @@
     var stockBadge = !p.stock || p.stock <= 1 ? '<span class="badge badge-last">Siste eks.</span>' : p.stock <= 3 ? '<span class="badge badge-stock">Få igjen</span>' : '<span class="badge badge-stock">På lager</span>';
     var stockBar = p.stock && p.stock <= 8 ? '<div class="stock-bar"><div class="stock-bar__track"><div class="stock-bar__fill stock-bar__fill--' + stockLevel + '" style="width:' + (p.stock / 12 * 100) + '%"></div></div><div class="stock-bar__label"><span>' + (p.stock <= 1 ? 'Siste eksemplar' : p.stock <= 3 ? 'Få igjen' : p.stock + ' på lager') + '</span></div></div>' : '';
     var sizesHTML = p.sizes.length && p.sizes.length <= 6 ? '<div class="pcard__sizes">' + p.sizes.map(function (s) { return '<span class="pcard__size">' + s + '</span>'; }).join('') + '</div>' : '';
+    var grad = MO._brandGrad(p.brand);
+    var turHtml = MO._turMeter(p);
+    var lastHtml = MO._lastChance(p);
+    var wishSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="' + (wished ? '#c0392b' : 'none') + '" stroke="' + (wished ? '#c0392b' : 'currentColor') + '" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
     return '<article class="pcard" data-pid="' + p.id + '" tabindex="0">' +
       '<div class="pcard__img" data-cat="' + p.cat + '">' +
-      '<div class="pcard__img-inner">' + (p.initials || p.brand.charAt(0)) + '</div>' +
+      '<div class="pcard__img-inner" style="background:linear-gradient(150deg,' + grad + ')">' + (p.initials || p.brand.charAt(0)) + '</div>' +
       '<div class="pcard__badges"><span class="badge badge-' + (p.type === 'nytt' ? 'new' : 'used') + '">' + (p.type === 'nytt' ? 'Nytt' : 'Brukt') + '</span>' + condBadge + stockBadge + '</div>' +
-      '<button class="pcard__wish' + (wished ? ' active' : '') + '" data-wish="' + p.id + '" aria-label="Favoritt"><svg width="14" height="14" viewBox="0 0 24 24" fill="' + (wished ? '#c0392b' : 'none') + '" stroke="' + (wished ? '#c0392b' : 'currentColor') + '" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>' +
+      '<button class="pcard__wish' + (wished ? ' active' : '') + '" data-wish="' + p.id + '" aria-label="Favoritt">' + wishSvg + '</button>' +
       '<div class="pcard__quick"><button class="btn btn-white btn-sm btn-full" data-quickadd="' + p.id + '">+ Legg i kurv</button><button class="btn btn-ghost btn-sm btn-full" onclick="event.stopPropagation();MO.openProduct(\'' + p.id + '\')" style="margin-top:4px;font-size:11px">Hurtigvis</button></div>' +
       '</div>' +
       '<div class="pcard__body">' +
@@ -219,7 +250,7 @@
       '<h3 class="pcard__name">' + p.name + '</h3>' +
       (p.condDesc ? '<p class="pcard__cond">' + p.condDesc.split('.')[0] + '.</p>' : '') +
       '<div class="pcard__prices"><span class="pcard__price">' + p.price.toLocaleString('no-NO') + ' kr</span><span class="pcard__old">' + p.oldPrice.toLocaleString('no-NO') + ' kr</span><span class="pcard__save' + (saving >= 40 ? ' pulse' : '') + '">–' + saving + '%</span></div>' +
-      stockBar + sizesHTML +
+      turHtml + lastHtml + stockBar + sizesHTML +
       '</div></article>';
   };
 
@@ -1577,18 +1608,28 @@
       return '<div class="pdp__feat"><span class="pdp__feat-dot"></span>' + f + '</div>';
     }).join('');
     var stockLevel = p.stock > 3 ? 'På lager' : p.stock <= 1 ? 'Siste eksemplar' : 'Få igjen (' + p.stock + ')';
+    var grad = MO._brandGrad(p.brand);
+    var turHtml = MO._turMeter(p);
+    var lastHtml = MO._lastChance(p);
 
     document.getElementById('pdp-root').innerHTML =
+      '<div class="pdp__bread" style="font-size:12px;color:var(--text-4);margin-bottom:16px;display:flex;gap:6px;align-items:center">' +
+      '<a href="index.html" style="color:var(--text-4)">Hjem</a><span>/</span>' +
+      '<a href="index.html#' + (p.type === 'nytt' ? 'nytt' : 'brukt') + '" style="color:var(--text-4)">' + (p.type === 'nytt' ? 'Nytt' : 'Brukt') + '</a><span>/</span>' +
+      '<span style="color:var(--text)">' + p.name.split(' ').slice(0, 2).join(' ') + '</span></div>' +
       '<a href="javascript:history.back()" class="pdp__back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>Tilbake</a>' +
       '<div class="pdp__grid">' +
-      '<div class="pdp__gallery"><div style="font-family:var(--serif);font-size:48px;font-weight:600;color:var(--gray-300)">' + (p.initials || p.brand.charAt(0)) + '</div></div>' +
+      '<div class="pdp__gallery"><div class="pdp__gallery-main" style="background:linear-gradient(150deg,' + grad + ');display:flex;align-items:center;justify-content:center;border-radius:16px;min-height:320px"><span style="font-family:var(--serif);font-size:64px;font-weight:600;color:rgba(255,255,255,.25)">' + (p.initials || p.brand.charAt(0)) + '</span></div>' +
+      '<div class="pdp__gallery-thumbs" style="display:flex;gap:8px;margin-top:10px">' +
+      '<div style="width:60px;height:60px;border-radius:8px;background:linear-gradient(150deg,' + grad + ');opacity:.7"></div>'.repeat(3) +
+      '</div></div>' +
       '<div class="pdp__info">' +
       '<p class="pdp__brand">' + p.brand + '</p>' +
       '<h1 class="pdp__name">' + p.name + '</h1>' +
       '<div class="pdp__prices"><span class="pdp__price">' + p.price.toLocaleString('no-NO') + ' kr</span><span class="pdp__old">' + p.oldPrice.toLocaleString('no-NO') + ' kr</span><span class="pdp__save">–' + saving + '%</span></div>' +
-      '<div style="font-size:13px;color:var(--text-4)">' + stockLevel + ' · ' + (p.type === 'nytt' ? 'Nytt' : 'Brukt') + '</div>' +
-      condHtml +
-      '<p class="form-label" style="margin:4px 0 8px">Størrelse <button class="pdm__sizeguide" onclick="MO.showSizeGuide()" style="font-size:11px;color:var(--g5);background:none;border:none;cursor:pointer;text-decoration:underline">Hjelp</button></p>' +
+      '<div style="font-size:13px;color:var(--text-4);margin-bottom:8px">' + stockLevel + ' · ' + (p.type === 'nytt' ? 'Nytt' : 'Brukt') + '</div>' +
+      condHtml + turHtml + lastHtml +
+      '<p class="form-label" style="margin:10px 0 8px">Størrelse <button class="pdm__sizeguide" onclick="MO.showSizeGuide()" style="font-size:11px;color:var(--g5);background:none;border:none;cursor:pointer;text-decoration:underline">Størrelsesguide</button></p>' +
       '<div class="pdp__sizes">' + sizesHtml + '</div>' +
       '<div class="pdp__ctas">' +
       '<button class="btn btn-primary btn-full btn-lg" data-atcmodal="' + p.id + '">Legg i handlekurv</button>' +
