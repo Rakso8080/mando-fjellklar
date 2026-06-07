@@ -48,6 +48,15 @@
       brands.forEach(function(b) {
         el.innerHTML += '<option value="' + b.replace(/'/g, '\\"') + '">' + b + '</option>';
       });
+      var chips = document.getElementById('brand-chips-' + prefix);
+      if (chips) {
+        chips.innerHTML = brands.map(function (b) {
+          var h = 0; for (var i = 0; i < b.length; i++) h = ((h << 5) - h) + b.charCodeAt(i);
+          var cols = ['#2d5a3e','#3d5a8a','#8a3d2a','#5a3d8a','#3d8a5a','#8a6a3a','#2d4a3a','#7a3d3d'];
+          var c = cols[Math.abs(h) % cols.length];
+          return '<button class="brand-chip" data-brand="' + b.replace(/'/g, '') + '" data-prefix="' + prefix + '"><span class="brand-chip__swatch" style="background:' + c + '"></span>' + b + '</button>';
+        }).join('');
+      }
     });
   };
 
@@ -805,6 +814,11 @@
       });
       var countEl = document.getElementById(countId);
       if (countEl) countEl.innerHTML = 'Viser <strong>' + limited.length + '</strong> av <strong>' + arr.length + '</strong> produkter';
+      /* Price flash on re-sort */
+      cards.forEach(function (c) {
+        var pr = c.querySelector('.pcard__price');
+        if (pr) { pr.classList.remove('pcard__price--flash'); void pr.offsetWidth; pr.classList.add('pcard__price--flash'); }
+      });
       MO.initReveal();
       if (MO.initLazyCards) setTimeout(MO.initLazyCards, 50);
     }
@@ -860,6 +874,18 @@
     setCount('grid-nytt', 'count-nytt', nytt);
     setCount('grid-brukt', 'count-brukt', brukt);
     MO.populateBrandFilters();
+    /* Brand chip listeners */
+    document.querySelectorAll('.brand-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var prefix = this.getAttribute('data-prefix');
+        document.querySelectorAll('.brand-chip[data-prefix="' + prefix + '"]').forEach(function (c) { c.classList.remove('active'); });
+        this.classList.toggle('active');
+        var brand = this.classList.contains('active') ? this.getAttribute('data-brand') : 'alle';
+        var select = document.getElementById('brand-' + prefix);
+        if (select) { select.value = brand; }
+        if (prefix === 'nytt') resetAndRenderNytt(); else resetAndRenderBrukt();
+      });
+    });
     if (MO.initLazyCards) setTimeout(MO.initLazyCards, 50);
   };
 
@@ -1026,6 +1052,26 @@
     btn.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+  };
+
+  MO.initParallax = function () {
+    var hero = document.getElementById('hero');
+    if (!hero || window.innerWidth <= 768) return;
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          var layers = hero.querySelectorAll('.mountains__layer');
+          var st = window.scrollY;
+          layers.forEach(function (l, i) {
+            var speed = 0.3 + i * 0.15;
+            l.style.transform = 'translateY(' + (st * speed) + 'px)';
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
   };
 
   MO.initMobileNav = function () {

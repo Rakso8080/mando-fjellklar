@@ -94,6 +94,7 @@
       '<p class="footer__copy" data-i18n="footer.copyright">&copy; 2025 M&amp;O — Mountain &amp; Outdoor. Alle rettigheter forbeholdt.</p>',
       '<p class="footer__copy" data-i18n="footer.org">Org.nr: 123 456 789 MVA</p>',
       '</div></footer>',
+      '<div class="footer footer--glow"></div>',
     ].join('');
 
     /* Store current lang for applyLang to use after injection */
@@ -103,6 +104,7 @@
     document.body.insertAdjacentHTML('beforeend', footerHTML);
 
     MO.initNav();
+    MO.initParallax();
     MO.initBackToTop();
     MO.initMobileNav();
     MO.initCookieConsent();

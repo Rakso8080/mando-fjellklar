@@ -1978,6 +1978,90 @@ footer { background: var(--slate); padding: 60px 0 28px; }
 .pdp__feat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--g6); flex-shrink: 0; }
 .pdp__back { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-4); margin-bottom: 16px; }
 
+/* ── BILDEREVEAL ─────────────────────────────────────────── */
+.pcard__img-inner { animation: imgReveal .5s var(--ease) both; }
+@keyframes imgReveal { 0% { opacity: 0; filter: blur(8px); transform: scale(1.05); } 100% { opacity: 1; filter: blur(0); transform: scale(1); } }
+.pcard.stagger-enter .pcard__img-inner { animation: none; opacity: 0; }
+
+/* ── KASSE-STEG ──────────────────────────────────────────── */
+.cart-steps { display: flex; align-items: center; gap: 8px; margin-bottom: 36px; font-size: 12px; }
+.cart-step { display: flex; align-items: center; gap: 6px; color: var(--text-4); }
+.cart-step__dot { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--gray-200); color: #fff; font-size: 11px; font-weight: 600; transition: background .3s; }
+.cart-step.active .cart-step__dot { background: var(--g5); }
+.cart-step.done .cart-step__dot { background: var(--g6); }
+.cart-step.active { color: var(--text); font-weight: 500; }
+.cart-step__line { flex: 1; height: 1px; background: var(--gray-200); min-width: 20px; }
+.cart-step.done + .cart-step__line { background: var(--g7); }
+
+/* ── PRIS-HIGHLIGHT ──────────────────────────────────────── */
+.pcard__price--flash { animation: priceFlash .4s var(--ease); }
+@keyframes priceFlash { 0% { color: var(--g5); transform: scale(1.04); } 100% { color: inherit; transform: scale(1); } }
+
+/* ── MERKE-CHIPS ──────────────────────────────────────────── */
+.brand-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.brand-chip { display: inline-flex; align-items: center; gap: 5px; padding: 5px 14px 5px 5px; border-radius: 99px; border: 1px solid var(--gray-200); background: #fff; font-size: 12px; color: var(--text-3); cursor: pointer; transition: all .15s; }
+.brand-chip:hover { border-color: var(--g7); color: var(--g3); }
+.brand-chip.active { background: var(--g9); border-color: var(--g7); color: var(--g3); font-weight: 500; }
+.brand-chip__swatch { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(0,0,0,.06); }
+
+/* ── PDP SKELETON ─────────────────────────────────────────── */
+.pdp-skel { padding: 20px; max-width: 1200px; margin: 0 auto; }
+.pdp-skel__back { height: 16px; width: 80px; background: var(--g9); border-radius: 4px; margin-bottom: 20px; animation: shimmer-skeleton 1.5s ease-in-out infinite; background-size: 200% 100%; }
+.pdp-skel__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.pdp-skel__gallery { height: 360px; background: var(--g9); border-radius: 16px; animation: shimmer-skeleton 1.5s ease-in-out infinite; background-size: 200% 100%; }
+.pdp-skel__info > div { height: 14px; background: var(--g9); border-radius: 6px; margin-bottom: 12px; animation: shimmer-skeleton 1.5s ease-in-out infinite; background-size: 200% 100%; }
+.pdp-skel__info > div:nth-child(1) { width: 30%; }
+.pdp-skel__info > div:nth-child(2) { width: 60%; height: 22px; }
+.pdp-skel__info > div:nth-child(3) { width: 40%; }
+.pdp-skel__info > div:nth-child(4) { width: 100%; height: 44px; margin-top: 16px; }
+
+/* ── TOPOGRAFI-LINJER ─────────────────────────────────────── */
+.section--contour { position: relative; }
+.section--contour::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  opacity: .025;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 38px, currentColor 38px, currentColor 39px),
+                    repeating-linear-gradient(90deg, transparent, transparent 38px, currentColor 38px, currentColor 39px);
+}
+
+/* ── HERO PARALLAKS ───────────────────────────────────────── */
+.hero--parallax .mountains__layer { transition: transform .05s linear; will-change: transform; }
+@media (max-width: 768px) { .hero--parallax .mountains__layer { transition: none; } }
+
+/* ── KURV-STAGGER ─────────────────────────────────────────── */
+.cart-item { opacity: 0; transform: translateX(-20px); animation: cartSlideIn .35s var(--ease) forwards; }
+.cart-item:nth-child(1) { animation-delay: 0s; }
+.cart-item:nth-child(2) { animation-delay: .05s; }
+.cart-item:nth-child(3) { animation-delay: .1s; }
+.cart-item:nth-child(4) { animation-delay: .15s; }
+.cart-item:nth-child(5) { animation-delay: .2s; }
+@keyframes cartSlideIn { to { opacity: 1; transform: translateX(0); } }
+
+/* ── FOOTER-GLOW ──────────────────────────────────────────── */
+.footer--glow { position: relative; }
+.footer--glow::after {
+  content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 200px; pointer-events: none;
+  background: radial-gradient(ellipse at center, var(--g7) 0%, transparent 70%);
+  opacity: .08;
+}
+
+/* ── KORT-EKSPANDER (desktop) ────────────────────────────── */
+@media (hover: hover) and (min-width: 769px) {
+  .pcard { transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s, min-height .35s var(--ease); }
+  .pcard:hover { min-height: 0; }
+  .pcard:hover .pcard__cond,
+  .pcard:hover .pcard__tur,
+  .pcard:hover .pcard__last,
+  .pcard:hover .pcard__sizes { max-height: 60px; opacity: 1; transform: translateY(0); }
+  .pcard__cond,
+  .pcard__tur,
+  .pcard__last,
+  .pcard__sizes { max-height: 0; opacity: 0; overflow: hidden; transform: translateY(-6px); transition: max-height .35s var(--ease), opacity .35s var(--ease), transform .35s var(--ease); }
+  .pcard__sizes { margin-top: 0; }
+  .pcard:hover .pcard__sizes { margin-top: 6px; }
+}
+
 /* ── MOUSE TRAIL ────────────────────────────────────── */
 .trail-sparkle { position: fixed; pointer-events: none; width: 5px; height: 5px; border-radius: 50%; background: var(--s2); z-index: 10000; opacity: 0; animation: trail-fade .5s ease-out forwards; }
 @keyframes trail-fade { 0% { opacity: .7; transform: scale(1); } 100% { opacity: 0; transform: scale(0); } }
