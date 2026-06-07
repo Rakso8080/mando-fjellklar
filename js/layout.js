@@ -14,7 +14,7 @@
       '<span class="searchbar__cancel" onclick="MO.closeSearch()">Avbryt</span>',
       '</div></div>',
       '<nav class="nav" id="main-nav"><div class="nav__inner">',
-      '<a href="index.html" class="nav__logo"><img src="assets/logo.png" alt="M&O" class="nav__logo-img"></a>',
+      '<a href="index.html" class="nav__logo"><svg viewBox="0 0 64 64" class="nav__logo-img" aria-label="M&O"><rect width="64" height="64" rx="12" fill="var(--g5)"/><polygon points="32,14 52,48 12,48" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.5" stroke-linejoin="round"/><polygon points="32,22 48,48 16,48" fill="rgba(255,255,255,.08)"/><path d="M18 44 L18 28 L26 38 L32 28 L38 38 L46 28 L46 44" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>',
       '<div class="nav__links">',
       '<a href="index.html" class="nav__link ' + (activePage === 'home' ? 'active' : '') + '"><span class="badge badge-new" data-i18n="nav.nytt">Nytt</span></a>',
       '<a href="index.html#brukt" class="nav__link ' + (activePage === 'brukt' ? 'active' : '') + '"><span class="badge badge-used" data-i18n="nav.brukt">Brukt</span></a>',
@@ -71,7 +71,7 @@
     var footerHTML = [
       '<footer>',
       '<div class="footer__top">',
-      '<div><div class="footer__logo"><img src="assets/logo.png" alt="M&O" class="footer__logo-img"></div><p class="footer__tagline" data-i18n="footer.tagline">Fjellklær uten kompromiss. Nye og brukte klær fra de beste merkene — til priser som gir mening.</p></div>',
+      '<div><div class="footer__logo"><svg viewBox="0 0 64 64" class="footer__logo-img" aria-label="M&O"><rect width="64" height="64" rx="12" fill="var(--g6)"/><polygon points="32,14 52,48 12,48" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.5" stroke-linejoin="round"/><polygon points="32,22 48,48 16,48" fill="rgba(255,255,255,.08)"/><path d="M18 44 L18 28 L26 38 L32 28 L38 38 L46 28 L46 44" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p class="footer__tagline" data-i18n="footer.tagline">Fjellklær uten kompromiss. Nye og brukte klær fra de beste merkene — til priser som gir mening.</p></div>',
       '<div><p class="footer__col-title" data-i18n="footer.shop">Butikk</p><div class="footer__links">',
       '<a href="index.html" class="footer__link" data-i18n="footer.new">Nytt sortiment</a>',
       '<a href="index.html#brukt" class="footer__link" data-i18n="footer.used">Pent brukt</a>',
