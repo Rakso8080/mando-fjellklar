@@ -294,6 +294,31 @@
     MO.bounceCartBadge();
     if (fromEl) MO.flyToCart(fromEl);
     MO.toast(p.name.split(' ').slice(0, 3).join(' ') + ' lagt i kurven');
+    MO.confetti(fromEl);
+  };
+
+  MO.confetti = function (fromEl) {
+    var rect = fromEl ? fromEl.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2 };
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var colors = ['#354F52','#52796f','#84a98c','#c0392b','#d4a373','#2d5a3e'];
+    for (var i = 0; i < 14; i++) {
+      var dot = document.createElement('div');
+      dot.className = 'confetti-dot';
+      dot.style.cssText = 'position:fixed;left:' + cx + 'px;top:' + cy + 'px;width:6px;height:6px;border-radius:50%;background:' + colors[i % colors.length] + ';pointer-events:none;z-index:9999;';
+      document.body.appendChild(dot);
+      var angle = Math.random() * Math.PI * 2;
+      var vel = 60 + Math.random() * 90;
+      var dx = Math.cos(angle) * vel;
+      var dy = Math.sin(angle) * vel - 120;
+      var dur = 500 + Math.random() * 400;
+      dot.style.transition = 'transform ' + dur + 'ms cubic-bezier(.25,.46,.45,.94), opacity ' + (dur + 100) + 'ms ease';
+      requestAnimationFrame(function () {
+        dot.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(.3)';
+        dot.style.opacity = '0';
+      });
+      setTimeout(function () { dot.remove(); }, dur + 150);
+    }
   };
 
   MO.bounceCartBadge = function () {
@@ -367,8 +392,6 @@
       el.style.display = count > 0 ? 'flex' : 'none';
     });
   };
-
-  MO.wishlist = JSON.parse(localStorage.getItem('mo_wish') || '[]');
 
   MO.toggleWish = function (id) {
     var idx = MO.wishlist.indexOf(id);
@@ -536,14 +559,6 @@
     MO._unlockScroll();
   };
 
-  MO.updateWishBadge = function () {
-    var el = document.getElementById('wish-badge-mobile');
-    if (!el) return;
-    var count = MO.wishlist.length;
-    el.textContent = count;
-    el.style.display = count > 0 ? 'flex' : 'none';
-  };
-
   MO.renderCartDrawer = function () {
     var body = document.getElementById('cart-drawer-body');
     var foot = document.getElementById('cart-drawer-foot');
@@ -607,14 +622,6 @@
   MO.initWishlist = function () {
     MO.wishlist = JSON.parse(localStorage.getItem('mo_wish') || '[]');
     MO.updateWishBadge();
-  };
-
-  MO.toggleWish = function (id) {
-    var idx = MO.wishlist.indexOf(id);
-    if (idx === -1) { MO.wishlist.push(id); } else { MO.wishlist.splice(idx, 1); }
-    localStorage.setItem('mo_wish', JSON.stringify(MO.wishlist));
-    MO.updateWishBadge();
-    MO.updateWishIcons();
   };
 
   MO.updateWishBadge = function () {
@@ -1749,6 +1756,7 @@
       '<h1 class="pdp__name">' + p.name + '</h1>' +
       '<div class="pdp__prices"><span class="pdp__price">' + p.price.toLocaleString('no-NO') + ' kr</span><span class="pdp__old">' + p.oldPrice.toLocaleString('no-NO') + ' kr</span><span class="pdp__save">–' + saving + '%</span></div>' +
       '<div style="font-size:13px;color:var(--text-4);margin-bottom:8px">' + stockLevel + ' · ' + (p.type === 'nytt' ? 'Nytt' : 'Brukt') + '</div>' +
+      (p.stock <= 3 ? '<div class="stock-warn"><div class="stock-warn__bar" style="width:' + (p.stock / 12 * 100) + '%"></div><span class="stock-warn__label">' + (p.stock <= 1 ? 'Siste eksemplar!' : 'Kun ' + p.stock + ' igjen') + '</span></div>' : '') +
       condHtml + turHtml + lastHtml +
       '<p class="form-label" style="margin:10px 0 8px">Størrelse <button class="pdm__sizeguide" onclick="MO.showSizeGuide()" style="font-size:11px;color:var(--g5);background:none;border:none;cursor:pointer;text-decoration:underline">Størrelsesguide</button></p>' +
       '<div class="pdp__sizes">' + sizesHtml + '</div>' +
@@ -1761,6 +1769,29 @@
     document.title = p.brand + ' — ' + p.name + ' — M&O Fjellklær';
   };
 
+  MO._sectionTitleInited = false;
+  MO.initSectionTitles = function () {
+    if (MO._sectionTitleInited) return;
+    MO._sectionTitleInited = true;
+    var titles = document.querySelectorAll('.section__title-anim, .sr-title');
+    if (!titles.length) return;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var t = e.target;
+          var text = t.textContent.trim();
+          t.innerHTML = text.split('').map(function (ch) { return '<span class="st-char">' + (ch === ' ' ? ' ' : ch) + '</span>'; }).join('');
+          Array.from(t.children).forEach(function (span, i) {
+            span.style.transitionDelay = (i * 30) + 'ms';
+          });
+          t.classList.add('st-reveal');
+          obs.unobserve(t);
+        }
+      });
+    }, { threshold: 0.15 });
+    titles.forEach(function (t) { obs.observe(t); });
+  };
+
   /* ── RUN ON DOM READY ────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
     if (MO.initLazyCards) MO.initLazyCards();
@@ -1768,6 +1799,7 @@
     if (MO.init3DTilt) setTimeout(MO.init3DTilt, 300);
     if (MO.initStickyFilter) setTimeout(MO.initStickyFilter, 300);
     if (MO.initAmbientGlow) MO.initAmbientGlow();
+    if (MO.initSectionTitles) setTimeout(MO.initSectionTitles, 200);
     if (document.getElementById('pdp-root')) MO.renderProductPage();
   });
 
