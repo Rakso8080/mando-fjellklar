@@ -58,7 +58,7 @@
       '</div>',
     ].join('');
 
-    var backToTopHTML = '<button class="back-top" id="back-top" aria-label="Til toppen" data-i18n="backtop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></button>';
+    var backToTopHTML = '<button class="back-top" id="back-top" aria-label="Til toppen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></button>';
 
     var cookieHTML = [
       '<div class="cookie-bar" id="cookie-bar">',

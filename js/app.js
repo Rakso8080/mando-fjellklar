@@ -250,6 +250,17 @@
     return '<div class="pcard__last" data-exp="' + expires[p.id] + '"><span class="pcard__last-icon">⏳</span>Siste sjanse — ' + left + 't</div>';
   };
 
+  MO._catSVG = function (cat) {
+    var svgs = {
+      jakker: '<svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M30 14 L22 38 L18 72 L45 58 L50 55 L55 58 L82 72 L78 38 L70 14" stroke="rgba(255,255,255,.3)" stroke-width="1.5" fill="rgba(255,255,255,.04)" stroke-linejoin="round"/><line x1="50" y1="16" x2="50" y2="55" stroke="rgba(255,255,255,.22)" stroke-width="1.2"/><path d="M50 16 L46 24" stroke="rgba(255,255,255,.18)" stroke-width="1.2"/><path d="M50 16 L54 24" stroke="rgba(255,255,255,.18)" stroke-width="1.2"/><rect x="36" y="32" width="10" height="12" rx="1.5" stroke="rgba(255,255,255,.18)" stroke-width="1" fill="none"/><path d="M54 32 L64 32" stroke="rgba(255,255,255,.15)" stroke-width="1"/><path d="M54 38 L64 38" stroke="rgba(255,255,255,.15)" stroke-width="1"/></svg>',
+      mellomlag: '<svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M32 16 L24 40 L20 72 L45 60 L50 57 L55 60 L80 72 L76 40 L68 16" stroke="rgba(255,255,255,.28)" stroke-width="1.5" fill="rgba(255,255,255,.04)" stroke-linejoin="round"/><path d="M45 60 L42 68" stroke="rgba(255,255,255,.2)" stroke-width="1.2"/><path d="M55 60 L58 68" stroke="rgba(255,255,255,.2)" stroke-width="1.2"/><path d="M38 42 Q50 36 62 42" stroke="rgba(255,255,255,.2)" stroke-width="1.2" fill="rgba(255,255,255,.03)"/><rect x="35" y="50" width="30" height="6" rx="3" stroke="rgba(255,255,255,.15)" stroke-width="1" fill="none"/></svg>',
+      bukser: '<svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M32 10 L28 30 L24 72 L42 72 L44 42 L50 40 L56 42 L58 72 L76 72 L72 30 L68 10" stroke="rgba(255,255,255,.3)" stroke-width="1.5" fill="rgba(255,255,255,.04)" stroke-linejoin="round"/><line x1="50" y1="10" x2="50" y2="40" stroke="rgba(255,255,255,.2)" stroke-width="1.2"/><rect x="34" y="16" width="12" height="8" rx="2" stroke="rgba(255,255,255,.15)" stroke-width="1" fill="none"/><rect x="54" y="16" width="12" height="8" rx="2" stroke="rgba(255,255,255,.15)" stroke-width="1" fill="none"/></svg>',
+      sko: '<svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M28 58 L18 56 C15 56 12 58 12 62 L12 68 L88 68 L88 62 C88 56 84 52 78 50 L72 48 L65 22 C63 16 57 12 51 12 L46 12 C40 12 35 16 33 22 L28 42 Z" stroke="rgba(255,255,255,.3)" stroke-width="1.5" fill="rgba(255,255,255,.04)" stroke-linejoin="round"/><path d="M30 44 L50 44" stroke="rgba(255,255,255,.2)" stroke-width="1.2"/><path d="M38 34 L50 34" stroke="rgba(255,255,255,.18)" stroke-width="1.2"/><path d="M42 24 L50 24" stroke="rgba(255,255,255,.15)" stroke-width="1.2"/><circle cx="24" cy="64" r="2" fill="rgba(255,255,255,.12)"/><circle cx="34" cy="64" r="2" fill="rgba(255,255,255,.12)"/></svg>',
+      tilbehor: '<svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25 50 L20 52 C16 54 14 58 14 62 L14 68 L86 68 L86 62 C86 58 84 54 80 52 L75 50" stroke="rgba(255,255,255,.3)" stroke-width="1.5" fill="rgba(255,255,255,.04)" stroke-linejoin="round"/><path d="M40 38 L38 50 L62 50 L60 38" stroke="rgba(255,255,255,.25)" stroke-width="1.5" fill="rgba(255,255,255,.03)" stroke-linejoin="round"/><ellipse cx="50" cy="28" rx="22" ry="16" stroke="rgba(255,255,255,.28)" stroke-width="1.5" fill="rgba(255,255,255,.04)"/><path d="M32 22 Q50 14 68 22" stroke="rgba(255,255,255,.18)" stroke-width="1" fill="none"/></svg>'
+    };
+    return svgs[cat] || svgs.jakker;
+  };
+
   MO.cardHTML = function (p) {
     var saving = Math.round((1 - p.price / p.oldPrice) * 100);
     var wished = MO.isWished(p.id);
@@ -265,7 +276,7 @@
     var wishSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="' + (wished ? '#c0392b' : 'none') + '" stroke="' + (wished ? '#c0392b' : 'currentColor') + '" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
     return '<article class="pcard" data-pid="' + p.id + '" tabindex="0">' +
       '<div class="pcard__img" data-cat="' + p.cat + '">' +
-      '<div class="pcard__img-inner" style="background:linear-gradient(150deg,' + grad + ')">' + (p.initials || p.brand.charAt(0)) + '</div>' +
+      '<div class="pcard__img-inner" style="background:linear-gradient(150deg,' + grad + ')">' + MO._catSVG(p.cat) + '</div>' +
       '<div class="pcard__badges"><span class="badge badge-' + (p.type === 'nytt' ? 'new' : 'used') + '">' + (p.type === 'nytt' ? 'Nytt' : 'Brukt') + '</span>' + condBadge + stockBadge + '</div>' +
       '<button class="pcard__wish' + (wished ? ' active' : '') + '" data-wish="' + p.id + '" aria-label="Favoritt">' + wishSvg + '</button>' +
       '<div class="pcard__quick"><button class="btn btn-white btn-sm btn-full" data-quickadd="' + p.id + '">+ Legg i kurv</button><button class="btn btn-ghost btn-sm btn-full" onclick="event.stopPropagation();MO.openProduct(\'' + p.id + '\')" style="margin-top:4px;font-size:11px">Hurtigvis</button></div>' +
@@ -1756,7 +1767,7 @@
       '<span style="color:var(--text)">' + p.name.split(' ').slice(0, 2).join(' ') + '</span></div>' +
       '<a href="javascript:history.back()" class="pdp__back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>Tilbake</a>' +
       '<div class="pdp__grid">' +
-      '<div class="pdp__gallery"><div class="pdp__gallery-main" style="background:linear-gradient(150deg,' + grad + ');display:flex;align-items:center;justify-content:center;border-radius:16px;min-height:320px"><span style="font-family:var(--serif);font-size:64px;font-weight:600;color:rgba(255,255,255,.25)">' + (p.initials || p.brand.charAt(0)) + '</span></div>' +
+      '<div class="pdp__gallery"><div class="pdp__gallery-main" style="background:linear-gradient(150deg,' + grad + ');display:flex;align-items:center;justify-content:center;border-radius:16px;min-height:320px"><div style="width:140px;height:112px;opacity:.7">' + MO._catSVG(p.cat) + '</div></div>' +
       '<div class="pdp__gallery-thumbs" style="display:flex;gap:8px;margin-top:10px">' +
       '<div style="width:60px;height:60px;border-radius:8px;background:linear-gradient(150deg,' + grad + ');opacity:.7"></div>'.repeat(3) +
       '</div></div>' +
