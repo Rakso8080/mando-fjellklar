@@ -226,6 +226,13 @@
     return colors[Math.abs(h) % colors.length].join(',');
   };
 
+  MO._viewingCache = {};
+  MO._viewingCount = function (id) {
+    if (!MO._viewingCache[id]) MO._viewingCache[id] = 3 + Math.floor(Math.random() * 14);
+    var drift = Math.floor(Math.sin(Date.now() / 8000 + MO._viewingCache[id]) * 3);
+    return MO._viewingCache[id] + drift;
+  };
+
   MO._turMeter = function (p) {
     if (p.type !== 'brukt' || !p.cond) return '';
     var trips = { 'Topptrim': '40–60', 'Turerfaren': '15–40', 'Arbeidshest': '5–15' }[p.cond] || '';
@@ -246,6 +253,7 @@
   MO.cardHTML = function (p) {
     var saving = Math.round((1 - p.price / p.oldPrice) * 100);
     var wished = MO.isWished(p.id);
+    var viewing = MO._viewingCount(p.id);
     var condBadge = p.cond ? '<span class="badge badge-' + (p.cond === 'Topptrim' ? 'top' : p.cond === 'Turerfaren' ? 'mid' : 'low') + '">' + p.cond + '</span>' : '';
     var stockLevel = p.stock > 3 ? 'high' : p.stock <= 1 ? 'low' : 'mid';
     var stockBadge = !p.stock || p.stock <= 1 ? '<span class="badge badge-last">Siste eks.</span>' : p.stock <= 3 ? '<span class="badge badge-stock">Få igjen</span>' : '<span class="badge badge-stock">På lager</span>';
@@ -267,6 +275,7 @@
       '<h3 class="pcard__name">' + p.name + '</h3>' +
       (p.condDesc ? '<p class="pcard__cond">' + p.condDesc.split('.')[0] + '.</p>' : '') +
       '<div class="pcard__prices"><span class="pcard__price">' + p.price.toLocaleString('no-NO') + ' kr</span><span class="pcard__old">' + p.oldPrice.toLocaleString('no-NO') + ' kr</span><span class="pcard__save' + (saving >= 40 ? ' pulse' : '') + '">–' + saving + '%</span></div>' +
+      (viewing ? '<div class="pcard__viewing"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>' + viewing + ' ser på</div>' : '') +
       turHtml + lastHtml + stockBar + sizesHTML +
       '</div></article>';
   };
