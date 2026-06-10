@@ -1,12 +1,11 @@
-var CACHE = 'mando-v3';
-var STATIC_CACHE = 'mando-static-v3';
-var ASSET_CACHE = 'mando-assets-v3';
+var CACHE = 'mando-v4';
+var STATIC_CACHE = 'mando-static-v4';
+var ASSET_CACHE = 'mando-assets-v4';
 
 var staticUrls = [
   '/',
   '/index.html',
   '/om-oss.html',
-  '/cart.html',
   '/produkt.html',
   '/kategori.html',
   '/sjekkut.html',
@@ -18,13 +17,15 @@ var staticUrls = [
   '/vilkar.html',
   '/angrerett.html',
   '/offline.html',
+  '/404.html',
   '/css/style.css',
   '/data/products.js',
   '/js/app.js',
   '/js/layout.js',
-  '/js/effects.js',
   '/favicon.svg',
   '/favicon.png',
+  '/icon-192.svg',
+  '/icon-512.svg',
   '/manifest.json'
 ];
 
