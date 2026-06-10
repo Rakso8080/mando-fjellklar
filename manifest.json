@@ -2,7 +2,7 @@
   "name": "M&O — Mountain & Outdoor",
   "short_name": "M&O",
   "description": "Fjellklær uten kompromiss — nye og brukte klær fra de beste merkene",
-  "start_url": "/",
+  "start_url": "/index.html",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#2F3E46",
@@ -11,14 +11,11 @@
   "dir": "ltr",
   "prefer_related_applications": false,
   "scope": "/",
-  "capture_links": "existing-client-navigate",
-  "launch_handler": {
-    "client_mode": "auto"
-  },
   "icons": [
-    { "src": "icon-192.svg", "type": "image/svg+xml", "sizes": "192x192", "purpose": "any maskable" },
-    { "src": "icon-512.svg", "type": "image/svg+xml", "sizes": "512x512", "purpose": "any maskable" },
-    { "src": "favicon.png", "sizes": "192x192", "type": "image/png", "purpose": "any" }
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-192.svg", "sizes": "192x192", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon-512.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any" }
   ],
   "categories": ["shopping", "sports"]
 }
